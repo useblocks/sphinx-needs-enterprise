@@ -3,7 +3,7 @@ Sphinx-Needs Enterprise
 
 .. image:: assets/sphinx-needs-enterprise-logo.png
    :align: center
-   :scale: 40%
+   :width: 40%
 
 ``Sphinx-Needs Enterprise`` is a collection of additional functions for ``Sphinx-Needs``, which are useful mostly
 in company-based environments.
