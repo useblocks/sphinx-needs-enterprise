@@ -3,24 +3,12 @@ Sphinx-Needs Enterprise
 
 .. image:: assets/sphinx-needs-enterprise-logo.png
    :align: center
-   :scale: 80%
+   :scale: 40%
 
 ``Sphinx-Needs Enterprise`` is a collection of additional functions for ``Sphinx-Needs``, which are useful mostly
 in company-based environments.
 
-Project structure
------------------
+This repository contains the documentation and provides issue tracking for ``Sphinx-Needs Enterprise``.
 
-* docker/
-* docs/
-* sphinx_needs_enterprise/
-
-  * api/
-
-    * extension/
-
-  * connectors/
-
-* tests/
-* theme/
-
+The source code itself is accessible after purchasing a license. For more information please visit:
+http://www.sphinx-needs.com.
