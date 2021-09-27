@@ -1,7 +1,7 @@
 Sphinx-Needs Enterprise
 =======================
 
-.. image:: assets/sphinx-needs-enterprise-logo.png
+.. image:: docs/_static/sphinx-needs-enterprise-logo.png
    :align: center
    :width: 40%
 
