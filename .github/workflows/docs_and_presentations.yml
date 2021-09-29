@@ -10,7 +10,7 @@ env:
 
 jobs:
   build-and-deploy_docs:
-    name: Docs
+    name: Docs and Presentations
     runs-on: ubuntu-latest
     steps:
       # https://github.com/marketplace/actions/checkout
@@ -95,7 +95,7 @@ jobs:
         run: |
           set -x
           tree .
-          rsync -a docs/_build/revealjs/ _gh-pages/presentations/
+          rsync -a presentations/_build/revealjs/ _gh-pages/presentations/
 
       # Add the .nojekyll file
       - name: nojekyll
