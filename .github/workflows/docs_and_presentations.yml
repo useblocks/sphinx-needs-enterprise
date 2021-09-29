@@ -80,7 +80,7 @@ jobs:
           set -x
           tree .
           find _gh-pages/docs -mindepth 1 -delete
-          rsync -a _build/html/ _gh-pages/docs/
+          rsync -a docs/_build/html/ _gh-pages/docs/
 
       # Add the .nojekyll file
       - name: nojekyll
@@ -172,7 +172,7 @@ jobs:
         run: |
           set -x
           find _gh-pages/presentations -mindepth 1 -delete
-          rsync -a _build/revealjs _gh-pages/presentations
+          rsync -a docs/_build/revealjs _gh-pages/presentations
 
       # Add the .nojekyll file
       - name: nojekyll
