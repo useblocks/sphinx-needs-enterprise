@@ -77,7 +77,6 @@ Analysis 2
 
 .. image:: /_static/needflow_example_1.svg
 
-
 Analysis 3
 ~~~~~~~~~~
 ``.. needpie::``
