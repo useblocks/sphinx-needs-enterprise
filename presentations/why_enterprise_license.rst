@@ -10,17 +10,21 @@ Becoming reliable
 .. image:: ../docs/_static/sphinx-needs-enterprise-logo.png
    :scale: 30%
 
-
 .. revealjs-break::
    :notitle:
 
+
 .. image:: ../docs/_static/sphinx-needs-enterprise-content.svg
-   :scale: 100%
 
 What is Sphinx-Needs?
 ---------------------
+
 A highly customizable, free and open ALM solution for **developers** to enhance their **productivity**
 to a new **maximum**.
+
+.. revealjs-section::
+   :data-background-color: #ffcc00
+   :data-background-transition: zoom
 
 Features
 ~~~~~~~~
@@ -96,6 +100,10 @@ A collection of tools and scripts to embedded Sphinx-Needs inside companies tool
 
 ➔ One-Stop-Shop of Truth
 
+.. revealjs-section::
+   :data-background-color: #2a639aff
+   :data-background-transition: zoom
+
 
 Connectors
 ~~~~~~~~~~
@@ -159,6 +167,10 @@ Business Model
 --------------
 Why is it needed?
 
+.. revealjs-section::
+   :data-background-color: #4d4d4dff
+   :data-background-transition: zoom
+
 Challenges
 ~~~~~~~~~~
 Sphinx-Needs is mainly used by process driven companies.
@@ -190,6 +202,11 @@ Constraints
 Business Source License
 -----------------------
 | An eventually Open Source license
+
+
+.. revealjs-section::
+   :data-background-color: #800080
+   :data-background-transition: zoom
 
 Eventually?
 ~~~~~~~~~~~

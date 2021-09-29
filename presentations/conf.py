@@ -54,11 +54,7 @@ html_theme = 'alabaster'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-revealjs_css_files = [
-    'custom_presentation.css',
-    '_static/custom_presentation.css',
-    '/custom_presentation.css',
-]
+revealjs_css_files = []
 
 revealjs_style_theme = "moon"
 
