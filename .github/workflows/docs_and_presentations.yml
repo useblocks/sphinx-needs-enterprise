@@ -78,7 +78,8 @@ jobs:
           contains(github.event_name, 'push')
         run: |
           set -x
-          find _gh-pages/docs -mindepth 1
+          tree .
+          find _gh-pages/docs -mindepth 1 -delete
           rsync -a _build/html/ _gh-pages/docs/
 
       # Add the .nojekyll file
@@ -170,7 +171,7 @@ jobs:
           contains(github.event_name, 'push')
         run: |
           set -x
-          find _gh-pages/presentations -mindepth 1
+          find _gh-pages/presentations -mindepth 1 -delete
           rsync -a _build/revealjs _gh-pages/presentations
 
       # Add the .nojekyll file
