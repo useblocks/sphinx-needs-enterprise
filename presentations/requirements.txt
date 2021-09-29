@@ -1,0 +1,5 @@
+sphinx
+sphinxcontrib-needs
+sphinx-material
+sphinxcontrib-plantuml
+sphinx-revealjs
