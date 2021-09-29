@@ -172,7 +172,7 @@ jobs:
         run: |
           set -x
           find _gh-pages/presentations -mindepth 1 -delete
-          rsync -a docs/_build/revealjs _gh-pages/presentations
+          rsync -a presentations/_build/revealjs _gh-pages/presentations
 
       # Add the .nojekyll file
       - name: nojekyll
