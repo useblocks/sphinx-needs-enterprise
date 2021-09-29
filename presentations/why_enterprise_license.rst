@@ -3,19 +3,24 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-License Open-Source?
-====================
 
-.. image:: ../../docs/_static/sphinx-needs-enterprise-logo.png
+Becoming reliable
+=================
+
+.. image:: ../docs/_static/sphinx-needs-enterprise-logo.png
    :scale: 30%
 
-.. revealjs-section::
-    :data-background-color: #222222
+
+.. revealjs-break::
+   :notitle:
+
+.. image:: ../docs/_static/sphinx-needs-enterprise-content.svg
+   :scale: 100%
 
 What is Sphinx-Needs?
 ---------------------
-
-A highly customizable, free and open ALM solution for **developers** to enhance their **productivity** to a **maximum**.
+A highly customizable, free and open ALM solution for **developers** to enhance their **productivity**
+to a new **maximum**.
 
 Features
 ~~~~~~~~
@@ -88,7 +93,7 @@ Analysis 3
 
 And Sphinx-Needs-Enterprise?
 ----------------------------
-A collection of tools and scripts to embedded Sphinx-Needs inside companies tool environmens.
+A collection of tools and scripts to embedded Sphinx-Needs inside companies tool environments.
 
 ➔ One-Stop-Shop of Truth
 
@@ -151,8 +156,9 @@ Custom Sphinx theme with company focused features:
   * Long, complex TOC and sidebars
   * Search across documentations
 
-Why is a business model needed?
-------------------------------
+Business Model
+--------------
+Why is it needed?
 
 Challenges
 ~~~~~~~~~~
@@ -172,7 +178,44 @@ Problems may be company specific and can't be openly discussed.
 
 Maintenance shall be independent from customers and projects.
 
-➔ An ongoing income is needed to get 1-2 all-time developers on it.
+➔ An ongoing income is needed to get 1-2 full-time developers on it.
+
+Constraints
+~~~~~~~~~~~~
+.. role:: strike
+    :class: strike
+
+* We love Open Source
+* One :strike:`ring`/*product* to rule them all
+
+Business Source License
+-----------------------
+| An eventually Open Source license
+
+Eventually?
+~~~~~~~~~~~
+
+* It's **free** for ALL.
+
+  * Except you fulfill the usage limitations (commercial usage).
+
+* It's **open** after 4 years.
+
+  * Released under GPL/MIT.
+  * No usage limitations anymore.
+
+* Open code, docs and issue tracker all the time.
+
+Secured usages?
+~~~~~~~~~~~~~~~
+
+* Yes, but with textual hints only.
+
+  * During installation.
+  * In outputs, logs and maybe in results.
+
+* Software will work all the time.
+* But with on-the-fly license checks.
 
 
 Thanks

@@ -55,11 +55,15 @@ html_theme = 'alabaster'
 html_static_path = ['_static']
 
 revealjs_css_files = [
-    'custom.css',
+    'custom_presentation.css',
+    '_static/custom_presentation.css',
+    '/custom_presentation.css',
 ]
 
+revealjs_style_theme = "moon"
+
 html_css_files = [
-    'custom.css',
+    'custom_presentation.css',
 ]
 
 on_rtd = os.environ.get('READTHEDOCS') == 'True'

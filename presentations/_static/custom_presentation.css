@@ -1,3 +1,7 @@
 /*table.need {*/
 /*    color: red !important;*/
 /*}*/
+
+.strike {
+  text-decoration: line-through;
+}
