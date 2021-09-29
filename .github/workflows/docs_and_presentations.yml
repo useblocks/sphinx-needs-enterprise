@@ -86,7 +86,6 @@ jobs:
           contains(github.event_name, 'push')
         run: |
           set -x
-          tree .
           rsync -a docs/_build/html/ _gh-pages/
 
       - name: Copy presentation build
@@ -94,7 +93,6 @@ jobs:
           contains(github.event_name, 'push')
         run: |
           set -x
-          tree .
           rsync -a presentations/_build/revealjs/ _gh-pages/presentations/
 
       # Add the .nojekyll file

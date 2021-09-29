@@ -75,7 +75,7 @@ Analysis 2
 ~~~~~~~~~~
 ``.. needflow::``
 
-.. needflow::
+.. image:: /_static/needflow_example_1.svg
 
 
 Analysis 3
