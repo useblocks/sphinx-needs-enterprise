@@ -165,12 +165,12 @@ jobs:
           mkdir -p _gh-pages/presentations/
       # If a push and default branch, copy build to _gh-pages/ as the "main"
       # deployment.
+      # find _gh-pages/presentations -mindepth 1 -delete
       - name: Copy presentation build
         if: |
           contains(github.event_name, 'push')
         run: |
           set -x
-#          find _gh-pages/presentations -mindepth 1 -delete
           rsync -a presentations/_build/revealjs _gh-pages/presentations
 
       # Add the .nojekyll file
