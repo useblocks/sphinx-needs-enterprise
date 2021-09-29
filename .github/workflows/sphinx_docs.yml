@@ -73,10 +73,9 @@ jobs:
           mkdir -p _gh-pages/docs/
       # If a push and default branch, copy build to _gh-pages/ as the "main"
       # deployment.
-      - name: Copy new build (default branch)
+      - name: Copy docs build
         if: |
-          contains(github.event_name, 'push') &&
-          contains(github.ref, env.DEFAULT_BRANCH)
+          contains(github.event_name, 'push')
         run: |
           set -x
           # Delete everything under _gh-pages/ that is from the
