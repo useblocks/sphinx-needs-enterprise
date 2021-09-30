@@ -29,7 +29,8 @@ author = 'team useblocks'
 extensions = [
     'sphinxcontrib.plantuml',
     'sphinxcontrib.needs',
-    'sphinx_revealjs'
+    'sphinx_revealjs',
+    'sphinx.ext.mathjax'
 ]
 needs_css = "blank.css"
 # Add any paths that contain templates here, relative to this directory.

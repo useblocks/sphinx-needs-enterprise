@@ -14,7 +14,7 @@ Becoming reliable
    :notitle:
 
 
-.. image:: ../docs/_static/sphinx-needs-enterprise-content.svg
+.. image:: ../docs/_static/sphinx-needs-enterprise-content.png
 
 What is Sphinx-Needs?
 ---------------------
@@ -163,6 +163,12 @@ Custom Sphinx theme with company focused features:
   * Long, complex TOC and sidebars
   * Search across documentations
 
+Additional solutions
+~~~~~~~~~~~~~~~~~~~~
+* Needs Comment Server
+* Sphinx-Metadata (Page specific data)
+
+
 Business Model
 --------------
 Why is it needed?
@@ -191,13 +197,6 @@ Maintenance shall be independent from customers and projects.
 
 ➔ An ongoing income is needed to get 1-2 full-time developers on it.
 
-Constraints
-~~~~~~~~~~~~
-.. role:: strike
-    :class: strike
-
-* We love Open Source
-* One :strike:`ring`/*product* to rule them all
 
 Business Source License
 -----------------------
@@ -233,9 +232,82 @@ Secured usages?
 * Software will work all the time.
 * But with on-the-fly license checks.
 
+Offers
+------
+
+.. revealjs-section::
+   :data-background-color: #207020
+   :data-background-transition: zoom
+
+| **Whatever is needed**
+| Licenses, Support, Trainings
+| and Development Service
+
+License
+~~~~~~~
+* Access to enterprise features
+* Support ongoing development of Sphinx-Needs
+* Influence issue priorities
+* Support via issue tracker
+
+Support contract
+~~~~~~~~~~~~~~~~
+* Faster reaction time and bug fixes
+* Company and user specific solutions
+* SLA possible
+* Additional contact via email, telephone and online meetings
+
+Trainings
+~~~~~~~~~
+* Sphinx, Sphinx-Needs and Sphinx-Needs Enterprise
+* For beginners, power users and developers
+* Company specific integrations
+
+`sphinx-needs.com/trainings <https://www.sphinx-needs.com/trainings>`_
+
+Development service
+~~~~~~~~~~~~~~~~~~~
+* Company specific concepts and solutions
+* Development, Maintenance, Operations
+* From small scripts to complete tool chains
+* Working inside company networks
+* Responsible for topics, not only tech. solutions
+* Temporary on-site contact
+
+License types
+-------------
+
+* **Floating license**
+* User based license¹
+* Node based license¹
+
+¹ if requested
+
+Floating license
+~~~~~~~~~~~~~~~~
+
+.. math::
+
+   \tiny{
+   \text{ Licenses } = \text{ Users } *
+   \frac {  \text{ User builds}} { \text{ Working time }}
+   * \text{ Build duration}
+   }
+
+**Example**
+
+.. math::
+
+   50
+   * \frac {6 \tiny{\text { Builds}}} { 10h * 60}
+   * 5min
+   = 2.5 => \text{ 3 Licenses }
 
 Thanks
 ------
+
+.. image:: ../docs/_static/sphinx-needs-enterprise-logo.png
+   :scale: 20%
 
 Example Data
 ~~~~~~~~~~~~
