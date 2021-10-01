@@ -132,6 +132,14 @@ Databases
 * ElasticSearch
 * ... any other document-based DB
 
+Analytics
+~~~~~~~~~
+Send and show metrics in external dashboards:
+
+* ElasticSearch / Kibana
+* Splunk
+
+
 Viewers
 ~~~~~~~
 Filter and analyse data across documentations and projects:
@@ -220,6 +228,28 @@ Eventually?
   * No usage limitations anymore.
 
 * Open code, docs and issue tracker all the time.
+
+License change example
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :stub-columns: 1
+   :align: center
+
+   - * Usage
+     * | Release 2021
+       | 2021 - 2025
+     * | Release 2021
+       | 2025 - ...
+   - * Private
+     * BSL
+     * MIT
+   - * Commercial
+     * Commercial License
+     * MIT
+
+Sphinx-Needs stays MIT, forever!
 
 Secured usages?
 ~~~~~~~~~~~~~~~
