@@ -19,7 +19,7 @@ Becoming reliable
 What is Sphinx-Needs?
 ---------------------
 
-A highly customizable, free and open ALM solution for **developers** to enhance their **productivity**
+A highly customizable, free and open Lifecycle Management solution for **developers** to enhance their **productivity**
 to a new **maximum**.
 
 .. revealjs-section::
