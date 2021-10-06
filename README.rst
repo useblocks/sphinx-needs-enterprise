@@ -8,7 +8,14 @@ Sphinx-Needs Enterprise
 ``Sphinx-Needs Enterprise`` is a collection of additional functions for ``Sphinx-Needs``, which are useful mostly
 in company-based environments.
 
-This repository contains the documentation and provides issue tracking for ``Sphinx-Needs Enterprise``.
+This repository contains the complete source code and documentation.
 
-The source code itself is accessible after purchasing a license. For more information please visit:
-http://www.sphinx-needs.com.
+License
+-------
+This package is released under the Business Source License, which allows free usage for private projects and sets
+some duties for commercial projects. For details please take a look into our
+`LICENSE <https://raw.githubusercontent.com/useblocks/sphinx-needs-enterprise/main/LICENSE>`_ file.
+
+|
+| **To use Sphinx-Needs-Enterprise in commercial projects a commercial license is needed.**
+| Please get it contact with `useblocks <https://useblocks.com>`_ or visit sphinx-needs.com.

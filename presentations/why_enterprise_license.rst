@@ -107,7 +107,7 @@ A collection of tools and scripts to embedded Sphinx-Needs inside companies tool
 
 Connectors
 ~~~~~~~~~~
-Im- and Export of data from:
+Import and Export of data from:
 
 * CodeBeamer
 * Azure Boards
@@ -134,11 +134,11 @@ Databases
 
 Analytics
 ~~~~~~~~~
-Send and show metrics in external dashboards:
+Send and show metrics on external dashboards:
 
 * ElasticSearch / Kibana
 * Splunk
-
+* Grafana
 
 Viewers
 ~~~~~~~
@@ -224,7 +224,7 @@ Eventually?
 
 * It's **open** after 4 years.
 
-  * Released under GPL/MIT.
+  * Released under MIT.
   * No usage limitations anymore.
 
 * Open code, docs and issue tracker all the time.

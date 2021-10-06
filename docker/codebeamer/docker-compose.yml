@@ -1,0 +1,55 @@
+# Copyright by Intland Software, https://www.intland.com
+#
+# All rights reserved.
+#
+# Please note that if you change this docker file, we do not take any responsibility and we are not liable for
+# any damage caused through use of this image, be it indirect, special, incidental
+# or consequential damages (including but not limited to damages for loss of business, loss of profits, interruption or the like).
+
+version: '2.1'
+
+services:
+  codebeamer-db:
+    image: intland/mysql:5.7.21
+    environment:
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pass
+      - MYSQL_DATABASE=codebeamer
+      - MYSQL_MAX_ALLOWED_PACKET=1024M
+      - MYSQL_INNODB_BUFFER_POOL_SIZE=1G
+      - MYSQL_INNODB_LOG_FILE_SIZE=256M
+      - MYSQL_INNODB_LOG_BUFFER_SIZE=256M
+    volumes:
+      - codebeamer-db-data:/var/lib/mysql/data
+
+  codebeamer-app:
+    image: intland/codebeamer:10.1-SP3
+    ports:
+      - 8080:8080
+    environment:
+      - WAIT_HOSTS=container-mysql:3306
+      - WAIT_HOSTS_TIMEOUT=120
+      - CB_database_JDBC_Username=user
+      - CB_database_JDBC_Password=pass
+      - CB_database_JDBC_Driver=com.mysql.jdbc.Driver
+      - CB_database_JDBC_ConnectionURL=jdbc:mysql://container-mysql:3306/codebeamer?autoReconnect=true&zeroDateTimeBehavior=convertToNull&emulateLocators=true&characterEncoding=UTF-8&useSSL=false
+      - CB_database_JDBC_Timeout=120
+      - CB_MAC_ADDRESS=${CB_MAC_ADDRESS}
+      - CB_LICENSE=${CB_LICENSE}
+
+    volumes:
+      - codebeamer-app-logo:/home/appuser/codebeamer/tomcat/webapps/ROOT/config/logo
+      - codebeamer-app-repository-docs:/home/appuser/codebeamer/repository/docs
+      - codebeamer-app-repository-search:/home/appuser/codebeamer/repository/search
+      - codebeamer-app-logs:/home/appuser/codebeamer/logs
+      - codebeamer-app-tmp:/home/appuser/codebeamer/tomcat/tmp
+    links:
+      - codebeamer-db:container-mysql
+
+volumes:
+  codebeamer-db-data:
+  codebeamer-app-logo:
+  codebeamer-app-repository-docs:
+  codebeamer-app-repository-search:
+  codebeamer-app-logs:
+  codebeamer-app-tmp:

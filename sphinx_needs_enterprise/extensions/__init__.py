@@ -1,0 +1,1 @@
+from sphinx_needs_enterprise.extensions.extension import ServiceExtension

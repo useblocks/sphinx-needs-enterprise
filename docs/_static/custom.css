@@ -2,7 +2,26 @@
     background-color: #2a639a !important;
 }
 
+td.need {
+    padding: 5px 10px;
+}
 
+.md-typeset td.need dd {
+    margin: 0;
+}
+
+.md-typeset td.need dd {
+    margin: 0;
+}
+
+.md-hero {
+    background-color: #4d4d4d;
+}
+
+
+.md-hero__inner {
+    padding-top: .1rem;
+}
 /*table.need {*/
 /*    color: red !important;*/
 /*}*/

@@ -1,3 +1,5 @@
 sphinx
 sphinxcontrib-needs
-sphinx-material
+
+# Sphinx-Material Theme + Fix to support Sphinx-Needs
+sphinx-material>=0.0.35
