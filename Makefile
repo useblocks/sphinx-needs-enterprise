@@ -1,4 +1,4 @@
-SRC_FILES = sphinxcontrib/ tests/ performance/ noxfile.py
+SRC_FILES = sphinx_needs_enterprise tests/ noxfile.py
 
 .PHONY: list
 list:
