@@ -43,7 +43,7 @@ extensions = [
     'sphinx_needs_enterprise'
 ]
 
-on_ci = os.environ.get('ON_CI') == 'True'
+
 
 cb_server = 'http://127.0.0.1:8080'
 
@@ -61,10 +61,18 @@ needs_services = {
         'password': '007',
         'prefix': "CB_IMPORT_",
         'content': own_content,
+        'mappings': {
+            'type': "spec",
+            'tags': 'cb_import, example',
+            "id": ["id"],
+            "status": ["status", "name"],
+            "title": ["name"],
+        },
         'extra_data': {
             'assignedBy': ['assignedTo', 0, 'name'],
             'createdAt': ['createdAt'],
             'updated': ['modifiedAt'],
+            'type': ['typeName'],
         }
     }
 }
@@ -96,7 +104,11 @@ def rstjinja(app, docname, source):
 
 def setup(app):
     app.connect("source-read", rstjinja)
-    app.add_config_value('on_ci', False, 'env')
+
+
+html_context = {
+    'on_ci': os.environ.get('ON_CI') == 'True'
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

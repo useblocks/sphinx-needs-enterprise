@@ -225,20 +225,21 @@ Example
 
 **Result**
 
-{% if on_ci!=False %}
+{% if on_ci!= True %}
+
 .. needservice:: codebeamer
    :query: project.name IN ('my_project', 'another_project')
    :prefix: CB_IMPORT_
 
-{% elif on_ci==True %}
+{% else %}
 .. hint::
 
-   The below examples are just images, as no CodeBeamer instance is available on ReadTheDocs to generate this
+   The below examples are just images, as no CodeBeamer instance is available on a CI run to generate this
    data during build phase.
 
 .. image:: /_images/cb_example.png
    :align: center
-   :width: 100%
+   :width: 60%
 
 {% endif %}
 
@@ -250,14 +251,13 @@ Filtering
    .. needtable::
       :filter: "CB_IMPORT" in id
 
-{% if on_ci!=False %}
+{% if on_ci!= True %}
 .. needtable::
    :filter: "CB_IMPORT" in id
-   :style: table
 
-{% elif on_ci==True %}
+{% else %}
 .. image:: /_images/cb_table.png
    :align: center
-   :width: 100%
+   :width: 60%
 
 {% endif %}
