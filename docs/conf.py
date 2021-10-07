@@ -43,6 +43,8 @@ extensions = [
     'sphinx_needs_enterprise'
 ]
 
+on_ci = os.environ.get('ON_CI') == 'True'
+
 cb_server = 'http://127.0.0.1:8080'
 
 own_content = f"""
@@ -94,7 +96,7 @@ def rstjinja(app, docname, source):
 
 def setup(app):
     app.connect("source-read", rstjinja)
-    app.add_config_value('on_rtd', False, 'env')
+    app.add_config_value('on_ci', False, 'env')
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

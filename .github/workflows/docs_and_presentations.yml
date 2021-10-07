@@ -12,6 +12,8 @@ jobs:
   build-and-deploy_docs:
     name: Docs and Presentations
     runs-on: ubuntu-latest
+    env:
+      ON_CI: True
     steps:
       # https://github.com/marketplace/actions/checkout
       - uses: actions/checkout@v2

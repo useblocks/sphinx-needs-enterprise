@@ -164,6 +164,7 @@ Example:
     """
     }
 {% endraw %}
+
 extra_data
 ~~~~~~~~~~
 There may be information stored inside Codebeamer fields, which can not be mapped to Sphinx-Needs options, but
@@ -224,16 +225,12 @@ Example
 
 **Result**
 
-blab: {{on_rtd}}
-
-{% if on_rtd!=False %}
-Make...
-
+{% if on_ci!=False %}
 .. needservice:: codebeamer
    :query: project.name IN ('my_project', 'another_project')
    :prefix: CB_IMPORT_
 
-{% elif on_rtd==True %}
+{% elif on_ci==True %}
 .. hint::
 
    The below examples are just images, as no CodeBeamer instance is available on ReadTheDocs to generate this
@@ -253,12 +250,12 @@ Filtering
    .. needtable::
       :filter: "CB_IMPORT" in id
 
-{% if on_rtd!=False %}
+{% if on_ci!=False %}
 .. needtable::
    :filter: "CB_IMPORT" in id
    :style: table
 
-{% elif on_rtd==True %}
+{% elif on_ci==True %}
 .. image:: /_images/cb_table.png
    :align: center
    :width: 100%
