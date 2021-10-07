@@ -10,7 +10,7 @@ lint:
 
 .PHONY: test
 test:
-	poetry run pyytest -v mtests
+	poetry run pytest -v tests
 
 .PHONY: test-matrix
 test-matrix:
