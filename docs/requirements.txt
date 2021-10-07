@@ -1,5 +1,5 @@
 sphinx
-sphinxcontrib-needs
+git+git://github.com/useblocks/sphinxcontrib-needs@master
 
 # Sphinx-Material Theme + Fix to support Sphinx-Needs
 sphinx-material>=0.0.35
