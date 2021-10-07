@@ -1,5 +1,4 @@
 sphinx
-sphinxcontrib-needs
-sphinx-material
+git+git://github.com/useblocks/sphinxcontrib-needs@master
 sphinxcontrib-plantuml
 sphinx-revealjs
