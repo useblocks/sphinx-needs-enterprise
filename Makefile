@@ -20,6 +20,10 @@ test-matrix:
 docs-html:
 	poetry run make --directory docs/ clean && make --directory docs/ html
 
+.PHONY: ci-docs-html
+ci-docs-html:
+	poetry run make --directory docs/ clean && ON_CI=true make --directory docs/ html
+
 .PHONY: docs-pdf
 docs-pdf:
 	poetry run make --directory docs/ clean && make --directory docs/ latexpdf

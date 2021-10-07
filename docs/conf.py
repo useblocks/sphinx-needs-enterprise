@@ -105,11 +105,14 @@ def rstjinja(app, docname, source):
 def setup(app):
     app.connect("source-read", rstjinja)
 
-test = os.environ.get('ON_CI') == 'True'
-print(f'---> ON_CI is: {test}')
+# Check, if docs get buil on ci.
+# If this is the case, external services like Codebeamer are not available and
+# docs will show images instead of gettting real data.
+on_ci = os.environ.get('ON_CI', 'False').upper() == 'TRUE'
+print(f'---> ON_CI is: {on_ci}')
 
 html_context = {
-    'on_ci': os.environ.get('ON_CI') == 'True'
+    'on_ci': on_ci
 }
 
 # Add any paths that contain templates here, relative to this directory.

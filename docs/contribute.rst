@@ -3,24 +3,35 @@ Contribute
 
 Doc build
 ---------
+
+With external services
+~~~~~~~~~~~~~~~~~~~~~~
+This build is for systems, which have e.g. a running CodeBeamer instance available, so that real data can
+be fetched during build.
+
 On project root: ``make docs-html``
 
 Under ``/docs``: ``make html``
 
-Use local codebeamer instance
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-To build the documentation with local codebeamer support you must set the tag ``local_dev``.
-This can be achieved by directly using ``sphinx-build`` inside ``/docs`` folder:
-``sphinx-build -a -E -b html . _build/html -t local_dev``
+Without external services / CI Build
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If the documentation build shall act like it is performed on our used CI system (github actions),
+an environment variable must be set. The build will then contain images instead of trying to reach
+external services during build.
 
-This will execute ``needservice`` request during documentation build, what is not possible on ReadTheDocs servers
-or when no codebeamer instance is available.
+On project root: ``make ci-docs-html``
 
-RST code, which shall be executed with the tag ``local_dev`` only, must be added like this to the documentation:
+Under ``/docs``: ``ON_CI=true make html``
 
-.. code-block:: rst
 
-    .. only:: local_dev
+External services
+-----------------
+For some services like CodeBeamer, there are open Docker Images available, which can be used
+to test ``Sphinx-Needs Enterprise`` and to build the documentation with active data synchronization.
 
-       .. needservice:: codebeamer
-          :query: project.name IN ('my_project', 'another_project')
+To start the needed service, go to ``/docker/<service>`` and run ``docker-compose down && docker-compose up -d``.
+
+Docker configurations are available for:
+
+* **CodeBeamer**: ``/docker/codebeamer``
+
