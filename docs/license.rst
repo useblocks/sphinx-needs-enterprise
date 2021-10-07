@@ -17,17 +17,17 @@ FAQ
     ``Sphinx-Needs`` and related extensions are mostly used by process driven companies.
     And so most of our users and contributors must follow company internal rules, if they want to contribute to an
     Open-Source project.
-    They also use Sphinx-Needs mostly during their daily work, so the motiviation is low to spend some additional time
-    on it after work.
+    They also use Sphinx-Needs mostly during their daily work, so motivation to spend additional time
+    on it after work is low.
 
     This makes it hard for the ``Sphinx-Needs`` community to gain enough contributors, even if the amout of users is
     quite high and most of them are developers.
 
     So we have created ``Sphinx-Needs Enterprise``, which shall help to retrieve some kind of money back from companies,
-    which earn or save money thanks of ``Sphinx-Needs`` and which have a special interest in the solutions provided by
+    which earn or save money thanks to ``Sphinx-Needs`` and which have a special interest in the solutions provided by
     ``Sphinx-Needs Enterprise``.
 
-    The money gets completely spend on development power for ``Sphinx-Needs`` and related extensions.
+    The money gets completely spent on development power for ``Sphinx-Needs`` and related extensions.
     And we hope that one day a fulltime engineer can work on it thanks to the license fees.
 
 .. dropdown:: Any chance of a discount?

@@ -12,10 +12,8 @@ Welcome
 
 This package provides enterprise specific solutions for ``Sphinx-Needs``.
 
-It's main goal is to embedded ``Sphinx-Needs`` in company specific tool environments by
+Its main goal is to embed ``Sphinx-Needs`` in company specific tool environments by
 sychnronizing data between ``Sphinx-Needs`` and tools like Jira, Doors, GitHub, CodeBeamer and more.
-
-
 
 
 There are different tool specific solutions available:
@@ -37,10 +35,7 @@ License
 ``Sphinx-Needs Enterprise`` is **free to use for private projects**.
 
 **Commercial projects must obtain a commercial license**, which guarantees an ongoing and professional development of
-``Sphinx-Needs`` and related extentions. For details please see :ref:`license`.
-
-
-
+``Sphinx-Needs`` and related extensions. For details please see :ref:`license`.
 
 
 Content
