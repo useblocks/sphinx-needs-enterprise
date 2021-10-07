@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.abspath('../sphinx_needs_enterprise'))
 
 project = 'Sphinx-Needs Enterprise'
 now = datetime.datetime.now()
-copyright = '{year}, <a href="http://useblocks.com">team useblocks</a>'.format(year=now.year)
+copyright = '{year}, useblocks.com'.format(year=now.year)
 author = 'team useblocks'
 
 # The full version, including alpha/beta/rc tags
@@ -40,7 +40,8 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.ifconfig',
     'sphinxcontrib.needs',
-    'sphinx_needs_enterprise'
+    'sphinx_needs_enterprise',
+    'sphinx_panels',
 ]
 
 

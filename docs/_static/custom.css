@@ -22,6 +22,17 @@ td.need {
 .md-hero__inner {
     padding-top: .1rem;
 }
-/*table.need {*/
-/*    color: red !important;*/
-/*}*/
+
+/* Sphinx-Panels in MAterial Theme */
+details.dropdown {
+    width: 100%;
+}
+
+details.dropdown summary {
+    padding-left: 40px;
+}
+details.dropdown summary:after {
+    content: none;
+}
+
+
