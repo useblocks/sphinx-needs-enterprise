@@ -71,7 +71,7 @@ You must also create a codebeamer service configuration in your ``conf.py`` file
             }
         }
     }
-{% rawend %}
+{% endraw %}
 
 url
 ~~~
@@ -225,7 +225,7 @@ Example
 
 **Result**
 
-{% if on_ci!= True %}
+{% if on_ci != true %}
 
 .. needservice:: codebeamer
    :query: project.name IN ('my_project', 'another_project')
@@ -251,7 +251,7 @@ Filtering
    .. needtable::
       :filter: "CB_IMPORT" in id
 
-{% if on_ci!= True %}
+{% if on_ci != true %}
 .. needtable::
    :filter: "CB_IMPORT" in id
 

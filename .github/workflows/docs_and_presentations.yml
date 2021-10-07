@@ -59,6 +59,7 @@ jobs:
           python -V
           pip list --not-required
           pip list
+          echo "ON_CI = $ON_CI"
 
       # Build
       - uses: ammaraskar/sphinx-problem-matcher@master

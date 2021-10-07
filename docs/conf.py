@@ -105,6 +105,8 @@ def rstjinja(app, docname, source):
 def setup(app):
     app.connect("source-read", rstjinja)
 
+test = os.environ.get('ON_CI') == 'True'
+print(f'---> ON_CI is: {test}')
 
 html_context = {
     'on_ci': os.environ.get('ON_CI') == 'True'
