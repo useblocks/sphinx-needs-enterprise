@@ -1,5 +1,5 @@
-from functools import reduce  # forward compatibility for Python 3
 import operator
+from functools import reduce  # forward compatibility for Python 3
 
 
 def dict_get(root, items, default=None):
@@ -21,4 +21,3 @@ def dict_get(root, items, default=None):
 def dict_undefined_set(dict_obj, key, value):
     if key not in dict_obj:
         dict_obj[key] = value
-

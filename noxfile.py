@@ -3,9 +3,7 @@ from nox_poetry import session
 
 PYTHON_VERSIONS = ["3.6", "3.8", "3.9"]
 SPHINX_VERSIONS = ["3.2", "3.5", "4.1", "4.2"]
-TEST_DEPENDENCIES = [
-    "pytest"
-]
+TEST_DEPENDENCIES = ["pytest"]
 LINT_DEPENDENCIES = [
     "flake8",
     "pep8-naming",

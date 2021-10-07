@@ -10,11 +10,7 @@ lint:
 
 .PHONY: test
 test:
-	poetry run nosetests -v -w tests
-
-.PHONY: test
-test-short:
-	poetry run nosetests -v -w tests -I .*official.*
+	poetry run pyytest -v mtests
 
 .PHONY: test-matrix
 test-matrix:
