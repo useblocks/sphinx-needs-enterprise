@@ -16,7 +16,7 @@ Becoming reliable
 What is Sphinx-Needs?
 ---------------------
 | A highly customizable, free and open
-| **Lifecycle Management tool box for developers**
+| **Lifecycle Management toolbox for developers**
 | to enhance their productivity to a new maximum.
 
 .. revealjs-section::
@@ -105,7 +105,7 @@ Sphinx-Needs is mainly used by process driven companies.
 
 Users may not be allowed to support Open Source projects.
 
-Users don't spend after-work hours.
+Users don't contribute during after-work hours.
 
 ➔ Tough community building
 
@@ -117,7 +117,8 @@ Problems may be company specific and can't be openly discussed.
 
 Maintenance shall be independent from customers and projects.
 
-➔ An ongoing income is needed to get 1-2 full-time developers on it.
+| ➔ An ongoing income is needed to get
+| **1-2 full-time developers** on it.
 
 Sphinx-Needs-Enterprise
 -----------------------
