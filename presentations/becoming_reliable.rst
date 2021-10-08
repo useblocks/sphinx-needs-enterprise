@@ -10,17 +10,14 @@ Becoming reliable
 .. image:: ../docs/_static/sphinx-needs-enterprise-logo.png
    :scale: 30%
 
-.. revealjs-break::
-   :notitle:
 
 
-.. image:: ../docs/_static/sphinx-needs-enterprise-content.png
 
 What is Sphinx-Needs?
 ---------------------
-
-A highly customizable, free and open Lifecycle Management solution for **developers** to enhance their **productivity**
-to a new **maximum**.
+| A highly customizable, free and open
+| **Lifecycle Management tool box for developers**
+| to enhance their productivity to a new maximum.
 
 .. revealjs-section::
    :data-background-color: #ffcc00
@@ -94,8 +91,36 @@ Analysis 3
    type == 'spec'
    type == 'test'
 
-And Sphinx-Needs-Enterprise?
-----------------------------
+Business Model
+--------------
+Why is it needed?
+
+.. revealjs-section::
+   :data-background-color: #4d4d4dff
+   :data-background-transition: zoom
+
+Challenges
+~~~~~~~~~~
+Sphinx-Needs is mainly used by process driven companies.
+
+Users may not be allowed to support Open Source projects.
+
+Users don't spend after-work hours.
+
+➔ Tough community building
+
+Challenges 2
+~~~~~~~~~~~~
+Fast reaction time may be needed.
+
+Problems may be company specific and can't be openly discussed.
+
+Maintenance shall be independent from customers and projects.
+
+➔ An ongoing income is needed to get 1-2 full-time developers on it.
+
+Sphinx-Needs-Enterprise
+-----------------------
 A collection of tools and scripts to embedded Sphinx-Needs inside companies tool environments.
 
 ➔ One-Stop-Shop of Truth
@@ -103,6 +128,12 @@ A collection of tools and scripts to embedded Sphinx-Needs inside companies tool
 .. revealjs-section::
    :data-background-color: #2a639aff
    :data-background-transition: zoom
+
+.. revealjs-break::
+   :notitle:
+
+
+.. image:: ../docs/_static/sphinx-needs-enterprise-content.png
 
 
 Connectors
@@ -158,9 +189,7 @@ Write, link and configure Needs with technical support:
 
 Theme
 ~~~~~
-Custom Sphinx theme with company focused features:
-
-* Embedded Viewers
+* Professional HTML and PDF themes for documentations and presentations
 * Additional areas for information
 
   * Static links to other tools
@@ -177,35 +206,6 @@ Additional solutions
 * Sphinx-Metadata (Page specific data)
 
 
-Business Model
---------------
-Why is it needed?
-
-.. revealjs-section::
-   :data-background-color: #4d4d4dff
-   :data-background-transition: zoom
-
-Challenges
-~~~~~~~~~~
-Sphinx-Needs is mainly used by process driven companies.
-
-Users may not be allowed to support Open Source projects.
-
-Users don't spend after-work hours.
-
-➔ Tough community building
-
-Challenges 2
-~~~~~~~~~~~~
-Fast reaction time may be needed.
-
-Problems may be company specific and can't be openly discussed.
-
-Maintenance shall be independent from customers and projects.
-
-➔ An ongoing income is needed to get 1-2 full-time developers on it.
-
-
 Business Source License
 -----------------------
 | An eventually Open Source license
@@ -218,16 +218,15 @@ Business Source License
 Eventually?
 ~~~~~~~~~~~
 
+* Open code, docs and issue tracker all the time.
 * It's **free** for ALL.
 
   * Except you fulfill the usage limitations (commercial usage).
 
-* It's **open** after 4 years.
+* It becomes automatically **Open Source** after 4 years.
 
   * Released under MIT.
   * No usage limitations anymore.
-
-* Open code, docs and issue tracker all the time.
 
 License change example
 ~~~~~~~~~~~~~~~~~~~~~~

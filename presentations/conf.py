@@ -55,13 +55,9 @@ html_theme = 'alabaster'
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-revealjs_css_files = []
-
 revealjs_style_theme = "moon"
-
-html_css_files = [
-    'custom_presentation.css',
-]
+revealjs_static_path = ['_static']
+revealjs_css_files = ['custom.css']
 
 on_rtd = os.environ.get('READTHEDOCS') == 'True'
 local_plantuml_path = os.path.join(os.path.dirname(__file__), "utils", "plantuml.jar")

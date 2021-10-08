@@ -1,0 +1,29 @@
+/*table.need {*/
+/*    color: red !important;*/
+/*}*/
+
+.strike {
+  text-decoration: line-through;
+}
+
+table.need tbody {
+  color: #333;
+  font-size: 0.7em;
+}
+
+img.needs_image {
+  margin: 0;
+}
+
+.reveal pre {
+	background: #333;
+	padding: 10px;
+}
+
+table.NEEDS_TABLE {
+	font-size: 0.7em;
+}
+
+table.needs_style_none {
+    background-color: #aaa;
+}
