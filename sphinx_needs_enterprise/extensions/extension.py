@@ -159,7 +159,7 @@ class ServiceExtension(BaseService):
             content += "\n"
 
             for key, value in extra_data.items():
-                content += f"\n:{key}: {value}"
+                content += f"\n| **{key}**: {value}"
             content += "\n\n"
 
             prefix = options.get("prefix", self.id_prefix)

@@ -1,0 +1,9 @@
+#
+
+version: '2.1'
+
+services:
+  jira:
+    image: atlassian/jira-software:latest
+    ports:
+      - 8081:8080

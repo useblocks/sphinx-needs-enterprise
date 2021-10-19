@@ -44,24 +44,26 @@ extensions = [
     'sphinx_panels',
 ]
 
-
+intersphinx_mapping = {'needs': ('https://sphinxcontrib-needs.readthedocs.io/en/latest/', None)}
 
 cb_server = 'http://127.0.0.1:8080'
 
-own_content = f"""
+cb_content = f"""
 `Codebeamer Link to Issue {{{{id}}}} <{cb_server}/issue/{{{{id}}}}>`_
 
 {{{{description}}}}"""
 
+jira_content = f"""
+{{{{fields.description}}}}"""
+
 needs_services = {
     'codebeamer': {
         'license_key': 'IRKTJ-RVCQS-KSNCP-ZHYBA',
-        # 'license_key': 'no-way',
         'url': "http://127.0.0.1:8080",
         'user': 'bond',
         'password': '007',
         'prefix': "CB_IMPORT_",
-        'content': own_content,
+        'content': cb_content,
         'mappings': {
             'type': "spec",
             'tags': 'cb_import, example',
@@ -74,6 +76,23 @@ needs_services = {
             'createdAt': ['createdAt'],
             'updated': ['modifiedAt'],
             'type': ['typeName'],
+        }
+    },
+    'jira': {
+        'license_key': 'IRKTJ-RVCQS-KSNCP-ZHYBA',
+        'url': "http://127.0.0.1:8081",
+        'user': 'test',
+        'password': 'test',
+        'id_prefix': "JIRA_",
+        'mappings': {
+            "id": ["key"],
+            "type": 'spec',
+            "title": ["fields", "summary"],
+            "status": ["fields", "status", "name"],
+        },
+        'extra_data': {
+            "Original Type": ["fields", "issuetype", "name"],
+            "Original Assignee": ["fields", "assignee", "displayName"],
         }
     }
 }
@@ -130,8 +149,9 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_material'
-# html_theme = 'alabaster'
+
+html_theme = os.environ.get('THEME', 'sphinx_material')
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -190,7 +210,8 @@ html_css_files = [
     'custom.css',
 ]
 
-html_sidebars = {
-    "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
-}
+if html_theme == "sphinx_material":
+    html_sidebars = {
+        "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
+    }
 
