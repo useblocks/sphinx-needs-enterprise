@@ -31,7 +31,28 @@ to test ``Sphinx-Needs Enterprise`` and to build the documentation with active d
 
 To start the needed service, go to ``/docker/<service>`` and run ``docker-compose down && docker-compose up -d``.
 
-Docker configurations are available for:
+Codebeamer
+~~~~~~~~~~
+Open a terminal and switch folder to ``/docker/codebeamer``.
 
-* **CodeBeamer**: ``/docker/codebeamer``
+Then run ``docker-compose down && docker-compose up -d``.
 
+After everything is running, open a browser with this address http://127.0.0.1:8080/.
+
+Login data is:
+:username: bond
+:password: 007
+
+Jira
+~~~~
+Open a terminal and switch folder to ``/docker/jira``.
+
+Then run ``docker-compose down && docker-compose up -d``.
+
+After everything is running, open a browser with this address http://127.0.0.1:8081/.
+
+You will be asked several questions and need to login with an atlassian cloud account to create an evaluation
+license for your specific server.
+
+To test the REST API open http://127.0.0.1:8081/rest/api/2/search in a browser to get json based content, which
+includes all available issues.

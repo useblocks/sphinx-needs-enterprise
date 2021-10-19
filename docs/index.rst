@@ -18,10 +18,11 @@ sychnronizing data between ``Sphinx-Needs`` and tools like Jira, Doors, GitHub, 
 
 There are different tool specific solutions available:
 
-**CodeBeamer**: :ref:`Service <service_cb>` | :ref:`cb2needs <cb2needs>`
+| **CodeBeamer**: :ref:`Service <service_cb>` | :ref:`cb2needs <cb2needs>`
+| **Jira**: :ref:`Service <service_jira>`
 
 
-Support for following tools is planned: Jira, Doors, GitHub Enterprise, Azure Boards
+Support for following tools is planned: Doors, GitHub Enterprise, Azure Boards
 
 
 .. warning::

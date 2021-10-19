@@ -1,4 +1,5 @@
 from sphinx_needs_enterprise.services.codebeamer import CodebeamerService
+from sphinx_needs_enterprise.services.jira import JiraService
 
 
 def setup(app):
@@ -8,3 +9,4 @@ def setup(app):
 
 def prepare_env(app, env, _docname):
     app.needs_services.register("codebeamer", CodebeamerService)
+    app.needs_services.register("jira", JiraService)

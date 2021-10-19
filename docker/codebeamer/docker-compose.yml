@@ -1,11 +1,3 @@
-# Copyright by Intland Software, https://www.intland.com
-#
-# All rights reserved.
-#
-# Please note that if you change this docker file, we do not take any responsibility and we are not liable for
-# any damage caused through use of this image, be it indirect, special, incidental
-# or consequential damages (including but not limited to damages for loss of business, loss of profits, interruption or the like).
-
 version: '2.1'
 
 services:
