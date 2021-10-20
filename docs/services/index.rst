@@ -3,6 +3,9 @@ Services
 Services are used to get objects like Issues from external services like JIRA and create Sphinx-Needs objects based
 on them.
 
+Write ``.. needservice:: <service>`` into any rst-file and the related service will add the received data
+as Sphinx-Needs objects.
+
 ``Sphinx-Needs Enterprise`` supports the following services:
 
 .. toctree::

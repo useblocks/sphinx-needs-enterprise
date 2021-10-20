@@ -43,6 +43,7 @@ extensions = [
     'sphinxcontrib.needs',
     'sphinx_needs_enterprise',
     'sphinx_panels',
+    'sphinxcontrib.programoutput'
 ]
 
 intersphinx_mapping = {'needs': ('https://sphinxcontrib-needs.readthedocs.io/en/latest/', None)}

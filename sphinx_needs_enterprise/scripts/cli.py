@@ -15,10 +15,17 @@ def cli():
 
 
 @cli.command(name="import")
-@click.argument("given_service")
+@click.argument("service")
 @click.option("-c", "--conf", default="conf.py", type=click.Path(exists=True), help="Relative path to conf.py")
 @click.option("-o", "--outdir", default=".", type=str, help="Relative path to folder for needs.json")
-def import_cmd(given_service, conf, outdir):
+@click.option("-q", "--query", type=str, help="Query string")
+@click.option(
+    "-r", "--reuse", "old_needfile", type=click.Path(exists=True), help="Relative path to an existing needs.json file"
+)
+@click.option("-v", "--version", type=str, help="Version under which data shall be stored")
+@click.option("-w", "--wipe", is_flag=True, default=False, help="Erases all data from reused file for used version.")
+def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
+    given_service = service
     conf_path = os.path.abspath(conf)
 
     click.echo(f"Importing config from {conf_path}")
@@ -52,24 +59,40 @@ def import_cmd(given_service, conf, outdir):
 
     app = get_app(sphinx_config)
     service_obj = service(app, given_service, config)
-    params = service_obj._prepare_request({})
+    options = {}
+    if query:
+        options["query"] = query
+    params = service_obj._prepare_request(options)
 
     # Getting data
     click.echo()
     click.echo(f'URL: {params["url"]}')
     click.echo(f'Query: {params["query"]}')
     click.echo("Sending request:  ", nl=False)
-    data = service_obj.request()
+    data = service_obj.request(options)
     click.echo("Done")
     click.echo(f"Retrieved {len(data)} elements")
 
     # Storing data
-    click.echo("\nStoring data to json file: ", nl=False)
     os.makedirs(outdir, exist_ok=True)
     needlist = NeedsList(sphinx_config, outdir, ".")
-    for datum in data:
-        needlist.add_need(needlist.current_version, datum)
+    version = version or needlist.current_version
+    click.echo(f"Version to use: {version}")
 
+    if old_needfile:
+        if not os.path.isabs(old_needfile):
+            old_needfile = os.path.abspath(old_needfile)
+        click.echo(f"Reusing needs.json: {old_needfile}")
+        needlist.load_json(old_needfile)
+
+    if wipe:
+        click.echo(f"Erasing existing data for version {version}.")
+        needlist.wipe_version(version)
+
+    for datum in data:
+        needlist.add_need(version, datum)
+
+    click.echo("\nStoring data to json file: ", nl=False)
     needlist.write_json()
     click.echo("Done")
 
