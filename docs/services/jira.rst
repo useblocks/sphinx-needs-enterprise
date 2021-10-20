@@ -35,8 +35,15 @@ Inside any ``rst`` file of your Sphinx project:
 
 Options
 -------
-:query: A query string, which must be valid to `JQL <https://support.atlassian.com/jira-service-management-cloud/docs/use-advanced-search-with-jira-query-language-jql/>`_.
-:prefix: A string, which is taken as prefix for the need-id. E.g. ``CB_IMPORT_`` --> ``CB_IMPORT_005``.
+The following options can be used inside ``.. needservice:: Jira`` and related directives.
+
+query
+~~~~~
+A query string, which must be valid to `JQL <https://support.atlassian.com/jira-service-management-cloud/docs/use-advanced-search-with-jira-query-language-jql/>`_.
+
+prefix
+~~~~~~
+A string, which is taken as prefix for the need-id. E.g. ``CB_IMPORT_`` --> ``CB_IMPORT_005``.
 
 Config
 ------
@@ -54,6 +61,14 @@ endpoint
 **Default**: ``/rest/api/2/search``
 
 See also :ref:`conf_endpoint` for more details.
+
+query
+~~~~~
+String, which must follow the `JQL <https://support.atlassian.com/jira-service-management-cloud/docs/use-advanced-search-with-jira-query-language-jql/>`_.
+notation.
+
+See also :ref:`conf_query` for more details.
+
 
 id_prefix
 ~~~~~~~~~
@@ -73,8 +88,6 @@ specific information like ``h3.`` for titles.
 Drawback: The used converter libraries are quite slow and it will take 1-3 seconds per issue.
 
 **Default**: True
-
-
 
 Example
 -------

@@ -35,12 +35,19 @@ Inside any ``rst`` file of your Sphinx project:
 
 Options
 -------
-:query: A query string, which must be valid to `cbQL <https://codebeamer.com/cb/wiki/871101>`_.
-:prefix: A string, which is taken as prefix for the need-id. E.g. ``CB_IMPORT_`` --> ``CB_IMPORT_005``.
+The following options can be used inside ``.. needservice:: Codebeamer`` and related directives.
+
+query
+~~~~~
+A query string, which must be valid to `cbQL <https://codebeamer.com/cb/wiki/871101>`_.
+
+prefix
+~~~~~~
+A string, which is taken as prefix for the need-id. E.g. ``CB_IMPORT_`` --> ``CB_IMPORT_005``.
 
 Config
 ------
-A codebeamer service configuration must be created inside your ``conf.py`` file.
+A Codebeamer service configuration must be created inside your ``conf.py`` file.
 
 .. hint::
 

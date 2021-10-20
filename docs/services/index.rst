@@ -3,6 +3,9 @@ Services
 Services are used to get objects like Issues from external services like JIRA and create Sphinx-Needs objects based
 on them.
 
+Write ``.. needservice:: <service>`` into any rst-file and the related service will add the received data
+as Sphinx-Needs objects.
+
 ``Sphinx-Needs Enterprise`` supports the following services:
 
 .. toctree::
@@ -20,6 +23,37 @@ Most services share a common set of configuration parameters, which are describe
 
 .. contents::
    :local:
+
+.. code-block:: python
+
+    my_content = """
+    **Raw description of content**
+
+    {{description}}
+    """
+
+    needs_services = {
+        'my_service': {
+            'url': "http://127.0.0.1:8081",
+            'endpoint': "/custom/rest/endpoint"
+            'user': 'test',
+            'password': 'test',
+            'id_prefix': "SERVICE_",
+            'query': 'project = TEST',
+            'content': my_content,
+            'mappings': {
+                "id": ["key"],
+                "type": 'spec',
+                "title": ["fields", "summary"],
+                "status": ["fields", "status", "name"],
+            },
+            'extra_data': {
+                "Original Type": ["fields", "issuetype", "name"],
+                "Original Assignee": ["fields", "assignee", "displayName"],
+            }
+        }
+    }
+
 
 .. _conf_url:
 
@@ -40,6 +74,21 @@ Is service specific, but the configured default values should work for most case
 user/password
 ~~~~~~~~~~~~~
 Credentials used for login.
+
+.. _conf_query:
+
+query
+~~~~~
+A string which represents the query parameter. The syntax of the query string is service specific.
+
+It can be overwritten by option ``query`` of the ``needservice`` directive.
+
+.. code-block:: rst
+
+   .. needservice:: JIRA
+      :query: status not in ('Closed', 'Resolved', 'Done')
+
+See related service description for details.
 
 .. _conf_id_prefix:
 
@@ -125,7 +174,7 @@ Example for a Codebeamer configuration:
     -----------------------------
     ``{{description}}``.
 
-    This is assigned to **{{assignedTo[0].name]}}**``.
+    This is assigned to **{{assignedTo[0].name]}}**.
 
     `Link to source <http://my_server/issue/{{id}}>`_
     """

@@ -13,17 +13,30 @@ Welcome
 This package provides enterprise specific solutions for ``Sphinx-Needs``.
 
 Its main goal is to embed ``Sphinx-Needs`` in company specific tool environments by
-sychnronizing data between ``Sphinx-Needs`` and tools like Jira, Doors, GitHub, CodeBeamer and more.
+synchronizing data between ``Sphinx-Needs`` and tools like Jira, Doors, GitHub, CodeBeamer and more.
 
+``Sphinx-Needs Enterprise`` provides directives and scripts to fetch data inside and outside of a Sphinx
+project.
 
-There are different tool specific solutions available:
+Inside a rst-file:
 
-| **CodeBeamer**: :ref:`Service <service_cb>` | :ref:`cb2needs <cb2needs>`
-| **Jira**: :ref:`Service <service_jira>`
+.. code-block:: rst
 
+   .. needservice:: jira_config
+      :query: project = my_project
+
+As script to store data inside a ``needs.json`` file:
+
+.. code-block:: bash
+
+   sne import jira_config --query "project = my_project"
+
+Supported tools:
+
+* **CodeBeamer**
+* **Jira**
 
 Support for following tools is planned: Doors, GitHub Enterprise, Azure Boards
-
 
 .. warning::
 

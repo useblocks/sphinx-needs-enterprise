@@ -21,6 +21,7 @@ class JiraService(ServiceExtension):
 
         # Set default values, if nothing got configured
         dict_undefined_set(config, "url", "http://127.0.0.1:8080")
+        dict_undefined_set(config, "query", "")
         dict_undefined_set(config, "id_prefix", "JIRA_")
         dict_undefined_set(config, "url_postfix", "/rest/api/2/search")
         dict_undefined_set(config, "content", "{{fields.description}}")

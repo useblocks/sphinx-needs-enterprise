@@ -28,6 +28,7 @@ author = 'team useblocks'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0'
+version = '1.0.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -42,6 +43,7 @@ extensions = [
     'sphinxcontrib.needs',
     'sphinx_needs_enterprise',
     'sphinx_panels',
+    'sphinxcontrib.programoutput'
 ]
 
 intersphinx_mapping = {'needs': ('https://sphinxcontrib-needs.readthedocs.io/en/latest/', None)}
@@ -64,6 +66,7 @@ needs_services = {
         'password': '007',
         'prefix': "CB_IMPORT_",
         'content': cb_content,
+        'query': "project.name IN ('my_project', 'another_project') and type = 'Requirement' and status = 'Draft'",
         'mappings': {
             'type': "spec",
             'tags': 'cb_import, example',
@@ -84,6 +87,7 @@ needs_services = {
         'user': 'test',
         'password': 'test',
         'id_prefix': "JIRA_",
+        'query': "project = PX",
         'mappings': {
             "id": ["key"],
             "type": 'spec',
@@ -94,7 +98,8 @@ needs_services = {
             "Original Type": ["fields", "issuetype", "name"],
             "Original Assignee": ["fields", "assignee", "displayName"],
         }
-    }
+    },
+    'test': {},
 }
 
 needs_extra_options = ["author"]
@@ -122,14 +127,17 @@ def rstjinja(app, docname, source):
     )
     source[0] = rendered
 
-def setup(app):
-    app.connect("source-read", rstjinja)
 
 # Check, if docs get buil on ci.
 # If this is the case, external services like Codebeamer are not available and
 # docs will show images instead of gettting real data.
 on_ci = os.environ.get('ON_CI', 'False').upper() == 'TRUE'
-print(f'---> ON_CI is: {on_ci}')
+
+
+def setup(app):
+    print(f'---> ON_CI is: {on_ci}')
+    app.connect("source-read", rstjinja)
+
 
 html_context = {
     'on_ci': on_ci

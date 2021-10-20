@@ -97,6 +97,8 @@ class ServiceExtension(BaseService):
         self.license.check()
 
     def _prepare_request(self, options):
+        if options is None:
+            options = {}
         url = options.get("url", self.url)
         url = url + self.url_postfix
 
@@ -138,6 +140,8 @@ class ServiceExtension(BaseService):
         """
 
         need_data = []
+        if options is None:
+            options = {}
         for item in data:
             extra_data = {}
             for name, selector in self.extra_data.items():
@@ -156,11 +160,12 @@ class ServiceExtension(BaseService):
                 self.content = re.sub(regex, new_str, self.content)
             content_template = Template(self.content)
             content = content_template.render(item)
-            content += "\n"
+            content += "\n\n| \n"  # Add enough space between content and extra_data
 
+            # Add extra_data to content
             for key, value in extra_data.items():
                 content += f"\n| **{key}**: {value}"
-            content += "\n\n"
+            content += "\n"
 
             prefix = options.get("prefix", self.id_prefix)
 
