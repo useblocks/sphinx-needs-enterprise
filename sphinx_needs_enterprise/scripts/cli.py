@@ -1,11 +1,14 @@
 import importlib.machinery
+import json
 import os
 import re
 import subprocess
 import types
 import webbrowser
+from datetime import datetime
 
 import click
+import jinja2
 from sphinxcontrib.needs.utils import NeedsList
 
 from sphinx_needs_enterprise.scripts.config import PROVIDERS
@@ -97,6 +100,64 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     click.echo("\nStoring data to json file: ", nl=False)
     needlist.write_json()
     click.echo("Done")
+
+
+@cli.command()
+@click.option(
+    "-j", "--json", "needs_file", default="needs.json", type=click.Path(), help="Relative path to a needs.json file"
+)
+@click.option(
+    "-t", "--template", "template_path", type=click.Path(exists=True), help="Relative path to a template file"
+)
+@click.option(
+    "-o", "--output", "output_path", default="needs.rst", type=click.Path(), help="Relative path to output file"
+)
+def render(needs_file, template_path, output_path):
+    if template_path is None:
+        template_path = os.path.join(os.path.dirname(__file__), "../", "templates", "needs.rst.template")
+
+    needs_file = os.path.abspath(needs_file)
+    template_path = os.path.abspath(template_path)
+    template_file = os.path.basename(template_path)
+    template_dir = os.path.dirname(template_path)
+    output_path = os.path.abspath(output_path)
+    output_dir = os.path.dirname(output_path)
+
+    click.echo(f"Needs file: {needs_file}")
+    click.echo(f"Template file: {template_path}")
+    click.echo(f"Output file: {output_path}\n")
+
+    if not os.path.exists(needs_file):
+        click.echo(f"Error: Needs file does not exist: {needs_file}")
+
+    if not os.path.exists(template_path):
+        click.echo(f"Error: Template file does not exist: {template_path}")
+
+    # Load needs.json data
+    click.echo("\nReading json data: ", nl=False)
+    with open(needs_file, "rb") as json_file:
+        need_data = json.load(json_file)
+    click.echo("Done")
+
+    # Render template
+    click.echo("Rendering template: ", nl=False)
+    template_loader = jinja2.FileSystemLoader(searchpath=template_dir)
+    template_env = jinja2.Environment(loader=template_loader)
+    template = template_env.get_template(f"{template_file}".strip())
+
+    output_data = template.render(data=need_data, now=datetime.now())
+
+    click.echo("Done")
+
+    # Storing data
+    click.echo("Storing data: ", nl=False)
+    os.makedirs(output_dir, exist_ok=True)
+    with open(output_path, "w") as output_fp:
+        output_fp.write(output_data)
+
+    click.echo("Done")
+
+    click.echo("All good, we are done! 🎉")
 
 
 @cli.group()
