@@ -1,0 +1,35 @@
+{{ data.project }}
+{{ "=" * data.project|length }}
+
+
+| Report created: {{now}}
+| Data exported: {{data.created}}
+| Versions found: {{data.versions|length}}
+| Current version: {{data.current_version}}
+
+**Versions**:
+
+.. contents::
+   :local:
+
+{% for name, version in data.versions.items() %}
+{{ name }}
+{{ "-" * name|length }}
+
+| Needs: {{ version.needs|length }}
+| Created: {{ version.created }}
+
+Needs
+~~~~~
+
+{%  for id, need in version.needs.items() %}
+.. {{ need.type }}:: {{ need.title }}
+   :id: {{ need.id }}
+   :status: {{ need.status }}
+
+   {{ need.description|replace('\n', '\n   ') }}
+
+
+{% endfor %}
+
+{% endfor %}
