@@ -1,7 +1,9 @@
 import importlib.machinery
 import os
 import re
+import subprocess
 import types
+import webbrowser
 
 import click
 from sphinxcontrib.needs.utils import NeedsList
@@ -95,6 +97,69 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     click.echo("\nStoring data to json file: ", nl=False)
     needlist.write_json()
     click.echo("Done")
+
+
+@cli.group()
+def dev():
+    pass
+
+
+@dev.command(name="docker")
+@click.argument("operation")
+@click.option("-b", "--browser", is_flag=True, default=False, help="Opens a browser for each service")
+def docker(operation, browser):
+    """
+    Starts all docker configurations delivered by Sphinx-Needs Enterprise for development.
+
+    These are mainly containers for JIRA, CodeBeamer and more to test the different functions of
+    Sphinx-Needs Enterprise.
+
+    The OPERATION argument must be one of: start, up, stop, down.
+    """
+    if operation.lower() not in ["start", "up", "stop", "down"]:
+        click.echo("operation must be one of: start, up, stop, down")
+        return 1
+
+    operation = operation.lower()
+
+    click.echo("Starting all docker configurations")
+
+    docker_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../", "../", "docker/"))
+
+    # Collect docker-compose files
+    docker_files = []
+    for element in os.listdir(docker_path):
+        subelement = os.path.join(docker_path, element)
+        if os.path.isdir(subelement):
+            subfolder_file = os.path.join(subelement, "docker-compose.yml")
+            if os.path.exists(subfolder_file):
+                docker_files.append(subfolder_file)
+
+    click.echo("Found following docker configurations:")
+
+    args = ["docker-compose"]
+    for docker_file in docker_files:
+        args.append("-f")
+        args.append(f"{docker_file}")
+        click.echo(f" {docker_file}")
+    args.append(operation)
+    if operation in ["up", "start"]:
+        args.append("-d")
+
+    click.echo(f'\nExecuting {" ".join(args)}')
+    os.chdir(docker_path)
+    click.echo(f"CWD: {os.getcwd()}")
+
+    subprocess.run(args)
+
+    if browser:
+        click.echo("Opening web browsers")
+        for index, docker_file in enumerate(docker_files):
+            url = f"127.0.0.1:{8080 + index}"
+            click.echo(f"Opening {url} for {docker_file}")
+            webbrowser.open(url)
+
+    click.echo("All good, we are done! 🎉")
 
 
 def get_app(sphinx_config):
