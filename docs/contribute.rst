@@ -1,3 +1,5 @@
+.. _contribute:
+
 Contribute
 ==========
 
@@ -24,12 +26,17 @@ On project root: ``make ci-docs-html``
 Under ``/docs``: ``ON_CI=true make html``
 
 
-External services
------------------
+.. _contribute_docker:
+
+External services via docker
+----------------------------
 For some services like CodeBeamer, there are open Docker Images available, which can be used
 to test ``Sphinx-Needs Enterprise`` and to build the documentation with active data synchronization.
 
 To start the needed service, go to ``/docker/<service>`` and run ``docker-compose down && docker-compose up -d``.
+
+You can also use the ``sne`` script to start **all available containers** with one command for you:
+``sne dev docker up``. See: :ref:`sne_dev_docker` for details.
 
 Codebeamer
 ~~~~~~~~~~
@@ -47,7 +54,7 @@ Jira
 ~~~~
 Open a terminal and switch folder to ``/docker/jira``.
 
-Then run ``docker-compose down && docker-compose up -d``.
+Then run ``docker-compose up -d``.
 
 After everything is running, open a browser with this address http://127.0.0.1:8081/.
 
@@ -56,3 +63,7 @@ license for your specific server.
 
 To test the REST API open http://127.0.0.1:8081/rest/api/2/search in a browser to get json based content, which
 includes all available issues.
+
+The JIRA container should be stopped with ``docker-compose stop``. Use ``stop`` instead of ``down``, as ``down`` will
+delete the container, together with the internal config and database.
+So after using ``down`` you must register your server and add all the data again.

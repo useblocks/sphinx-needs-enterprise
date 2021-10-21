@@ -74,7 +74,8 @@ class JiraService(ServiceExtension):
             # We need to transform the description text format to rst, before we proceed to extract
             # the final data
             for datum in data:
-                if datum["fields"]["description"] is False:
+                if datum["fields"]["description"] is None:
+                    datum["fields"]["description"] = ""
                     continue
                 try:
                     # Convert from Jira format to markdown and from markdown to rst.

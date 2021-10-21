@@ -1,5 +1,8 @@
+import logging
 import operator
 from functools import reduce  # forward compatibility for Python 3
+
+log = logging.getLogger(__name__)
 
 
 def dict_get(root, items, default=None):
@@ -13,7 +16,8 @@ def dict_get(root, items, default=None):
     """
     try:
         value = reduce(operator.getitem, items, root)
-    except (KeyError, IndexError):
+    except (KeyError, IndexError, TypeError) as e:
+        log.debug(e)
         return default
     return value
 
