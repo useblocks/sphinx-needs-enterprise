@@ -1,10 +1,3 @@
-from sphinx_needs_enterprise.config import (
-    CODEBEAMER_DOCS_URL,
-    CODEBEAMER_PRIVATE_USAGE_KEY,
-    CODEBEAMER_PRODUCT_ID,
-    CODEBEAMER_PRODUCT_NAME,
-    CODEBEAMER_PRODUCT_URL,
-)
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
 from sphinx_needs_enterprise.util import dict_undefined_set
 
@@ -40,18 +33,6 @@ class CodebeamerService(ServiceExtension):
         dict_undefined_set(config, "mappings_replaces", mappings_replaces_default)
 
         super().__init__(config, **kwargs)
-
-        key = config.get("license_key", CODEBEAMER_PRIVATE_USAGE_KEY)
-        suppress_private_message = getattr(app.config, "needs_is_private_project", False)
-        self.set_license(
-            CODEBEAMER_PRODUCT_ID,
-            CODEBEAMER_PRODUCT_NAME,
-            CODEBEAMER_PRODUCT_URL,
-            CODEBEAMER_DOCS_URL,
-            license_key=key,
-            suppress_private_message=suppress_private_message,
-        )
-        self.check_license()
 
     def request(self, options=None):
         params = self._prepare_request(options)

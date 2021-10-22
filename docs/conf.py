@@ -50,23 +50,23 @@ intersphinx_mapping = {'needs': ('https://sphinxcontrib-needs.readthedocs.io/en/
 
 cb_server = 'http://127.0.0.1:8080'
 
-azure_content = f"""
-Item URL: `{{{{fields["System.TeamProject"]}}}}/{{{{id}}}} <https://dev.azure.com/useblocks/{{{{fields["System.TeamProject"]}}}}/_workitems/edit/{{{{id}}}}>`_
+azure_content = """
+Item URL: `{{fields["System.TeamProject"]}}/{{id}} <https://dev.azure.com/useblocks/{{fields["System.TeamProject"]}}/_workitems/edit/{{id}}>`_
  
 .. raw:: html
 
-   {{{{fields["System.Description"]}}}}"""
+   {{fields["System.Description"]}}"""
 
-cb_content = f"""
-`Codebeamer Link to Issue {{{{id}}}} <{cb_server}/issue/{{{{id}}}}>`_
+cb_content = """
+`Codebeamer Link to Issue {{id}} <{cb_server}/issue/{{id}}>`_
 
-{{{{description}}}}"""
+{{description}}"""
 
-jira_content = f"""
-{{{{fields.description}}}}"""
+jira_content = """
+{{fields.description}}"""
 
 needs_services = {
-    'azure': {
+    'azure_config': {
         'url': "https://dev.azure.com/useblocks",
         'token': os.getenv('NEEDS_AZURE', ''),
         'id_prefix': "AZURE_",
@@ -83,7 +83,7 @@ needs_services = {
             "Original Assignee": ["fields", 'System.AssignedTo', 'displayName'],
         }
     },
-    'codebeamer': {
+    'codebeamer_config': {
         'license_key': 'IRKTJ-RVCQS-KSNCP-ZHYBA',
         'url': "http://127.0.0.1:8080",
         'user': 'bond',
@@ -105,7 +105,7 @@ needs_services = {
             'type': ['typeName'],
         }
     },
-    'jira': {
+    'jira_config': {
         'license_key': 'IRKTJ-RVCQS-KSNCP-ZHYBA',
         'url': "http://127.0.0.1:8081",
         'user': 'test',
@@ -237,9 +237,16 @@ html_theme_options = {
         "services/index": "Synchronize with external services",
     },
 }
+panels_css_variables = {
+    "tabs-color-label-active": "rgb(42, 99, 154)",
+    "tabs-color-label-inactive": "rgb(42, 99, 154, 0.6)",
+    "tabs-color-overline": "rgb(42, 99, 154)",
+    "tabs-color-underline": "rgb(42, 99, 154)",
+    "tabs-size-label": "0.9rem",
+}
 
 html_css_files = [
-    'custom.css',
+    'custom.css'
 ]
 
 if html_theme == "sphinx_material":

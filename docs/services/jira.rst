@@ -2,10 +2,6 @@
 
 JIRA
 ====
-
-.. contents::
-   :local:
-
 The ``Jira`` service synchronizes
 data between `Jira <https://www.atlassian.com/software/jira>`_ from `Atlassian <https://www.atlassian.com>`_ and the
 life cycle management extension `Sphinx-Needs <https://sphinxcontrib-needs.readthedocs.io/en/latest/>`_ from
@@ -19,19 +15,6 @@ to create Sphinx-Needs objects based on this data.
 After the created Sphinx-Needs objects support every function from
 `Sphinx-Needs <https://sphinxcontrib-needs.readthedocs.io/en/latest/>`__, which includes Filtering, Linking,
 Updating and much more.
-
-**Example**:
-
-Inside any ``rst`` file of your Sphinx project:
-
-.. code-block:: rst
-
-   .. needservice:: jira
-       :query: summary !~ "FooBar"
-       :prefix: MY_IMPORT_
-
-.. contents:: Page content
-   :local:
 
 Options
 -------
@@ -91,34 +74,16 @@ Drawback: The used converter libraries are quite slow and it will take 1-3 secon
 
 Example
 -------
-**conf.py**
+Inside your ``conf.py`` file:
 
-.. code-block:: python
+.. literalinclude:: /snippets/jira_config.py
+      :language: python
 
-    needs_services = {
-        'jira': {
-            'url': "http://127.0.0.1:8081",
-            'user': 'test',
-            'password': 'test',
-            'id_prefix': "JIRA_",
-            'mappings': {
-                "id": ["key"],
-                "type": 'spec',
-                "title": ["fields", "summary"],
-                "status": ["fields", "status", "name"],
-            },
-            'extra_data': {
-                "Original Type": ["fields", "issuetype", "name"],
-                "Original Assignee": ["fields", "assignee", "displayName"],
-            }
-        }
-    }
-
-**Any rst file**
+Inside any ``rst`` file of your Sphinx project:
 
 .. code-block:: rst
 
-   .. needservice:: jira
+   .. needservice:: jira_config
        :query: project = PX
        :prefix: JIRA_IMPORT
 
@@ -129,12 +94,14 @@ Example
 
 {% if on_ci != true %}
 
-.. needservice:: jira
+.. needservice:: jira_config
    :query: project = PX
    :prefix: JIRA_IMPORT
 
 .. needtable::
    :filter: "JIRA_IMPORT" in id
+   :columns: id, title, status, type
+   :style: table
 
 {% else %}
 .. hint::
