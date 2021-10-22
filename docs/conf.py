@@ -232,10 +232,10 @@ html_theme_options = {
             "title": "Sphinx-Needs Docs",
         },
     ],
-    "heroes": {
-        "index": "Enterprise Solutions for Sphinx-Needs",
-        "services/index": "Synchronize with external services",
-    },
+    # "heroes": {
+    #     "index": "Enterprise Solutions for Sphinx-Needs",
+    #     "services/index": "Synchronize with external services",
+    # },
 }
 panels_css_variables = {
     "tabs-color-label-active": "rgb(42, 99, 154)",

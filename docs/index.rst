@@ -5,7 +5,7 @@
 
 .. image:: /_static/sphinx-needs-enterprise-logo.png
    :align: center
-   :scale: 35%
+   :scale: 25%
 
 Welcome
 =======
