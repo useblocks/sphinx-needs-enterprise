@@ -1,7 +1,11 @@
 # From: https://github.com/rkdarst/sphinx-actions-test/blob/master/.github/workflows/sphinx-build.yml
 
 name: sphinx_docs
-on: [pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 env:
   DEFAULT_BRANCH: "master"
