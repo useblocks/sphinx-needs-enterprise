@@ -1,21 +1,19 @@
-import dataclasses
-
 from azure.devops.connection import Connection
-from msrest.authentication import BasicAuthentication
-
 from azure.devops.v5_1.work_item_tracking.models import Wiql
+from msrest.authentication import BasicAuthentication
 
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
 from sphinx_needs_enterprise.util import dict_undefined_set
 
-DEFAULT_FIELDS = ['System.Id',
-                  'System.WorkItemType',
-                  'System.Title',
-                  'System.State',
-                  'System.AreaPath',
-                  'System.IterationPath',
-                  'System.Tags'
-                  ]
+DEFAULT_FIELDS = [
+    "System.Id",
+    "System.WorkItemType",
+    "System.Title",
+    "System.State",
+    "System.AreaPath",
+    "System.IterationPath",
+    "System.Tags",
+]
 
 DEFAULT_ORDER = "[System.ChangedDate] desc"
 
@@ -28,7 +26,7 @@ class AzureService(ServiceExtension):
         self.name = name
 
         # Set default values, if nothing got configured
-        dict_undefined_set(config, "url", 'https://dev.azure.com/YOURORG')
+        dict_undefined_set(config, "url", "https://dev.azure.com/YOURORG")
         dict_undefined_set(config, "query", "[System.WorkItemType] = 'Issue'")
         dict_undefined_set(config, "fields", DEFAULT_FIELDS)
         dict_undefined_set(config, "order", DEFAULT_ORDER)
@@ -54,8 +52,8 @@ class AzureService(ServiceExtension):
         super().__init__(config, **kwargs)
 
         # Prepare AZURE client
-        credentials = BasicAuthentication('', self.token)
-        connection = Connection(base_url=config['url'], creds=credentials)
+        credentials = BasicAuthentication("", self.token)
+        connection = Connection(base_url=config["url"], creds=credentials)
         self.client = connection.clients.get_work_item_tracking_client()
 
     def request(self, options=None):
@@ -66,9 +64,9 @@ class AzureService(ServiceExtension):
         See: https://github.com/microsoft/azure-devops-python-api
         """
 
-        query = options.get('query', self.config['query'])
-        fields = options.get('fields', self.config['fields'])
-        order = options.get('order', self.config['order'])
+        query = options.get("query", self.config["query"])
+        fields = options.get("fields", self.config["fields"])
+        order = options.get("order", self.config["order"])
 
         wiql = self._create_wiql(query, fields, order)
 
@@ -83,11 +81,11 @@ class AzureService(ServiceExtension):
                 # The returned datum object returns functions and other stuff, we don't need.
                 # See we store only elements, which we need (but try to keep the original structure)
                 cleaned_datum = {
-                    'id': datum.id,
-                    'rev': datum.rev,
-                    'url': datum.url,
-                    'fields': datum.fields,
-                    'relations': datum.relations
+                    "id": datum.id,
+                    "rev": datum.rev,
+                    "url": datum.url,
+                    "fields": datum.fields,
+                    "relations": datum.relations,
                 }
                 cleaned_data.append(cleaned_datum)
 
@@ -98,12 +96,12 @@ class AzureService(ServiceExtension):
     def _create_wiql(self, query=None, fields=None, order=None):
 
         if fields is None:
-            fields = self.config['fields']
+            fields = self.config["fields"]
 
         if order is None:
-            order = self.config['order']
+            order = self.config["order"]
 
-        field_str = ','.join(f'[{x}]' for x in fields)
+        field_str = ",".join(f"[{x}]" for x in fields)
         wiql = Wiql(
             query=f"""
             select {field_str}
@@ -113,6 +111,7 @@ class AzureService(ServiceExtension):
         )
 
         return wiql
+
 
 class InvalidConfigException(BaseException):
     pass

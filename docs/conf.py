@@ -67,8 +67,8 @@ jira_content = """
 
 needs_services = {
     'azure_config': {
-        'url': "https://dev.azure.com/useblocks",
-        'token': os.getenv('NEEDS_AZURE', ''),
+        'url': os.getenv('NEEDS_AZURE_URL', 'https://dev.azure.com/useblocks'),
+        'token': os.getenv('NEEDS_AZURE_TOKEN', ''),
         'id_prefix': "AZURE_",
         'query':  "[System.WorkItemType] = 'Issue'",
         'content': azure_content,

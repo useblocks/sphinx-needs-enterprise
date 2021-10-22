@@ -1,7 +1,7 @@
 def get_providers():
+    from sphinx_needs_enterprise.services.azure import AzureService
     from sphinx_needs_enterprise.services.codebeamer import CodebeamerService
     from sphinx_needs_enterprise.services.jira import JiraService
-    from sphinx_needs_enterprise.services.azure import AzureService
 
     providers = {
         "jira": {"service": JiraService, "regex": "^jira"},
@@ -16,4 +16,3 @@ RSA_PUB_KEY = "<RSAKeyValue><Modulus>t5w/Rj4SijVJyQALRUzEJmV8Vin4P0SRCAqWSnttULr
 API_TOKEN = "WyI0MDg4MjQyIiwibmJ4Y2FWeEtmRjIrMG8xZ2szeis2NGlZU09meDk5RGFGdG1vNGJjNSJd"
 PRIVATE_USAGE_FEATURE = "f1"
 COMMERCIAL_USAGE_FEATURE = "f2"
-

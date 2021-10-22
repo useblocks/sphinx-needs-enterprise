@@ -8,6 +8,7 @@ needs_services = {
         'password': 'test',
         'id_prefix': "JIRA_",
         'query': "project = PX",
+        'content': jira_content,
         'mappings': {
             "id": ["key"],
             "type": 'spec',

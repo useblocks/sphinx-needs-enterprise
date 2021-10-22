@@ -2,6 +2,7 @@ import re
 
 from sphinx_needs_enterprise.config import get_providers
 
+
 def setup(app):
     # Register sphinx-needs stuff after it has been initialised.
     app.connect("env-before-read-docs", prepare_env)
