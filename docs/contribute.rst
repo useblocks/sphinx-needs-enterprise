@@ -3,6 +3,12 @@
 Contribute
 ==========
 
+Code linting
+------------
+Use ``make format`` to run ``black`` on your code, which should fix most of possible linter errors.
+
+To run all our configured linter, run ``make lint``.
+
 Doc build
 ---------
 
@@ -28,8 +34,8 @@ Under ``/docs``: ``ON_CI=true make html``
 
 .. _contribute_docker:
 
-External services via docker
-----------------------------
+External services
+-----------------
 For some services like CodeBeamer, there are open Docker Images available, which can be used
 to test ``Sphinx-Needs Enterprise`` and to build the documentation with active data synchronization.
 
@@ -38,8 +44,8 @@ To start the needed service, go to ``/docker/<service>`` and run ``docker-compos
 You can also use the ``sne`` script to start **all available containers** with one command for you:
 ``sne dev docker up``. See: :ref:`sne_dev_docker` for details.
 
-Codebeamer
-~~~~~~~~~~
+Codebeamer via docker
+~~~~~~~~~~~~~~~~~~~~~
 Open a terminal and switch folder to ``/docker/codebeamer``.
 
 Then run ``docker-compose down && docker-compose up -d``.
@@ -50,8 +56,8 @@ Login data is:
 :username: bond
 :password: 007
 
-Jira
-~~~~
+Jira via docker
+~~~~~~~~~~~~~~~
 Open a terminal and switch folder to ``/docker/jira``.
 
 Then run ``docker-compose up -d``.
@@ -67,3 +73,16 @@ includes all available issues.
 The JIRA container should be stopped with ``docker-compose stop``. Use ``stop`` instead of ``down``, as ``down`` will
 delete the container, together with the internal config and database.
 So after using ``down`` you must register your server and add all the data again.
+
+
+Azure DevOps
+~~~~~~~~~~~~
+``Azure DevOps`` can only be used as cloud service. A local installation is not possible.
+Luckily there is a free plan available, so for testing create an account via
+https://azure.microsoft.com/en-us/services/devops/.
+
+For a documentation build of ``Sphinx-Needs Enterprise`` you should set the env vars
+``NEEDS_AZURE_URL`` and ``NEEDS_AZURE_TOKEN`` with your specific data.
+They will overwrite the config set in ``docs/conf.py``.
+
+

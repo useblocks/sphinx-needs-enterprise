@@ -3,9 +3,6 @@
 Codebeamer
 ==========
 
-.. contents::
-   :local:
-
 The ``Codebeamer`` service synchronizes
 data between `codebeamer <https://codebeamer.com/>`_ from `Intland <https://intland.com/>`_ and the
 Requirement Engineering extension `Sphinx-Needs <https://sphinxcontrib-needs.readthedocs.io/en/latest/>`_ from
@@ -19,19 +16,6 @@ to create Sphinx-Needs objects based on this data.
 After the created Sphinx-Needs objects support every function from
 `Sphinx-Needs <https://sphinxcontrib-needs.readthedocs.io/en/latest/>`__, which includes Filtering, Linking,
 Updating and much more.
-
-**Example**:
-
-Inside any ``rst`` file of your Sphinx project:
-
-.. code-block:: rst
-
-   .. needservice:: codebeamer
-       :query: project.name IN ('my_project', 'another_project')
-       :prefix: MY_IMPORT_
-
-.. contents:: Page content
-   :local:
 
 Options
 -------
@@ -66,45 +50,19 @@ url
 ~~~
 Please see :ref:`conf_url` for details.
 
-For Codebeamer REST call this specific location is used: ``/rest/v3/items/query``.
 
 Example
 -------
-**conf.py**
+Inside your ``conf.py`` file:
 
-.. code-block:: python
+.. literalinclude:: /snippets/azure_config.py
+      :language: python
 
-    needs_services = {
-        'codebeamer': {
-            'url': "http://127.0.0.1:8080",
-            'user': 'bond',
-            'password': '007',
-            'prefix': "CB_IMPORT_",
-            'mapping': {
-                'id': ['id'],
-                'type': ['typeName'],
-                'status': ['status', 'name'],
-                'title': ['name'],
-                'author': ['createdBy', 'name'],
-            },
-            'mapping_replaces': {
-                '^Task$': 'task',
-                '^Requirement$': 'req',
-                '^Specification$': 'spec',
-            },
-            'extra_data': {
-                'assignedBy': ['assignedTo', 0, 'name'],
-                'createdAt': ['createdAt'],
-                'updated': ['modifiedAt'],
-            }
-        }
-    }
-
-**Any rst file**
+Inside any ``rst`` file of your Sphinx project:
 
 .. code-block:: rst
 
-   .. needservice:: codebeamer
+   .. needservice:: codebeamer_config
        :query: project.name IN ('my_project', 'another_project')
        :prefix: CB_IMPORT
 
@@ -115,12 +73,14 @@ Example
 
 {% if on_ci != true %}
 
-.. needservice:: codebeamer
+.. needservice:: codebeamer_config
    :query: project.name IN ('my_project', 'another_project') and type = 'Requirement' and status = 'Draft'
    :prefix: CB_IMPORT_
 
 .. needtable::
    :filter: "CB_IMPORT" in id
+   :columns: id, title, status, type
+   :style: table
 
 {% else %}
 .. hint::

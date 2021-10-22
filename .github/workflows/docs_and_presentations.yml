@@ -1,7 +1,7 @@
 # From: https://github.com/rkdarst/sphinx-actions-test/blob/master/.github/workflows/sphinx-build.yml
 
 name: sphinx_docs
-on: [push, pull_request]
+on: [pull_request]
 
 env:
   DEFAULT_BRANCH: "master"
@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ON_CI: True
+      NEEDS_AZURE_TOKEN: ${{ secrets.AZURE_TOKEN }}
     steps:
       # https://github.com/marketplace/actions/checkout
       - uses: actions/checkout@v2

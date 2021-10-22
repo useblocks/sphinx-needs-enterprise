@@ -11,6 +11,7 @@ as Sphinx-Needs objects.
 .. toctree::
    :maxdepth: 2
 
+   azure
    codebeamer
    jira
 

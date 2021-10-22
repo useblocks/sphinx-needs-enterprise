@@ -11,7 +11,7 @@ import click
 import jinja2
 from sphinxcontrib.needs.utils import NeedsList
 
-from sphinx_needs_enterprise.scripts.config import PROVIDERS
+from sphinx_needs_enterprise.config import get_providers
 
 
 @click.group()
@@ -50,7 +50,7 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     config = configured_services[given_service]
 
     service = None
-    for name, provider in PROVIDERS.items():
+    for name, provider in get_providers().items():
         if re.search(provider["regex"], given_service):
             service = provider["service"]
             click.echo(f'Using provider "{name}" for given service {given_service}')
@@ -58,7 +58,7 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
 
     if not service:
         click.echo(f"Could not find a matching service provider for {given_service}. Known providers are:")
-        for name, provider in PROVIDERS.items():
+        for name, provider in get_providers().items():
             click.echo(f'  {name} with regex {provider["regex"]}')
         return 1
 
