@@ -19,6 +19,7 @@ jira2markdown = "^0.2.0"
 m2r = "^0.2.1"
 click = "^8.0.3"
 sphinxcontrib-programoutput = "^0.17"
+azure-devops = "^6.0.0-beta.4"
 
 [tool.poetry.dev-dependencies]
 # test dependencies

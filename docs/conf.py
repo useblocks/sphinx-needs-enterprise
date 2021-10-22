@@ -50,6 +50,13 @@ intersphinx_mapping = {'needs': ('https://sphinxcontrib-needs.readthedocs.io/en/
 
 cb_server = 'http://127.0.0.1:8080'
 
+azure_content = f"""
+Item URL: `{{{{fields["System.TeamProject"]}}}}/{{{{id}}}} <https://dev.azure.com/useblocks/{{{{fields["System.TeamProject"]}}}}/_workitems/edit/{{{{id}}}}>`_
+ 
+.. raw:: html
+
+   {{{{fields["System.Description"]}}}}"""
+
 cb_content = f"""
 `Codebeamer Link to Issue {{{{id}}}} <{cb_server}/issue/{{{{id}}}}>`_
 
@@ -59,6 +66,23 @@ jira_content = f"""
 {{{{fields.description}}}}"""
 
 needs_services = {
+    'azure': {
+        'url': "https://dev.azure.com/useblocks",
+        'token': os.getenv('NEEDS_AZURE', ''),
+        'id_prefix': "AZURE_",
+        'query':  "[System.WorkItemType] = 'Issue'",
+        'content': azure_content,
+        'mappings': {
+            "id": ["id"],
+            "type": 'spec',
+            "title": ["fields", "System.Title"],
+            "status": ["fields", "System.State"],
+        },
+        'extra_data': {
+            "Original Type": ["fields", 'System.WorkItemType'],
+            "Original Assignee": ["fields", 'System.AssignedTo', 'displayName'],
+        }
+    },
     'codebeamer': {
         'license_key': 'IRKTJ-RVCQS-KSNCP-ZHYBA',
         'url': "http://127.0.0.1:8080",

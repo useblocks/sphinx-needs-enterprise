@@ -23,6 +23,7 @@ class ServiceExtension(BaseService):
         query_postfix="",
         user="",
         password="",
+        token="",
         id_prefix="",
         content=None,
         mappings=None,
@@ -41,6 +42,7 @@ class ServiceExtension(BaseService):
 
         self.user = user or config.get("user", "")
         self.password = password or config.get("password", "")
+        self.token = token or config.get("token", "")
 
         self.id_prefix = id_prefix or config.get("id_prefix", "")
 
