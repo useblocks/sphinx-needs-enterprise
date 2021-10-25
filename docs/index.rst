@@ -165,8 +165,8 @@ In the last years additional information and extensions have been created, which
    :img-top: /_static/sphinx-needs-card.png
    :img-top-cls: + bg-light
 
-   Sphinx-Needs Overview
-   ^^^^^^^^^^^^^^^^^^^^^
+   Sphinx-Needs.com
+   ^^^^^^^^^^^^^^^^
    Webpage to present most important Sphinx-Needs functions and related extensions.
 
    Good entrypoint to understand the benefits and to get an idea about the complete ecosystem of Sphinx-Needs.
@@ -175,7 +175,7 @@ In the last years additional information and extensions have been created, which
 
    .. link-button:: https://sphinx-needs.com
        :type: url
-       :text: Sphinx-Neeeds.com
+       :text: Sphinx-Needs.com
        :classes: btn-secondary btn-block
 
    ---
@@ -255,7 +255,7 @@ to support the work in teams of the automotive industry:
    ---
    :img-top: /_static/sphinx_bazel_logo.png
 
-   
+
    Provides a Bazel domain in Sphinx documentations and allows the automated import of Bazel files and their
    documentation.
 
