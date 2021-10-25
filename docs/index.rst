@@ -199,8 +199,6 @@ In the last years additional information and extensions have been created, which
 
    Sphinx-Needs Enterprise
    ^^^^^^^^^^^^^^^^^^^^^^^
-   Current, viewed extensions.
-
    Synchronizes Sphinx-Needs data with external, company internal systems like CodeBeamer, Jira or Azure Boards.
 
    Provides scripts to baseline data and make CI usage easier.
