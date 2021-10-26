@@ -46,6 +46,8 @@ extensions = [
     'sphinxcontrib.programoutput'
 ]
 
+needs_enterprise_license = os.getenv('NEEDS_SNE_LICENSE', "")
+
 intersphinx_mapping = {'needs': ('https://sphinxcontrib-needs.readthedocs.io/en/latest/', None)}
 
 cb_server = 'http://127.0.0.1:8080'
