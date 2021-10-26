@@ -1,19 +1,19 @@
 import time
 
-from licensing.methods import Key, Helpers
+from licensing.methods import Helpers, Key
 from sphinx.util import logging
 
 from sphinx_needs_enterprise.config import (
     API_TOKEN,
-    RSA_PUB_KEY,
+    LICENSE_INTERVAL_SECS,
     LICENSE_RETRIES,
     LICENSE_RETRY_SECS,
-    LICENSE_INTERVAL_SECS,
-    TEXT_PRIVATE_FULL,
-    TEXT_PRIVATE_SHORT,
+    RSA_PUB_KEY,
     TEXT_INVALID,
     TEXT_INVALID_WARNING,
-    TEXT_VALID
+    TEXT_PRIVATE_FULL,
+    TEXT_PRIVATE_SHORT,
+    TEXT_VALID,
 )
 
 
@@ -28,7 +28,7 @@ class License:
         license_url=None,
         suppress_private_message=False,
         rsa_key=RSA_PUB_KEY,
-        api_token=API_TOKEN
+        api_token=API_TOKEN,
     ):
 
         self.log = logging.getLogger(__name__)
@@ -95,7 +95,7 @@ class License:
         while (self.limit_reached is None or self.limit_reached is True) and attempt <= 3:
             if attempt > 1:
                 time.sleep(LICENSE_RETRY_SECS)
-            self.log.debug(f'License attempt: {attempt}')
+            self.log.debug(f"License attempt: {attempt}")
             self.license, self.message = Key.activate(
                 token=self.token,
                 rsa_pub_key=self.rsa_pub_key,
@@ -107,15 +107,19 @@ class License:
 
             if "Could not contact the server" in self.message:
                 self.server_reachable = False
-                self.log.info(f'License server not reachable '
-                              f'Try again in {LICENSE_RETRY_SECS} secs. Attempt {attempt}/{LICENSE_RETRIES}')
+                self.log.info(
+                    f"License server not reachable "
+                    f"Try again in {LICENSE_RETRY_SECS} secs. Attempt {attempt}/{LICENSE_RETRIES}"
+                )
             else:
                 self.server_reachable = True
 
             if "limit has been reached" in self.message:
                 self.limit_reached = True
-                self.log.info(f'License limit has been reached. '
-                              f'Try again in {LICENSE_RETRY_SECS} secs. Attempt {attempt}/{LICENSE_RETRIES}')
+                self.log.info(
+                    f"License limit has been reached. "
+                    f"Try again in {LICENSE_RETRY_SECS} secs. Attempt {attempt}/{LICENSE_RETRIES}"
+                )
             else:
                 self.limit_reached = False
 
@@ -147,10 +151,10 @@ class License:
             product_id=self.product_id,
             key=self.license_key,
             machine_code=self.machine_code,
-            floating=True
+            floating=True,
         )
         if not success:
-            self.log.info(f'Could not free license: {message}')
+            self.log.info(f"Could not free license: {message}")
 
         return success
 
@@ -165,11 +169,14 @@ class License:
         """
         if not self.license_key or self.is_private:
             if not self.suppress_private_message:
-                self.log.info(TEXT_PRIVATE_FULL.format(product_name=self.product_name,
-                                                       product_url=self.product_url,
-                                                       docs_url=self.docs_url,
-                                                       license_url=self.license_url
-                                                       ))
+                self.log.info(
+                    TEXT_PRIVATE_FULL.format(
+                        product_name=self.product_name,
+                        product_url=self.product_url,
+                        docs_url=self.docs_url,
+                        license_url=self.license_url,
+                    )
+                )
             else:
                 self.log.info(TEXT_PRIVATE_SHORT.format(product_name=self.product_name))
             return
@@ -180,11 +187,18 @@ class License:
             else:
 
                 self.log.warning(
-                    TEXT_INVALID_WARNING.format(license_key=self.license_key, product_name=self.product_name,
-                                                message=self.message))
+                    TEXT_INVALID_WARNING.format(
+                        license_key=self.license_key, product_name=self.product_name, message=self.message
+                    )
+                )
                 self.log.info(
-                    TEXT_INVALID.format(license_key=self.license_key, product_name = self.product_name,
-                                        message=self.message,
-                                        product_url=self.product_url, docs_url=self.docs_url))
+                    TEXT_INVALID.format(
+                        license_key=self.license_key,
+                        product_name=self.product_name,
+                        message=self.message,
+                        product_url=self.product_url,
+                        docs_url=self.docs_url,
+                    )
+                )
         else:
             self.log.info(TEXT_VALID.format(product_name=self.product_name, customer=self.customer))

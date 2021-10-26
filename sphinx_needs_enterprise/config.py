@@ -28,12 +28,12 @@ LICENSE_INTERVAL_SECS = 300
 
 # TEXT MESSAGES
 TEXT_PRIVATE_FULL = """
-* Sphinx-Needs Enterprise License Information ************************************************ 
+* Sphinx-Needs Enterprise License Information ************************************************
 * No commercial license configured!
 * This allows the free usage of {product_name} for private Sphinx projects
 * of any size.
-* If this is a academic or commercial project, please obtain a license under 
-* {product_url}. 
+* If this is a academic or commercial project, please obtain a license under
+* {product_url}.
 * You can hide this message by setting "needs_enterprise_license = "PRIVATE"
 * or by setting a valid commercial license.
 * For technical support visit {docs_url}.

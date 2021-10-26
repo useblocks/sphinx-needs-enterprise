@@ -1,9 +1,13 @@
 import re
 
-from sphinx_needs_enterprise.config import get_providers, \
-    RSA_PUB_KEY, API_TOKEN, SNE_PRODUCT_ID, SNE_PRODUCT_NAME, \
-    SNE_PRODUCT_URL, SNE_DOCS_URL, SNE_LICENSE_URL
-
+from sphinx_needs_enterprise.config import (
+    SNE_DOCS_URL,
+    SNE_LICENSE_URL,
+    SNE_PRODUCT_ID,
+    SNE_PRODUCT_NAME,
+    SNE_PRODUCT_URL,
+    get_providers,
+)
 from sphinx_needs_enterprise.license import License
 
 
@@ -17,15 +21,21 @@ def setup(app):
 
 
 def prepare_env(app, env, _docname):
-    license_key = getattr(app.config, 'needs_enterprise_license', "")
+    license_key = getattr(app.config, "needs_enterprise_license", "")
     if license_key.upper() == "PRIVATE":
         suppress_private_message = True
     else:
         suppress_private_message = False
 
-    sne_license = License(SNE_PRODUCT_ID, SNE_PRODUCT_NAME, license_key,
-                          SNE_PRODUCT_URL, SNE_DOCS_URL, SNE_LICENSE_URL,
-                          suppress_private_message)
+    sne_license = License(
+        SNE_PRODUCT_ID,
+        SNE_PRODUCT_NAME,
+        license_key,
+        SNE_PRODUCT_URL,
+        SNE_DOCS_URL,
+        SNE_LICENSE_URL,
+        suppress_private_message,
+    )
 
     env.needs_sne_license = sne_license
 
