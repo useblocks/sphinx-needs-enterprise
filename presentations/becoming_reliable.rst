@@ -22,8 +22,8 @@ What is Sphinx-Needs!
 .. revealjs-section::
    :data-background-iframe: _static/dynamic_background/white_small_move.html
 
-Features2
-~~~~~~~~~
+Features
+~~~~~~~~
 
 * Objects of different types
 * Link objects
