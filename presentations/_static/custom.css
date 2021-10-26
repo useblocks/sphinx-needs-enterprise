@@ -3,16 +3,23 @@
 /*}*/
 
 body {
-    background: #002b36 url('background_1.png') 100% 100% !important;
+    background-image: url("background_2.png") !important;
+    background-color: #002b36 !important;
     background-size: 100% 100% !important;
     /* the following are for firefox 70 */
 	opacity:1;
-    
 	z-index:1;
 }
 
 .reveal-viewport {
     background: inherit;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal p {
+    text-shadow: 2px 2px black;
+}
+table.need td p {
+    text-shadow: none;
 }
 
 .strike {

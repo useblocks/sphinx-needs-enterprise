@@ -35,7 +35,7 @@ extensions = [
 
 revealjs_script_conf = """
 {
-    controls: false,
+    controls: true,
     transition: 'slide',
 }
 """

@@ -9,19 +9,21 @@ Becoming reliable
 .. image:: ../docs/_static/sphinx-needs-enterprise-logo.png
    :scale: 30%
 
+.. revealjs-section::
+   :data-background-color: #002b36
 
-What is Sphinx-Needs?
+
+What is Sphinx-Needs!
 ---------------------
 | A highly customizable, free and open
 | **Lifecycle Management toolbox for developers**
 | to enhance their productivity to a new maximum.
 
 .. revealjs-section::
-   :data-background-color: #ffcc00
-   :data-background-transition: zoom
+   :data-background-iframe: _static/dynamic_background/white_small_move.html
 
-Features
-~~~~~~~~
+Features2
+~~~~~~~~~
 
 * Objects of different types
 * Link objects
@@ -34,7 +36,6 @@ Features
 
 Input
 ~~~~~
-
 .. code-block:: rst
 
 
@@ -48,6 +49,8 @@ Input
 
       The python code of our product must follow
       `PEP8 <https://www.python.org/dev/peps/pep-0008/>`_.
+
+
 
 Result
 ~~~~~~
@@ -93,8 +96,7 @@ Business Model
 Why is it needed?
 
 .. revealjs-section::
-   :data-background-color: #4d4d4dff
-   :data-background-transition: zoom
+   :data-background-iframe: _static/dynamic_background/white_small_move.html
 
 Challenges
 ~~~~~~~~~~
@@ -124,8 +126,7 @@ A collection of tools and scripts to embedded Sphinx-Needs inside companies tool
 ➔ One-Stop-Shop of Truth
 
 .. revealjs-section::
-   :data-background-color: #2a639aff
-   :data-background-transition: zoom
+   :data-background-iframe: _static/dynamic_background/white_small_move.html
 
 .. revealjs-break::
    :notitle:
@@ -208,10 +209,8 @@ Business Source License
 -----------------------
 | An eventually Open Source license
 
-
 .. revealjs-section::
-   :data-background-color: #800080
-   :data-background-transition: zoom
+   :data-background-iframe: _static/dynamic_background/white_small_move.html
 
 Eventually?
 ~~~~~~~~~~~
@@ -263,8 +262,8 @@ Offers
 ------
 
 .. revealjs-section::
-   :data-background-color: #207020
-   :data-background-transition: zoom
+   :data-background-iframe: _static/dynamic_background/white_small_move.html
+
 
 | **Whatever is needed**
 | Licenses, Support, Trainings
