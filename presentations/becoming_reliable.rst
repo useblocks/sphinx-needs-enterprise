@@ -6,11 +6,8 @@
 
 Becoming reliable
 =================
-
 .. image:: ../docs/_static/sphinx-needs-enterprise-logo.png
    :scale: 30%
-
-
 
 
 What is Sphinx-Needs?

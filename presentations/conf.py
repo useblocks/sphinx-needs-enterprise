@@ -32,6 +32,14 @@ extensions = [
     'sphinx_revealjs',
     'sphinx.ext.mathjax'
 ]
+
+revealjs_script_conf = """
+{
+    controls: false,
+    transition: 'slide',
+}
+"""
+
 needs_css = "blank.css"
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

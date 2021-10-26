@@ -2,6 +2,19 @@
 /*    color: red !important;*/
 /*}*/
 
+body {
+    background: #002b36 url('background_1.png') 100% 100% !important;
+    background-size: 100% 100% !important;
+    /* the following are for firefox 70 */
+	opacity:1;
+    
+	z-index:1;
+}
+
+.reveal-viewport {
+    background: inherit;
+}
+
 .strike {
   text-decoration: line-through;
 }

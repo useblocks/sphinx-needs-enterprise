@@ -183,7 +183,7 @@ In the last years additional information and extensions have been created, which
 
    Sphinx-Needs
    ^^^^^^^^^^^^
-   Base extensions, which provides all of its functionality under the MIT license for free.
+   Base extension, which provides all of its functionality under the MIT license for free.
 
    Create, update, link, filter and present need objects like Requirements, Specifications, Bugs and much more.
 
@@ -263,11 +263,6 @@ to support the work in teams of the automotive industry:
        :type: url
        :text: Technical docs
        :classes: btn-secondary btn-block
-
-
-
-
-
 
 Content
 -------
