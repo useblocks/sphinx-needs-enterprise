@@ -10,7 +10,7 @@ Becoming reliable
    :scale: 30%
 
 .. revealjs-section::
-   :data-background-color: #002b36
+   :data-background-iframe: _static/dynamic_background/white_small_move.html
 
 
 What is Sphinx-Needs!
@@ -20,7 +20,7 @@ What is Sphinx-Needs!
 | to enhance their productivity to a new maximum.
 
 .. revealjs-section::
-   :data-background-iframe: _static/dynamic_background/white_small_move.html
+   :data-background-iframe: _static/dynamic_background/colored_small_move.html
 
 Features
 ~~~~~~~~
@@ -119,7 +119,7 @@ Maintenance shall be independent from customers and projects.
 | ➔ An ongoing income is needed to get
 | **1-2 full-time developers** on it.
 
-Sphinx-Needs-Enterprise
+Sphinx-Needs Enterprise
 -----------------------
 A collection of tools and scripts to embedded Sphinx-Needs inside companies tool environments.
 

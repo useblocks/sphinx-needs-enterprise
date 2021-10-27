@@ -28,17 +28,17 @@ And: https://github.com/VincentGarreau/particles.js/tree/master/demo
   {
     "particles": {
       "number": {
-        "value": 80,
+        "value": 40,
         "density": {
           "enable": true,
           "value_area": 800
         }
       },
       "color": {
-        "value": ["#ffffff"]
+        "value": ["#ffffff", "#ffcc00", "#ccff00", "#ff00cc"]
       },
       "shape": {
-        "type": ["circle"],
+        "type": ["circle", "edge", "polygon"],
         "stroke": {
           "width": 0,
           "color": "#ffffff"
@@ -53,7 +53,7 @@ And: https://github.com/VincentGarreau/particles.js/tree/master/demo
         }
       },
       "opacity": {
-        "value": 0.2,
+        "value": 0.3,
         "random": true,
         "anim": {
           "enable": false,
@@ -63,13 +63,13 @@ And: https://github.com/VincentGarreau/particles.js/tree/master/demo
         }
       },
       "size": {
-        "value": 5,
+        "value": 10,
         "random": true,
         "anim": {
-          "enable": false,
-          "speed": 40,
-          "size_min": 0.1,
-          "sync": false
+          "enable": true,
+          "speed": 5,
+          "size_min": 3,
+          "sync": true
         }
       },
       "line_linked": {
@@ -81,7 +81,7 @@ And: https://github.com/VincentGarreau/particles.js/tree/master/demo
       },
       "move": {
         "enable": true,
-        "speed": 3,
+        "speed": 2,
         "direction": "none",
         "random": false,
         "straight": false,
@@ -93,32 +93,32 @@ And: https://github.com/VincentGarreau/particles.js/tree/master/demo
         }
       }
     },
-    "interactivity": {
+    "interactivity": {          "color": "#FF0000",
       "detect_on": "canvas",
       "events": {
         "onhover": {
           "enable": true,
-          "mode": "repulse"
+          "mode": "grab"
         },
         "onclick": {
           "enable": true,
-          "mode": "push"
+          "mode": "bubble"
         },
         "resize": true
       },
       "modes": {
         "grab": {
-          "distance": 400,
+          "distance": 200,
           "line_linked": {
-            "opacity": 1
+            "opacity": 1.0,
           }
         },
         "bubble": {
-          "distance": 400,
-          "size": 40,
-          "duration": 2,
+          "distance": 200,
+          "size": 15,
+          "duration": 1,
           "opacity": 8,
-          "speed": 3
+          "speed": 20
         },
         "repulse": {
           "distance": 200
@@ -133,7 +133,7 @@ And: https://github.com/VincentGarreau/particles.js/tree/master/demo
     },
     "retina_detect": true,
     "config_demo": {
-      "hide_card": false,
+      "hide_card": true,
       "background_color": "#b61924",
       "background_image": "",
       "background_position": "50% 50%",

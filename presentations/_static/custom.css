@@ -15,10 +15,10 @@ body {
     background: inherit;
 }
 
-.reveal h1, .reveal h2, .reveal h3, .reveal p {
+.reveal h1, .reveal h2, .reveal h3, .reveal p, .reveal div.line {
     text-shadow: 2px 2px black;
 }
-table.need td p {
+table.need td p, span.needs_data, span.needs_label, div.needs_meta div.line {
     text-shadow: none;
 }
 
