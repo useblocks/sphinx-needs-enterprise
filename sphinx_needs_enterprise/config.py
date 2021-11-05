@@ -1,12 +1,14 @@
 def get_providers():
     from sphinx_needs_enterprise.services.azure import AzureService
     from sphinx_needs_enterprise.services.codebeamer import CodebeamerService
+    from sphinx_needs_enterprise.services.elasticsearch import ElasticsearchService
     from sphinx_needs_enterprise.services.jira import JiraService
 
     providers = {
         "jira": {"service": JiraService, "regex": "^jira"},
         "azure": {"service": AzureService, "regex": "^azure"},
         "codebeamer": {"service": CodebeamerService, "regex": "^codebeamer|^cb"},
+        "elasticsearch": {"service": ElasticsearchService, "regex": "^elastic|^es"},
     }
     return providers
 

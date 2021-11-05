@@ -20,6 +20,8 @@ m2r = "^0.2.1"
 click = "^8.0.3"
 sphinxcontrib-programoutput = "^0.17"
 azure-devops = "^6.0.0-beta.4"
+elasticsearch = "^7.15.1"
+tqdm = "^4.62.3"
 
 [tool.poetry.dev-dependencies]
 # test dependencies

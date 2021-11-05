@@ -19,26 +19,51 @@ synchronizing data between ``Sphinx-Needs`` and tools like Jira, Doors, GitHub, 
 
 .. panels::
    :container: container-lg pb-3
-   :column: col-lg-4 col-md-4 col-sm-4 col-xs-4 p-2
+   :column: col-lg-3 col-md-3 col-sm-6 col-xs-6 p-2
 
    .. image:: /_static/azuredevops-logo.png
       :align: center
       :height: 100px
+      :target: https://azure.microsoft.com/en-us/services/devops/
+
+   :badge:`BETA, badge-danger`
+   :link-badge:`service_azure,needservice,ref, badge-primary text-white`
+   :link-badge:`sne_import,sne import,ref,badge-secondary text-white`
    ---
    .. image:: /_static/codebeamer-logo.png
       :align: center
       :height: 100px
+      :target: https://codebeamer.com
+
+   :badge:`BETA, badge-danger`
+   :link-badge:`service_cb,needservice,ref, badge-primary text-white`
+   :link-badge:`sne_import,sne import,ref,badge-secondary text-white`
    ---
    .. image:: /_static/jira-logo.png
       :align: center
       :height: 100px
+      :target: https://www.atlassian.com/software/jira
+
+   :badge:`BETA, badge-danger`
+   :link-badge:`service_jira,needservice,ref, badge-primary text-white`
+   :link-badge:`sne_import,sne import,ref,badge-secondary text-white`
+   ---
+   .. image:: /_static/elasticsearch-logo.svg
+      :align: center
+      :height: 100px
+      :target: https://www.elastic.co/elastic-stack/
+
+   :badge:`BETA, badge-danger`
+   :link-badge:`service_cb,needservice,ref, badge-primary text-white`
+   :link-badge:`sne_import,sne import,ref,badge-secondary text-white`
+   :link-badge:`sne_export,sne export,ref,badge-info`
 
 ``Sphinx-Needs Enterprise`` provides directives and scripts to fetch data inside and outside of a Sphinx
 project.
 
 .. warning::
 
-   This package is in an Alpha phase. Docs, tests and even the code is not complete and may contain bugs.
+   This package is in an Beta phase. Docs, tests and even the code is not complete and may contain bugs.
 
 
 .. _index_needservice:
