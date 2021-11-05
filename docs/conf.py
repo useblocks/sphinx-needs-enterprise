@@ -86,7 +86,6 @@ needs_services = {
         }
     },
     'codebeamer_config': {
-        'license_key': 'IRKTJ-RVCQS-KSNCP-ZHYBA',
         'url': "http://127.0.0.1:8080",
         'user': 'bond',
         'password': '007',
@@ -108,7 +107,6 @@ needs_services = {
         }
     },
     'jira_config': {
-        'license_key': 'IRKTJ-RVCQS-KSNCP-ZHYBA',
         'url': "http://127.0.0.1:8081",
         'user': 'test',
         'password': 'test',
@@ -124,6 +122,10 @@ needs_services = {
             "Original Type": ["fields", "issuetype", "name"],
             "Original Assignee": ["fields", "assignee", "displayName"],
         }
+    },
+    'elasticsearch_config': {
+        "url": "http://127.0.0.1:9200",
+        "index": "needs"
     },
     'test': {},
 }

@@ -35,4 +35,6 @@ details.dropdown summary:after {
     content: none;
 }
 
-
+div.card img {
+    margin-bottom: 30px;
+}

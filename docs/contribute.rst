@@ -90,3 +90,18 @@ For a documentation build of ``Sphinx-Needs Enterprise`` you should set the env 
 They will overwrite the config set in ``docs/conf.py``.
 
 
+ElasticSearch and Kibana
+~~~~~~~~~~~~~~~~~~~~~~~~
+Open a terminal and switch folder to ``/docker/elasticsearch``.
+
+Then run ``docker-compose up -d``. This will start an ``ElasticSearch`` server and a ``Kibana`` server.
+
+``ElasticSearch`` is listening on Port ``9200`` and ``9300``.
+``Kibana`` on port ``5601``.
+
+To test everything, open http://127.0.0.1:5601 or http://127.0.0.1:5601/app/home#/tutorial_directory/sampleData
+to add some sample data.
+
+
+
+

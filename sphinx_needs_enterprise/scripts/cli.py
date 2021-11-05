@@ -1,17 +1,21 @@
-import importlib.machinery
 import json
 import os
-import re
 import subprocess
-import types
 import webbrowser
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import click
+import elasticsearch
 import jinja2
-from sphinxcontrib.needs.utils import NeedsList
+from tqdm import tqdm
 
-from sphinx_needs_enterprise.config import get_providers
+# API has changed with Sphinx-Needs version 0.7.3
+try:
+    from sphinxcontrib.needs.utils import NeedsList
+except ImportError:
+    from sphinxcontrib.needs.needsfile import NeedsList
+
+from sphinx_needs_enterprise.scripts.loader import service_loader
 
 
 @click.group()
@@ -30,40 +34,9 @@ def cli():
 @click.option("-v", "--version", type=str, help="Version under which data shall be stored")
 @click.option("-w", "--wipe", is_flag=True, default=False, help="Erases all data from reused file for used version.")
 def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
-    given_service = service
     conf_path = os.path.abspath(conf)
 
-    click.echo(f"Importing config from {conf_path}")
-    # Import the conf.py file as config
-    loader = importlib.machinery.SourceFileLoader("conf", conf_path)
-    sphinx_config = types.ModuleType(loader.name)
-    loader.exec_module(sphinx_config)
-
-    if not hasattr(sphinx_config, "needs_services"):
-        click.echo("Missing needs_services in configuration")
-        return 1
-
-    configured_services = sphinx_config.needs_services
-    if given_service not in configured_services:
-        click.echo(f'Unknown service: {given_service}. Available services are: {", ".join(configured_services)}')
-        return 1
-    config = configured_services[given_service]
-
-    service = None
-    for name, provider in get_providers().items():
-        if re.search(provider["regex"], given_service):
-            service = provider["service"]
-            click.echo(f'Using provider "{name}" for given service {given_service}')
-            break
-
-    if not service:
-        click.echo(f"Could not find a matching service provider for {given_service}. Known providers are:")
-        for name, provider in get_providers().items():
-            click.echo(f'  {name} with regex {provider["regex"]}')
-        return 1
-
-    app = get_app(sphinx_config)
-    service_obj = service(app, given_service, config)
+    service_obj, sphinx_config = service_loader(service, conf_path)
     options = {}
     if query:
         options["query"] = query
@@ -100,6 +73,55 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     click.echo("\nStoring data to json file: ", nl=False)
     needlist.write_json()
     click.echo("Done")
+
+
+@cli.command(name="export")
+@click.argument("service")
+@click.option(
+    "-j", "--json", "needs_file", default="needs.json", type=click.Path(), help="Relative path to a needs.json file"
+)
+@click.option("-c", "--conf", default="conf.py", type=click.Path(exists=True), help="Relative path to conf.py")
+@click.option("-v", "--version", type=str, help="Version under which data shall be stored")
+@click.option("-x", "--extra", multiple=True, type=click.Tuple([str, str]))
+@click.option("-h", "--hours", type=int, default="0")
+def export_cmd(service, needs_file, conf, version, extra, hours):
+    conf_path = os.path.abspath(conf)
+
+    service_obj, sphinx_config = service_loader(service, conf_path)
+
+    # Load needs.json data
+    click.echo("\nReading json data: ", nl=False)
+    with open(needs_file, "rb") as json_file:
+        needs_data = json.load(json_file)
+    click.echo("Done")
+
+    if not version:
+        version = needs_data["current_version"]
+    needs = needs_data["versions"][version]["needs"]
+
+    url = service_obj.url
+    click.echo(f"Connectiong to Elasticsearch url: {url}")
+    es = elasticsearch.Elasticsearch([url])
+
+    index = service_obj.index
+    if not es.indices.exists(index=index):
+        click.echo(f"Creating index {index}")
+        es.indices.create(index)
+    else:
+        click.echo(f"Using index {index}")
+
+    click.echo(f"Uploading {len(needs)} elements.")
+    elements = tqdm(needs.items(), bar_format="{bar:80} {percentage:3.0f}% | {desc}")
+    for key, need in elements:
+        # click.echo(f'{key}')
+        need.pop("id", None)  # Remove id, as it is used by ElasticSearch internally
+        for cus in extra:
+            need[cus[0]] = cus[1]
+        need["uploaded_at"] = datetime.now() + timedelta(hours=hours)
+        elements.set_description(f"Uploading need {key}")
+        es.index(index=index, document=need)
+
+    es.indices.refresh(index=index)
 
 
 @cli.command()
@@ -221,25 +243,6 @@ def docker(operation, browser):
             webbrowser.open(url)
 
     click.echo("All good, we are done! 🎉")
-
-
-def get_app(sphinx_config):
-    """
-    Create a dummy app object, which looks like a Sphinx app and contains all needed
-    information for the Services classes.
-
-    This helps us to reuse the code from services/jira and co.
-    """
-
-    class App:
-        def __init__(self):
-            self.config = {
-                "needs_services": sphinx_config.needs_services,
-                "needs_types": getattr(sphinx_config, "needs_types", [{"directive": "req"}]),
-                "needs_is_private_project": getattr(sphinx_config, "needs_is_private_project", False),
-            }
-
-    return App()
 
 
 if "main" in __name__:

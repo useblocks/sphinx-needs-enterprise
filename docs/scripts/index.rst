@@ -14,6 +14,8 @@ terminal:
 .. command-output:: sne --help
 
 
+.. _sne_import:
+
 import
 ------
 ``sne import`` allows the execution of configured need_services and stores the retrieved data in a ``needs.json`` file,
