@@ -9,6 +9,7 @@ from sphinx_needs_enterprise.config import (
     get_providers,
 )
 from sphinx_needs_enterprise.license import License
+from sphinx_needs_enterprise.version import VERSION
 
 
 def setup(app):
@@ -18,6 +19,12 @@ def setup(app):
     app.connect("source-read", process_per_doc)
     app.connect("doctree-resolved", process_per_doc)
     app.connect("build-finished", process_finish)
+
+    return {
+        "version": VERSION,  # identifies the version of our extension
+        "parallel_read_safe": True,  # support parallel modes
+        "parallel_write_safe": True,
+    }
 
 
 def prepare_env(app, env, _docname):
