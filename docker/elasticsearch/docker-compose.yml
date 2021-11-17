@@ -5,6 +5,8 @@ version: '2.1'
 services:
   elasticsearch:
     image: elasticsearch:7.13.4
+    container_name: elasticsearch
+    mem_limit: 2048m
     environment:
       - discovery.type=single-node
     ports:
@@ -12,7 +14,6 @@ services:
       - 9300:9300
     networks:
       - elk
-
   kibana:
     image: docker.elastic.co/kibana/kibana:7.13.4
     ports:

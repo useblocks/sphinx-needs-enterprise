@@ -3,6 +3,7 @@ version: '2.1'
 services:
   codebeamer-db:
     image: intland/mysql:5.7.21
+    container_name: mysql
     environment:
       - MYSQL_USER=user
       - MYSQL_PASSWORD=pass
@@ -16,6 +17,7 @@ services:
 
   codebeamer-app:
     image: intland/codebeamer:10.1-SP3
+    container_name: codebeamer
     ports:
       - 8080:8080
     environment:

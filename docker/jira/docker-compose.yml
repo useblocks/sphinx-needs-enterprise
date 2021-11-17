@@ -5,5 +5,7 @@ version: '2.1'
 services:
   jira:
     image: atlassian/jira-software:latest
+    container_name: jira
+    mem_limit: 2048m
     ports:
       - 8081:8080
