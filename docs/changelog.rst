@@ -5,6 +5,8 @@ Changelog
 -----
 **Released**: under development
 
+* Improvement: Activates parallel build support.
+  `#12 <https://github.com/useblocks/sphinx-needs-enterprise/issues/12>`_
 * Improvement: Added :ref:`Azure service <service_azure>`.
 * Improvement: Added :ref:`sne` subcommands: ``import``, ``render``, ``dev``.
 * Improvement: Added :ref:`sne`.
