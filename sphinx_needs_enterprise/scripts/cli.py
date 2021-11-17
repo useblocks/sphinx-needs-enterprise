@@ -84,7 +84,8 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
 @click.option("-v", "--version", type=str, help="Version under which data shall be stored")
 @click.option("-x", "--extra", multiple=True, type=click.Tuple([str, str]))
 @click.option("-h", "--hours", type=int, default="0")
-def export_cmd(service, needs_file, conf, version, extra, hours):
+@click.option("-s", "--skip", type=int, default="0")
+def export_cmd(service, needs_file, conf, version, extra, hours, skip):
     conf_path = os.path.abspath(conf)
 
     service_obj, sphinx_config = service_loader(service, conf_path)
@@ -103,25 +104,32 @@ def export_cmd(service, needs_file, conf, version, extra, hours):
     click.echo(f"Connectiong to Elasticsearch url: {url}")
     es = elasticsearch.Elasticsearch([url])
 
-    index = service_obj.index
-    if not es.indices.exists(index=index):
-        click.echo(f"Creating index {index}")
-        es.indices.create(index)
+    es_index = service_obj.index
+    if not es.indices.exists(index=es_index):
+        click.echo(f"Creating index {es_index}")
+        es.indices.create(es_index)
     else:
-        click.echo(f"Using index {index}")
+        click.echo(f"Using index {es_index}")
 
-    click.echo(f"Uploading {len(needs)} elements.")
     elements = tqdm(needs.items(), bar_format="{bar:80} {percentage:3.0f}% | {desc}")
-    for key, need in elements:
+    counter = 0
+    for element_index, element in enumerate(elements):
+        if skip > 0:
+            if element_index % skip == 0:
+                continue
+        key, need = element
         # click.echo(f'{key}')
-        need.pop("id", None)  # Remove id, as it is used by ElasticSearch internally
+        # need.pop("id", None)  # Remove id, as it is used by ElasticSearch internally
         for cus in extra:
             need[cus[0]] = cus[1]
         need["uploaded_at"] = datetime.now() + timedelta(hours=hours)
         elements.set_description(f"Uploading need {key}")
-        es.index(index=index, document=need)
+        es.index(index=es_index, document=need)
+        counter += 1
 
-    es.indices.refresh(index=index)
+    click.echo(f"Uploaded {counter} elements.")
+
+    es.indices.refresh(index=es_index)
 
 
 @cli.command()

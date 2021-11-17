@@ -1,0 +1,34 @@
+version: "3.6"
+
+networks:
+  splunknet:
+    driver: bridge
+    attachable: true
+
+volumes:
+  so1-var:
+
+services:
+  splunk:
+    networks:
+      splunknet:
+        aliases:
+          - splunk
+    image: splunk/splunk:latest
+    container_name: splunk
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=changem3N0w!
+      - DEBUG=true
+    ports:
+      - 8082:8000
+      - 8089:8089
+    volumes:
+      - so1-var:/opt/splunk/var
+    deploy:
+      resources:
+        limits:
+          cpus: '1.000'
+          memory: 2048M
+
+
