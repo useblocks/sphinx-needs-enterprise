@@ -29,6 +29,26 @@ prefix
 ~~~~~~
 A string, which is taken as prefix for the need-id. E.g. ``CB_IMPORT_`` --> ``CB_IMPORT_005``.
 
+.. _cb_raw:
+
+raw
+~~~
+If set to "True", the description content gets presented inside a code-block and is not handled as rst-valid text
+anymore. Use it to avoid sphinx build errors, is the item description is based on wiki or html syntax.
+
+Default: False
+
+.. _cb_wiki2html:
+
+wiki2html
+~~~~~~~~~
+If set to "True", wiki-based item content gets transformed to html and is presented in a
+``.. raw:: html`` directive.
+
+Default: True
+
+If ``raw`` is set as well, content gets transformed to HTML, but is presented inside a ``code-block``.
+
 Config
 ------
 A Codebeamer service configuration must be created inside your ``conf.py`` file.

@@ -56,6 +56,10 @@ Login data is:
 :username: bond
 :password: 007
 
+To use the current documentation with the new codebeamer instance, you should create a project based on the ``agile``
+template. In this case some elements, like issues, get automatically created and the used filters inside this
+documentation should already match some of them.
+
 Jira via docker
 ~~~~~~~~~~~~~~~
 Open a terminal and switch folder to ``/docker/jira``.

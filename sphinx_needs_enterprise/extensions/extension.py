@@ -161,7 +161,8 @@ class ServiceExtension(BaseService):
             for regex, new_str in self.mapping_replaces.items():
                 self.content = re.sub(regex, new_str, self.content)
             content_template = Template(self.content)
-            content = content_template.render(item)
+            context = {"data": item, "options": options}
+            content = content_template.render(context)
             content += "\n\n| \n"  # Add enough space between content and extra_data
 
             # Add extra_data to content

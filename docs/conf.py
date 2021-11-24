@@ -53,19 +53,19 @@ intersphinx_mapping = {'needs': ('https://sphinxcontrib-needs.readthedocs.io/en/
 cb_server = 'http://127.0.0.1:8080'
 
 azure_content = """
-Item URL: `{{fields["System.TeamProject"]}}/{{id}} <https://dev.azure.com/useblocks/{{fields["System.TeamProject"]}}/_workitems/edit/{{id}}>`_
+Item URL: `{{data.fields["System.TeamProject"]}}/{{data.id}} <https://dev.azure.com/useblocks/{{data.fields["System.TeamProject"]}}/_workitems/edit/{{data.id}}>`_
  
 .. raw:: html
 
-   {{fields["System.Description"]}}"""
+   {{data.fields["System.Description"]}}"""
 
 cb_content = """
-`Codebeamer Link to Issue {{id}} <{cb_server}/issue/{{id}}>`_
+`Codebeamer Link to Issue {{data.id}} <{cb_server}/issue/{{data.id}}>`_
 
-{{description}}"""
+{{data.description}}"""
 
 jira_content = """
-{{fields.description}}"""
+{{data.fields.description}}"""
 
 needs_services = {
     'azure_config': {

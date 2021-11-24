@@ -13,7 +13,7 @@ from sphinx_needs_enterprise.version import VERSION
 
 
 def setup(app):
-    app.add_config_value("needs_enterprise_license", None, "html", types=[str])
+    app.add_config_value("needs_enterprise_license", "", "html", types=[str])
     # Register sphinx-needs stuff after it has been initialised.
     app.connect("env-before-read-docs", prepare_env)
     app.connect("source-read", process_per_doc)
@@ -71,5 +71,7 @@ def process_finish(app, exception):
     """
     Finally check/print again license after everything was done
     """
-    app.env.needs_sne_license.print_info()
-    app.env.needs_sne_license.free()  # Give back license
+    # There are use cases, where needs_sne_license was not set up. (e.g. no files to build or prior error)
+    if hasattr(app.env, "needs_sne_license"):
+        app.env.needs_sne_license.print_info()
+        app.env.needs_sne_license.free()  # Give back license

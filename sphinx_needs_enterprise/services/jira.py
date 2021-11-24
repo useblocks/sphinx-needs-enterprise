@@ -17,7 +17,7 @@ class JiraService(ServiceExtension):
         dict_undefined_set(config, "query", "")
         dict_undefined_set(config, "id_prefix", "JIRA_")
         dict_undefined_set(config, "url_postfix", "/rest/api/2/search")
-        dict_undefined_set(config, "content", "{{fields.description}}")
+        dict_undefined_set(config, "content", "{{data.fields.description}}")
         dict_undefined_set(config, "convert_content", True)
 
         # If no mapping is given, we need to use a need-type, which really exists.
