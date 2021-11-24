@@ -12,3 +12,5 @@ Changelog
 * Improvement: Added :ref:`sne`.
 * Improvement: Added :ref:`Codebeamer service <service_cb>`.
 * Improvement: Added :ref:`Jira service <service_jira>`.
+* Improvement:: Added :Ref:`cb_wiki2html` and :ref:`cb_raw` to service :ref:`service_cb`.
+  `#11 <https://github.com/useblocks/sphinx-needs-enterprise/issues/11>`_

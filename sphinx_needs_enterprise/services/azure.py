@@ -31,7 +31,7 @@ class AzureService(ServiceExtension):
         dict_undefined_set(config, "fields", DEFAULT_FIELDS)
         dict_undefined_set(config, "order", DEFAULT_ORDER)
         dict_undefined_set(config, "id_prefix", "AZURE_")
-        dict_undefined_set(config, "content", "{{fields.description}}")
+        dict_undefined_set(config, "content", "{{data.fields.description}}")
 
         # If no mapping is given, we need to use a need-type, which really exists.
         # So we take the first one from config, instead of hard-coding a value or

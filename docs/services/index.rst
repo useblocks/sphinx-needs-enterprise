@@ -25,12 +25,14 @@ Most services share a common set of configuration parameters, which are describe
 .. contents::
    :local:
 
+{% raw %}
+
 .. code-block:: python
 
     my_content = """
     **Raw description of content**
 
-    {{description}}
+    {{data.description}}
     """
 
     needs_services = {
@@ -55,6 +57,7 @@ Most services share a common set of configuration parameters, which are describe
         }
     }
 
+{% endraw %}
 
 .. _conf_url:
 
@@ -164,7 +167,7 @@ content
 {% raw %}
 ``content`` takes a string, which gets interpreted as rst-code for the need-content area.
 Jinja support is also available, so that service data is available and can be accessed like
-``{{description}}``.
+``{{data.description}}``.
 
 Example for a Codebeamer configuration:
 
@@ -173,11 +176,11 @@ Example for a Codebeamer configuration:
     my_content = """
     Content from Codebeamer Issue
     -----------------------------
-    ``{{description}}``.
+    ``{{data.description}}``.
 
-    This is assigned to **{{assignedTo[0].name]}}**.
+    This is assigned to **{{data.assignedTo[0].name]}}**.
 
-    `Link to source <http://my_server/issue/{{id}}>`_
+    `Link to source <http://my_server/issue/{{data.id}}>`_
     """
 
     needs_services = {
@@ -186,6 +189,20 @@ Example for a Codebeamer configuration:
         'content': my_content
         }
     }
+
+The set options for the ``needservice`` are available  under ``options``. Example:
+
+.. code-block:: python
+
+   my_content = """
+   Executed query: {{options.query}}
+
+   {{data.description}}
+
+   {% if options.prefix == "TEST_" %}
+   **TEST TICKET**
+   {% endif %}
+   """
 
 {% endraw %}
 
