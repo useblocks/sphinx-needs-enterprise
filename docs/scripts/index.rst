@@ -14,257 +14,28 @@ terminal:
 .. command-output:: sne --help
 
 
-.. _sne_import:
+.. toctree::
+   :maxdepth: 1
+   :caption: Available commands
 
-import
-------
-``sne import`` allows the execution of configured need_services and stores the retrieved data in a ``needs.json`` file,
-which can be used by ``.. needimport::``.
+   import
+   export
+   render
+   dev
 
-::
+.. note::
 
-    $ sne import -c docs/conf.py jira -v 3.0.1 -r needs.json -o . -w
+   Please take into account that not all services are supporting all functions like ``sne import`` or ``sne export``.
 
-    Importing config from /home/daniel/workspace/sphinx/sphinx-needs-enterprise/docs/conf.py
-    Using provider "jira" for given service jira
+   Take a look on the service badges on our main page, to figure out what is currently supported.
 
-    URL: http://127.0.0.1:8081/rest/api/2/search
-    Query: project = PX
-    Sending request:  Done
-    Retrieved 2 elements
-    Version to use: 3.0.1
-    Reusing needs.json: /home/daniel/workspace/sphinx/sphinx-needs-enterprise/needs.json
-    Erasing existing data for version 3.0.1.
 
-use case
-~~~~~~~~
-``sne import`` can be used to retrieve and store baselines of external data at a specific point of time.
-So instead of getting always the latest data via ``.. needservice:: jira`` during each build, ``sne import`` can
-be used to request and store this data only once in a ``needs.json`` file.
-This file can be stored inside your source version system, so that each developer works on the same data.
-To get the data into your documentation, use ``.. needimport:: needs.json``.
 
-For huge requests and big teams this can reduce the amount of requests against the external service dramatically and
-it makes sure that each build is using the same data.
 
-arguments
-~~~~~~~~~
-``sne import`` takes only one argument, the name of the service to call.
 
-service
-+++++++
-A given service must be defined inside ``needs_services`` of a ``conf.py`` file.
-By default ``sne`` looks into the current working directory for a ``conf.py`` file.
-Use ``-c`` to specify another location.
 
-The service key should start with the name of the tool, so that ``sne`` is selecting the internal driver automatically.
-For instance: ``jira_my_server`` for ``JIRA`` or ``codebeamer123`` for ``Codebeamer``.
 
-.. code-block:: bash
 
-   sne import jira_my_server
-
-options
-~~~~~~~
-
-.. contents::
-   :local:
-
--c / --conf
-+++++++++++
-Can be used to specify the location of the ``conf.py`` file to use.
-
-``sne import jira -c docs/conf.py``
-
-Default: ``conf.py`` (in the current working directory)
-
--o/--outdir
-+++++++++++
-The folder, under which the final ``needs.json`` file shall be created.
-Will create not existing subfolders automatically.
-
-``sne import codebeamer -o my_exports/2.0.1/``
-
-Default: ``.`` (current working directory)
-
--q/--query
-++++++++++
-Query to use for the service request.
-
-``sne import jira -q "status != closed"``
-
-Default: Taken from service config in ``conf.py``.
-
--r/--reuse
-++++++++++
-Location of a ``needs.json`` compatible file, which data shall be copied/updated in the
-final ``needs.json`` file.
-
-``sne import codebeamer -r my_exports/2.0.1/needs.json``
-
-Default: Not set
-
--v/--version
-++++++++++++
-The version, under which the data shall be stored in the ``needs.json`` file.
-
-``sne import codebeamer -v 2.0.1``
-
-Default: ``version`` attribute from ``conf.py``
-
--w/--wipe
-+++++++++
-If ``-r/--reuse`` is used, version specific data may contain data, which is not valid after an import. Maybe
-because an issue got deleted, but its data is still available in the reused ``needs.json``.
-
-Use ``-w / --wipe`` to delete all data for the version given by ``-v / --version`` before the newly imported
-data is stored.
-
-``sne import codebeamer -v 2.0.1 -w``
-
-Default: Not set
-
-render
-------
-``render`` uses a Jinja2-Template and combines it with data from a ``needs.json`` file to generate a new output file,
-which can be a rst-file, a html-report, custom xml, whatever.
-
-``sne render``
-
-options
-~~~~~~~
-``sne render -j needs.json -t my_template.rst -o output.rst``
-
-.. contents::
-   :local:
-
--j / --json
-++++++++++++
-Defines a relative file to a json file, which can be a ``needs.json`` file.
-
-Default: ``needs.json`` in the current working directory
-
--t / --template
-+++++++++++++++
-Relative path to a jinja2 template file.
-
-If it is not set, an internal template is used to provide a fast way to test it.
-See :ref:`default_template` for details.
-
-Default: Sphinx-Needs Enterprise internal template
-
--o / --output
-+++++++++++++
-Relative path to an output file, which gets overwritten, if it already exists.
-
-Default: ``needs.rst`` in the current working directory
-
-Own template file
-~~~~~~~~~~~~~~~~~
-{% raw %}
-The template is using `Jinja <https://jinja.palletsprojects.com/en/3.0.x/>`_ as template language.
-
-The complete data from the loaded json file is available under the name ``data``.
-Example for getting the project name of a loaded ``needs.json`` use ``{{ data.project}}``.
-
-Also ``{{ now }}`` can be used to get the current datetime.
-
-For some ideas of how a report template may look like, please take a look into our :ref:`default_template`.
-
-{% endraw %}
-
-.. _default_template:
-
-Default template
-~~~~~~~~~~~~~~~~
-
-.. literalinclude:: ../../sphinx_needs_enterprise/templates/needs.rst.template
-   :language: jinja
-
-**Result Example**
-
-.. code-block:: rst
-
-    Sphinx-Needs Enterprise
-    =======================
-
-
-    | Report created: 2021-10-21 11:33:44.107829
-    | Data exported: 2021-10-21T11:31:06.176901
-    | Versions found: 1
-    | Current version: 1.0.0
-
-    **Versions**:
-
-    .. contents::
-       :local:
-
-
-    1.0.0
-    -----
-
-    | Needs: 2
-    | Created: 2021-10-21T11:31:06.176874
-
-    Needs
-    ~~~~~
-
-
-    .. spec:: Built in GPS-System
-       :id: CB_1018
-       :status: Draft
-
-       `Codebeamer Link to Issue 1018 <http://127.0.0.1:8080/issue/1018>`_
-
-       Example content
-
-
-
-
-    .. spec:: Navigation system
-       :id: CB_1091
-       :status: Draft
-
-       `Codebeamer Link to Issue 1091 <http://127.0.0.1:8080/issue/1091>`_
-
-       Example content
-
-
-
-
-
-dev
----
-The ``dev`` command contains subcommands, which are mostly used internally by the developer team to make things easier.
-
-``sne dev --help``
-
-.. _sne_dev_docker:
-
-docker
-~~~~~~
-Starts all docker-containers inside ``/docker`` with one single command.
-
-``sne dev docker up``
-
-Helpful to run tests and build the documentation against running external services like Jira or Codebeamer.
-See also :ref:`contribute_docker` for some details about the docker configuration in ``Sphinx-Needs Enterprise``.
-
-operation argument
-++++++++++++++++++
-The operation argument must be one of ``up``, ``start``, ``stop``, ``down``.
-They have the same meaning as they have for ``docker-compose``.
-
-Please be aware that ``down`` will delete the container and therefore maybe also stored data.
-This means e.g. for the Jira-container that the complete server registration and all data gets lost and you need
-to start from scratch with the next run.
-So ``stop`` is the better option for most docker containers.
-
-browser option
-++++++++++++++
-``sne dev docker up -b``
-
-``-b / --browser`` will open for each found docker configuration a web browser with the related url.
 
 
 

@@ -15,7 +15,6 @@ as Sphinx-Needs objects.
    codebeamer
    jira
 
-
 .. _service_config:
 
 Configuration

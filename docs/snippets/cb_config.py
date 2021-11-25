@@ -1,8 +1,8 @@
 # Manipulates the content to add a link to the source issue
 cb_content = """
-`Codebeamer Link to Issue {{id}} <{{cb_server}}/issue/{{id}}>`_
+`Codebeamer Link to Issue {{data.id}} <{{data.cb_server}}/issue/{{data.id}}>`_
 
-{{description}}"""
+{{data.description}}"""
 
 needs_services = {
     'codebeamer_config': {

@@ -1,5 +1,5 @@
 jira_content = """
-{{fields.description}}"""
+{{data.fields.description}}"""
 
 needs_services = {
     'jira_config': {
