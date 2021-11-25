@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sphinx-needs-enterprise"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["team useblocks"]
 
@@ -11,17 +11,17 @@ documentation = "https://useblocks.com/sphinx-needs-enterprise"
 
 [tool.poetry.dependencies]
 python = "^3.6"
-sphinxcontrib-needs = "0.7.2"
+sphinxcontrib-needs = ">0.7.2"
 licensing = "^0.31"
-requests = "^2.26.0"
-jinja2 = "^3.0.2"
-jira2markdown = "^0.2.0"
-m2r = "^0.2.1"
-click = "^8.0.3"
+requests = "^2.26"
+jinja2 = "^3"
+jira2markdown = "^0.2"
+m2r = "^0.2"
+click = "^8.0"
 sphinxcontrib-programoutput = "^0.17"
 azure-devops = "^6.0.0-beta.4"
-elasticsearch = "^7.15.1"
-tqdm = "^4.62.3"
+elasticsearch = "^7.15"
+tqdm = "^4.62"
 
 [tool.poetry.dev-dependencies]
 # test dependencies
