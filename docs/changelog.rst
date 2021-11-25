@@ -1,10 +1,15 @@
 Changelog
 =========
 
-0.1.0
+0.1.1
 -----
 **Released**: under development
 
+0.1.0
+-----
+**Released**: 25.11.2021
+
+* Improvement: Added :ref:`sne_export` for Elasticsearch.
 * Improvement: Activates parallel build support.
   `#12 <https://github.com/useblocks/sphinx-needs-enterprise/issues/12>`_
 * Improvement: Added :ref:`Azure service <service_azure>`.

@@ -2,11 +2,11 @@ import os
 
 # Manipulates the content to add a link to the source item
 azure_content = f"""
-Item URL: `{{fields["System.TeamProject"]}}/{{id}} <https://dev.azure.com/useblocks/{{fields["System.TeamProject"]}}/_workitems/edit/{{id}}>`_
+Item URL: `{{data.fields["System.TeamProject"]}}/{{data.id}} <https://dev.azure.com/useblocks/{{data.fields["System.TeamProject"]}}/_workitems/edit/{{data.id}}>`_
 
 .. raw:: html
 
-   {{fields["System.Description"]}}"""
+   {{data.fields["System.Description"]}}"""
 
 needs_services = {
     'azure_config': {

@@ -54,8 +54,6 @@ synchronizing data between ``Sphinx-Needs`` and tools like Jira, Doors, GitHub, 
       :target: https://www.elastic.co/elastic-stack/
 
    :badge:`BETA, badge-danger`
-   :link-badge:`service_cb,needservice,ref, badge-primary text-white`
-   :link-badge:`sne_import,sne import,ref,badge-secondary text-white`
    :link-badge:`sne_export,sne export,ref,badge-info`
 
 ``Sphinx-Needs Enterprise`` provides directives and scripts to fetch data inside and outside of a Sphinx
