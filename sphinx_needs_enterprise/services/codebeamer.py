@@ -57,10 +57,10 @@ class CodebeamerService(ServiceExtension):
         super().__init__(config, **kwargs)
 
     def request(self, options=None):
-        wiki2html = options.get("wiki2html", str(self.config['wiki2html']))
+        wiki2html = options.get("wiki2html", str(self.config["wiki2html"]))
         options["wiki2html"] = wiki2html  # Just to be sure that there is a value
 
-        raw = options.get("raw", str(self.config['raw']))
+        raw = options.get("raw", str(self.config["raw"]))
         options["raw"] = raw  # Just to be sure that there is a value
 
         params = self._prepare_request(options)
