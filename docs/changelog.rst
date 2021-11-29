@@ -1,9 +1,13 @@
 Changelog
 =========
 
-0.1.2
+0.1.3
 -----
 **Released**: under development
+
+0.1.2
+-----
+**Released**: 29.11.2021
 
 * Improvement: :ref:`conf_raw` and :ref:`conf_wiki2html` can be set in service configuration for Codebeamer.
 * Bugfix: :ref:`cb_wiki2html` can be set to False.
