@@ -5,11 +5,16 @@ Changelog
 -----
 **Released**: under development
 
+* Improvement: :ref:`conf_raw` and :ref:`conf_wiki2html` can be set in service configuration for Codebeamer.
+* Bugfix: :ref:`cb_wiki2html` can be set to False.
+  `#27 <https://github.com/useblocks/sphinx-needs-enterprise/issues/27>`_
+* Bugfix: Not so strict dependency handling.
+
 0.1.1
 -----
 **Released**: 25.11.2021
 
-* Bugfix: Not so strict dependency handling
+* Bugfix: Not so strict dependency handling.
 
 0.1.0
 -----

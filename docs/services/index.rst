@@ -53,6 +53,8 @@ Most services share a common set of configuration parameters, which are describe
                 "Original Type": ["fields", "issuetype", "name"],
                 "Original Assignee": ["fields", "assignee", "displayName"],
             }
+            'raw': 'False',
+            'wiki2html: 'True',
         }
     }
 
@@ -224,3 +226,30 @@ The logic and syntax is the same as used by :ref:`conf_mapping`.
             'createdAt': ['createdAt'],
             'updated': ['modifiedAt'],
         }
+
+.. _conf_raw:
+
+raw
+~~~
+Outputs the need content to a codeblock without any modifications.
+
+For some service a content transformation (e.g. wiki-syntax to html or rst) is needed, to get a nice looking and
+"working" representation of the content.
+
+Default: False
+
+Supported Services: Codebeamer
+
+.. _conf_wiki2html:
+
+wiki2html
+~~~~~~~~~
+Transforms a need content, which is using a wiki-like syntax, to a format, which can be used by Sphinx (e.g
+rst or HTML).
+
+Most services do not need to support this configuration options, as they provide by default a Sphinx compatible
+output.
+
+Default: True
+
+Supported Services: Codebeamer

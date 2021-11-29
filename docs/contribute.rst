@@ -9,6 +9,38 @@ Use ``make format`` to run ``black`` on your code, which should fix most of poss
 
 To run all our configured linter, run ``make lint``.
 
+Testing
+-------
+As ``SNE`` is highly using external services, some tests need a running and correctly preconfigured service instance.
+But these service instances are not available during CI tests, so that external calls needs to be mocked.
+
+If a test needs a running external service, e.g. to debug things easier, mark it like this::
+
+    @pytest.mark.sphinx(testroot="codebeamer")
+    @pytest.mark.cb_needed  # Uses marker "cb_needed"
+    def test_codebeamer(app):
+        app.build()
+
+New markers must be registered in ``pytest.ini``.
+
+Currently supported are::
+
+* ``cb_needed``: Needs a running codebeamer server.
+
+Marked tests normally do not get executed during CI runs, as ``make test`` invokes
+pytest like this: ``poetry run pytest -v tests -m "not cb_needed"``.
+
+So if you register a new marker, please update also the related Makefile command.
+
+All unmarked tests must be callable without the need to use any external resources.
+
+Sphinx support
+~~~~~~~~~~~~~~
+How to run test cases based on a Sphinx project is nearly undocumented by Sphinx itself.
+Some information can be found here: https://github.com/sphinx-doc/sphinx/issues/7008
+
+
+
 Doc build
 ---------
 
