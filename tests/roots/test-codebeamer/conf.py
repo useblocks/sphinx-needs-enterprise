@@ -44,7 +44,7 @@ needs_services = {
             "type": "spec",
             "tags": "cb_import, example",
             "id": ["id"],
-            "status": ["status", "name"],
+            "status": ["customFields", 0, "values", 0, "name"],
             "title": ["name"],
         },
         "extra_data": {
@@ -53,6 +53,7 @@ needs_services = {
             "updated": ["modifiedAt"],
             "type": ["typeName"],
             "cb_id": ["id"],
+            "status": ["customFields", 0, "values", 0, "name"],
         },
     }
 }

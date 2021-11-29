@@ -35,6 +35,8 @@ class CodebeamerService(ServiceExtension):
         dict_undefined_set(config, "id_prefix", "CB_")
         dict_undefined_set(config, "url_postfix", "/rest/v3/items/query")
         dict_undefined_set(config, "content", DEFAULT_CONTENT)
+        dict_undefined_set(config, "raw", "False")
+        dict_undefined_set(config, "wiki2html", "True")
 
         mappings_default = {
             "id": ["id"],
@@ -55,10 +57,10 @@ class CodebeamerService(ServiceExtension):
         super().__init__(config, **kwargs)
 
     def request(self, options=None):
-        wiki2html = options.get("wiki2html", "True")
+        wiki2html = options.get("wiki2html", str(self.config['wiki2html']))
         options["wiki2html"] = wiki2html  # Just to be sure that there is a value
 
-        raw = options.get("raw", "False")
+        raw = options.get("raw", str(self.config['raw']))
         options["raw"] = raw  # Just to be sure that there is a value
 
         params = self._prepare_request(options)
@@ -80,7 +82,7 @@ class CodebeamerService(ServiceExtension):
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
                 datum["description"] = ""
-            elif datum["descriptionFormat"] == "Wiki" and wiki2html:
+            elif datum["descriptionFormat"] == "Wiki" and wiki2html == "True":
                 # Transform the Codebeamer wiki syntax to HTML.
                 # Must be done by an API request for each item.
                 url = options.get("url", self.url)
