@@ -1,9 +1,15 @@
 Changelog
 =========
 
-0.1.3
+0.1.4
 -----
 **Released**: under development
+
+0.1.3
+-----
+**Released**: 29.11.2021
+
+* Bugfix: Fixed some hard coded versions for dependencies
 
 0.1.2
 -----
