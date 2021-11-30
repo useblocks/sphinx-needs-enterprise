@@ -26,6 +26,16 @@ for commercial projects.
 This hints / log entries can be deactivated by setting ``needs_enterprise_license = "PRIVATE"``.
 In this case, only a one-liner will be printed that Sphinx-Needs Enterprise is licensed for private projects.
 
+.. _conf_needs_enterprise_license_warn:
+
+needs_enterprise_license_warn
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If ``True`` SNE will write warnings, if something went wrong with the license, e.g. no floating-license is
+available right now.
+
+Default: False
+
+
 License check workflow
 ----------------------
 As all licenses are Floating licenses, they can be used by multiple users, but not in parallel.
