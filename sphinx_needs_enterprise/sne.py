@@ -14,6 +14,7 @@ from sphinx_needs_enterprise.version import VERSION
 
 def setup(app):
     app.add_config_value("needs_enterprise_license", "", "html", types=[str])
+    app.add_config_value("needs_enterprise_license_warn", False, "html", types=[bool])
     # Register sphinx-needs stuff after it has been initialised.
     app.connect("env-before-read-docs", prepare_env)
     app.connect("source-read", process_per_doc)
@@ -29,6 +30,8 @@ def setup(app):
 
 def prepare_env(app, env, _docname):
     license_key = getattr(app.config, "needs_enterprise_license", "")
+    license_warn = getattr(app.config, "needs_enterprise_license_warn", False)
+
     if license_key.upper() == "PRIVATE":
         suppress_private_message = True
     else:
@@ -42,6 +45,7 @@ def prepare_env(app, env, _docname):
         SNE_DOCS_URL,
         SNE_LICENSE_URL,
         suppress_private_message,
+        license_warn=license_warn,
     )
 
     env.needs_sne_license = sne_license
@@ -73,5 +77,9 @@ def process_finish(app, exception):
     """
     # There are use cases, where needs_sne_license was not set up. (e.g. no files to build or prior error)
     if hasattr(app.env, "needs_sne_license"):
-        app.env.needs_sne_license.print_info()
+        # Print license info only, if it is not valid or private.
+        # So do not disturb customers at the end of the build with not needed licenses information
+        if not app.env.needs_sne_license.license or app.env.needs_sne_license.is_private:
+            app.env.needs_sne_license.print_info()
+
         app.env.needs_sne_license.free()  # Give back license

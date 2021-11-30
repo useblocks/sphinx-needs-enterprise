@@ -5,6 +5,9 @@ Changelog
 -----
 **Released**: under development
 
+* Bugfix: Invalid licenses do not write "warnings".
+  `#35 <https://github.com/useblocks/sphinx-needs-enterprise/issues/35>`_
+
 0.1.3
 -----
 **Released**: 29.11.2021
