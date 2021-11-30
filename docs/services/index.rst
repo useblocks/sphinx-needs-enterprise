@@ -134,10 +134,10 @@ So the final ``mapping`` entry looks like:
 
 **Note**: Combining data from multiple locations in a mapping definition is currently not supported.
 
-.. _conf_mapping_replaces:
+.. _conf_mappings_replaces:
 
-mapping_replaces
-~~~~~~~~~~~~~~~~
+mappings_replaces
+~~~~~~~~~~~~~~~~~
 There are use cases, where a value inside service data is not valid for a Sphinx-Needs options.
 
 For instance: In Codebeamer the type is named ``Requirement``, but Sphinx-Needs supports only ``req`` as value
@@ -153,10 +153,10 @@ The Codebeamer value ``Requirement`` must be replaced by ``req`` and set as valu
 .. code-block:: python
 
     'codebeamer': {
-        'mapping': {
+        'mappings': {
             'type': ['typeName'],  # maps the original location
         },
-        'mapping_replaces': {
+        'mappings_replaces': {
             '^Requirement$': 'req',
         }
     }

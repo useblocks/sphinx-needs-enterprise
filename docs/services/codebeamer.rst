@@ -75,7 +75,7 @@ Example
 -------
 Inside your ``conf.py`` file:
 
-.. literalinclude:: /snippets/azure_config.py
+.. literalinclude:: /snippets/cb_config.py
       :language: python
 
 Inside any ``rst`` file of your Sphinx project:
