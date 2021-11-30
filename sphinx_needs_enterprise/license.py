@@ -29,6 +29,7 @@ class License:
         suppress_private_message=False,
         rsa_key=RSA_PUB_KEY,
         api_token=API_TOKEN,
+        license_warn=False,
     ):
 
         self.log = logging.getLogger(__name__)
@@ -42,6 +43,7 @@ class License:
         self.license_url = license_url
         self.license_key = license_key
         self.suppress_private_message = suppress_private_message
+        self.license_warn = license_warn
 
         self.machine_code = Helpers.GetMachineCode()
 
@@ -186,11 +188,13 @@ class License:
                 self.log.info(f"License server not reachable to validate license for {self.product_name}.")
             else:
 
-                self.log.warning(
-                    TEXT_INVALID_WARNING.format(
-                        license_key=self.license_key, product_name=self.product_name, message=self.message
+                if self.license_warn:
+                    # Onl use warnings, if it got requested/configured, as they might stop the build
+                    self.log.warning(
+                        TEXT_INVALID_WARNING.format(
+                            license_key=self.license_key, product_name=self.product_name, message=self.message
+                        )
                     )
-                )
                 self.log.info(
                     TEXT_INVALID.format(
                         license_key=self.license_key,
