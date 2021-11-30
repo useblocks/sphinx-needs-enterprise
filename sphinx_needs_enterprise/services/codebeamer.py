@@ -119,10 +119,7 @@ class CodebeamerService(ServiceExtension):
         }
         answer = self._send_request(request_params)
 
-        debug_data = {
-            "request": request_params,
-            "answer": answer.json()
-        }
+        debug_data = {"request": request_params, "answer": answer.json()}
 
         return debug_data
 
