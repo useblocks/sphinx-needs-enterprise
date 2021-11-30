@@ -93,6 +93,10 @@ class AzureService(ServiceExtension):
 
         return need_data
 
+    def debug(self, options):
+        debug_data = {}  # tbd
+        return debug_data
+
     def _create_wiql(self, query=None, fields=None, order=None):
 
         if fields is None:
