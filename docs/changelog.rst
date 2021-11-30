@@ -5,6 +5,8 @@ Changelog
 -----
 **Released**: under development
 
+* Improvement: Support of :ref:`cb_debug` option for Codebeamer added.
+  `#25 <https://github.com/useblocks/sphinx-needs-enterprise/issues/25>`_
 * Improvement: Added config option :ref:`conf_needs_enterprise_license_warn`.
 * Bugfix: Invalid licenses do not write "warnings".
   `#35 <https://github.com/useblocks/sphinx-needs-enterprise/issues/35>`_

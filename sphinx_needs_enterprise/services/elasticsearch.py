@@ -87,6 +87,10 @@ class ElasticsearchService(ServiceExtension):
 
         return need_data
 
+    def debug(self, options):
+        debug_data = {}  # tbd
+        return debug_data
+
 
 class InvalidConfigException(BaseException):
     pass

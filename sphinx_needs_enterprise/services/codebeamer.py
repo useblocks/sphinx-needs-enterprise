@@ -105,6 +105,27 @@ class CodebeamerService(ServiceExtension):
 
         return need_data
 
+    def debug(self, options):
+        params = self._prepare_request(options)
+        request_params = {
+            "method": "GET",
+            "url": params["url"],
+            "auth": params["auth"],
+            "params": {
+                "queryString": params["query"],
+                "descriptionFormat": "HTML",
+                "descFormat": "HTML",
+            },
+        }
+        answer = self._send_request(request_params)
+
+        debug_data = {
+            "request": request_params,
+            "answer": answer.json()
+        }
+
+        return debug_data
+
 
 class InvalidConfigException(BaseException):
     pass

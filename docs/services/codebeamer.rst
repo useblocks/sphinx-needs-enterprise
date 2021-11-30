@@ -49,6 +49,13 @@ Default: True
 
 If ``raw`` is set as well, content gets transformed to HTML, but is presented inside a ``code-block``.
 
+.. _cb_debug:
+
+debug
+~~~~~
+Use ``:debug:`` to see the data structure of Codebeamer's responses.
+
+
 Config
 ------
 A Codebeamer service configuration must be created inside your ``conf.py`` file.
