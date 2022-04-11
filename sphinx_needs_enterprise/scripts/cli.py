@@ -67,6 +67,30 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
         click.echo(f"Erasing existing data for version {version}.")
         needlist.wipe_version(version)
 
+    # Check needs options for new to be created needs from imported data
+    needs_supported_options = [
+        "tags",
+        "links",
+        "hide",
+        "collapse",
+        "layout",
+        "style",
+        "template",
+        "pre_template",
+        "post_template",
+        "duration",
+        "completion",
+    ]  # needs options like id, status, type, title, will be created by default if not config
+    if data:
+        not_included_options = []
+        for option in needs_supported_options:
+            if option not in data[0]:
+                not_included_options.append(option)
+        if not_included_options:
+            click.echo(
+                f"Warning: new created needs from imported data will not have such needs options: {not_included_options}"
+            )
+
     for datum in data:
         needlist.add_need(version, datum)
 
