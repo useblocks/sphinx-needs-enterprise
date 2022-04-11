@@ -88,7 +88,8 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
                 not_included_options.append(option)
         if not_included_options:
             click.echo(
-                f"Warning: new created needs from imported data will not have such needs options: {not_included_options}"
+                f"Warning: new created needs from imported data do not have such needs options: \
+                {not_included_options}"
             )
 
     for datum in data:
