@@ -10,7 +10,7 @@ repository = "http://github.com/useblocks/sphinx-needs-enterprise"
 documentation = "https://useblocks.com/sphinx-needs-enterprise"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = ">=3.6.2,<4.0"
 sphinxcontrib-needs = ">=0.7.4"
 licensing = ">=0.31"
 requests = ">=2"
@@ -32,7 +32,7 @@ flake8 = "^3.9.0"
 pep8-naming = "^0.11.1"
 
 # formatting dependencies
-black = "^20.8b1"
+black = "^22"
 isort = "^5.7.0"
 flake8-isort = "^4.0.0"
 flake8-black = "^0.2.1"
