@@ -1,4 +1,4 @@
 sphinx
-git+git://github.com/useblocks/sphinxcontrib-needs@master
+sphinxcontrib-needs
 sphinxcontrib-plantuml
 sphinx-revealjs
