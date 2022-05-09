@@ -1,9 +1,14 @@
 Changelog
 =========
 
-0.1.4
+0.1.5
 -----
 **Released**: under development
+
+
+0.1.4
+-----
+**Released**: 09.05.2022
 
 * Improvement: Support of :ref:`cb_debug` option for Codebeamer added.
   `#25 <https://github.com/useblocks/sphinx-needs-enterprise/issues/25>`_
