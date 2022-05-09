@@ -8,7 +8,7 @@ LINT_DEPENDENCIES = [
     "flake8",
     "pep8-naming",
     "flake8-isort",
-    "flake8-black",
+    # "flake8-black",
 ]
 
 

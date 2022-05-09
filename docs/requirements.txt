@@ -1,6 +1,6 @@
 sphinx
-git+git://github.com/useblocks/sphinxcontrib-needs@master
-
+sphinxcontrib-needs
+sphinxcontrib-plantuml
 # Sphinx-Material Theme + Fix to support Sphinx-Needs
 sphinx-material>=0.0.35
 sphinx-panels

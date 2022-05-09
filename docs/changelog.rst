@@ -10,6 +10,8 @@ Changelog
 * Improvement: Added config option :ref:`conf_needs_enterprise_license_warn`.
 * Bugfix: Invalid licenses do not write "warnings".
   `#35 <https://github.com/useblocks/sphinx-needs-enterprise/issues/35>`_
+* Bugfix: Replacing ``m2r`` with ``m2r2``.
+  `#43 <https://github.com/useblocks/sphinx-needs-enterprise/issues/43>`_
 
 0.1.3
 -----
