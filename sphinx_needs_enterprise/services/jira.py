@@ -1,5 +1,5 @@
 from jira2markdown import convert as jira_convert
-from m2r import convert as md_convert
+from m2r2 import convert as md_convert
 
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
 from sphinx_needs_enterprise.util import dict_undefined_set
