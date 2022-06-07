@@ -25,7 +25,7 @@ sys.path.insert(0, os.path.abspath("../sphinx_needs_enterprise"))
 
 project = "Sphinx-Needs Enterprise"
 now = datetime.datetime.now()
-copyright = "{year}, useblocks.com".format(year=now.year)
+copyright = '{year}, <a href="https://useblocks.com">team useblocks</a>'.format(year=now.year)
 author = "team useblocks"
 
 # The full version, including alpha/beta/rc tags
@@ -43,8 +43,11 @@ extensions = [
     "sphinx.ext.ifconfig",
     "sphinxcontrib.needs",
     "sphinx_needs_enterprise",
-    "sphinx_panels",
+    "sphinx_design",
     "sphinxcontrib.programoutput",
+    "sphinx_copybutton",
+    "sphinx_immaterial",
+
 ]
 
 needs_enterprise_license = os.getenv("NEEDS_SNE_LICENSE", "")
@@ -153,9 +156,9 @@ def rstjinja(app, docname, source):
     source[0] = rendered
 
 
-# Check, if docs get buil on ci.
-# If this is the case, external services like Codebeamer are not available and
-# docs will show images instead of gettting real data.
+# Check, if docs get built on ci.
+# If this is the case, external services like Code-beamer are not available and
+# docs will show images instead of getting real data.
 on_ci = os.environ.get("ON_CI", "False").upper() == "TRUE"
 
 
@@ -181,56 +184,119 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # a list of builtin themes.
 #
 
-html_theme = os.environ.get("THEME", "sphinx_material")
+html_theme = os.environ.get("THEME", "sphinx_immaterial")
+
+# Set link name generated in the top bar.
+html_title = "Sphinx-Needs Enterprise"
+
+html_favicon = "./_static/sphinx-needs-logo-favicon.png"
+html_logo = "./_static/sphinx-needs-logo-white.png"
+# material theme options (see theme.conf for more information)
+html_theme_options = {
+    "icon": {
+        "repo": "fontawesome/brands/github-square",
+    },
+    "site_url": "https://useblocks.com/sphinx-needs-enterprise/",
+    "repo_url": "https://github.com/useblocks/sphinx-needs-enterprise/",
+    "repo_name": "Sphinx-Needs Enterprise",
+    "repo_type": "github",
+    "edit_uri": "blob/master/docs",
+    "globaltoc_collapse": True,
+    "features": [
+        # "navigation.expand",
+        # "navigation.tabs",
+        # "toc.integrate",
+        "navigation.sections",
+        # "navigation.instant",
+        # "header.autohide",
+        "navigation.top",
+        # "navigation.tracking",
+        # "search.highlight",
+        "search.share",
+    ],
+    "palette": [
+        {
+            "media": "(prefers-color-scheme: light)",
+            "scheme": "default",
+            "primary": "blue",
+            "accent": "light-blue",
+            "toggle": {
+                "icon": "material/weather-night",
+                "name": "Switch to dark mode",
+            },
+        },
+        {
+            "media": "(prefers-color-scheme: dark)",
+            "scheme": "slate",
+            "primary": "blue",
+            "accent": "yellow",
+            "toggle": {
+                "icon": "material/weather-sunny",
+                "name": "Switch to light mode",
+            },
+        },
+    ],
+    "toc_title_is_page_title": True,
+    # "nav_links": [
+    #         {
+    #             "href": "https://sphinx-needs.com",
+    #             "internal": False,
+    #             "title": "Sphinx-Needs",
+    #         },
+    #         {
+    #             "href": "https://sphinxcontrib-needs.readthedocs.io/en/latest/",
+    #             "internal": False,
+    #             "title": "Sphinx-Needs Docs",
+    #         },
+    #     ]
+}
 
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
+html_css_files = ["custom.css"]
 
-
-# Set link name generated in the top bar.
-html_title = "Sphinx-Needs Enterprise"
 
 # Material theme options (see theme.conf for more information)
-html_theme_options = {
-    "table_classes": [""],
-    # Set the name of the project to appear in the navigation.
-    "nav_title": "Sphinx-Needs Enterprise",
-    # Specify a base_url used to generate sitemap.xml. If not
-    # specified, then no sitemap will be built.
-    "base_url": "https://project.github.io/project",
-    # Set the color and the accent color
-    "theme_color": "#2a639a",
-    "color_primary": "#2a639a",
-    "color_accent": "#2a639a",
-    # Set the repo location to get a badge with stats
-    "repo_url": "https://github.com/useblocks/sphinx-needs-enterprise/",
-    "repo_name": "",
-    # Visible levels of the global TOC; -1 means unlimited
-    "globaltoc_depth": 2,
-    # If False, expand all TOC entries
-    "globaltoc_collapse": True,
-    # If True, show hidden TOC entries
-    "globaltoc_includehidden": False,
-    "nav_links": [
-        {
-            "href": "https://sphinx-needs.com",
-            "internal": False,
-            "title": "Sphinx-Needs",
-        },
-        {
-            "href": "https://sphinxcontrib-needs.readthedocs.io/en/latest/",
-            "internal": False,
-            "title": "Sphinx-Needs Docs",
-        },
-    ],
-    # "heroes": {
-    #     "index": "Enterprise Solutions for Sphinx-Needs",
-    #     "services/index": "Synchronize with external services",
-    # },
-}
+# html_theme_options = {
+#     "table_classes": [""],
+#     # Set the name of the project to appear in the navigation.
+#     "nav_title": "Sphinx-Needs Enterprise",
+#     # Specify a base_url used to generate sitemap.xml. If not
+#     # specified, then no sitemap will be built.
+#     "base_url": "https://project.github.io/project",
+#     # Set the color and the accent color
+#     "theme_color": "#2a639a",
+#     "color_primary": "#2a639a",
+#     "color_accent": "#2a639a",
+#     # Set the repo location to get a badge with stats
+#     "repo_url": "https://github.com/useblocks/sphinx-needs-enterprise/",
+#     "repo_name": "",
+#     # Visible levels of the global TOC; -1 means unlimited
+#     "globaltoc_depth": 2,
+#     # If False, expand all TOC entries
+#     "globaltoc_collapse": True,
+#     # If True, show hidden TOC entries
+#     "globaltoc_includehidden": False,
+#     "nav_links": [
+#         {
+#             "href": "https://sphinx-needs.com",
+#             "internal": False,
+#             "title": "Sphinx-Needs",
+#         },
+#         {
+#             "href": "https://sphinxcontrib-needs.readthedocs.io/en/latest/",
+#             "internal": False,
+#             "title": "Sphinx-Needs Docs",
+#         },
+#     ],
+#     # "heroes": {
+#     #     "index": "Enterprise Solutions for Sphinx-Needs",
+#     #     "services/index": "Synchronize with external services",
+#     # },
+# }
 panels_css_variables = {
     "tabs-color-label-active": "rgb(42, 99, 154)",
     "tabs-color-label-inactive": "rgb(42, 99, 154, 0.6)",
@@ -239,7 +305,6 @@ panels_css_variables = {
     "tabs-size-label": "0.9rem",
 }
 
-html_css_files = ["custom.css"]
-
-if html_theme == "sphinx_material":
-    html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]}
+if html_theme == "sphinx_immaterial":
+    html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "navigation.html",
+                            "localtoc.html", "searchbox.html"]}

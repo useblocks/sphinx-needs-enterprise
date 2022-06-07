@@ -5,6 +5,8 @@ Changelog
 -----
 **Released**: under development
 
+* Improvement: Added needs options check for creating needs from services import.
+  `#40 <https://github.com/useblocks/sphinx-needs-enterprise/issues/40>`_
 
 0.1.4
 -----
@@ -17,6 +19,7 @@ Changelog
   `#35 <https://github.com/useblocks/sphinx-needs-enterprise/issues/35>`_
 * Bugfix: Replacing ``m2r`` with ``m2r2``.
   `#43 <https://github.com/useblocks/sphinx-needs-enterprise/issues/43>`_
+
 
 0.1.3
 -----
