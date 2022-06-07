@@ -13,7 +13,7 @@ Welcome
 This package provides enterprise specific solutions for ``Sphinx-Needs``.
 
 Its main goal is to embed ``Sphinx-Needs`` in company specific tool environments by
-synchronizing data between ``Sphinx-Needs`` and tools like Jira, Doors, GitHub, CodeBeamer and more.
+synchronizing data between ``Sphinx-Needs`` and tools like Jira, Azure, GitHub, CodeBeamer and more.
 
 ``Sphinx-Needs Enterprise`` features are supporting the following services and tools:
 
@@ -61,7 +61,7 @@ project.
 
 .. warning::
 
-   This package is in an Beta phase. Docs, tests and even the code is not complete and may contain bugs.
+   This package is in the Beta phase. Docs, tests and even the code is not complete and may contain bugs.
 
 
 .. _index_needservice:
@@ -102,7 +102,7 @@ SNE script
 ----------
 The ``sne`` script provides solutions for different tasks like getting and storing external data or rendering templates.
 
-Use ``sne import`` as command in your terminal to store external data in json files for later manipulation
+Use ``sne import`` as command in your terminal to store external data in JSON files for later manipulation
 or for imports into your Sphinx project.
 
 .. tabbed::  Azure
@@ -124,11 +124,11 @@ or for imports into your Sphinx project.
 
       sne import jira_config --query "project = my_project"
 
-After this you can use ``sne render`` to create e.g. rst-files for your Sphinx project based on own templates.
+After this you can use ``sne render`` to create files, e.g. rst-files, for your Sphinx project based on your templates.
 
 .. code-block:: bash
 
-   sne render -j needs.json -t my_template.rst -o output.rst
+   sne render -j needs.JSON -t my_template.rst -o output.rst
 
 
 See our docs about the :ref:`sne` for more details.

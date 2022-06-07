@@ -64,14 +64,14 @@ class License:
         This function should be used as early as possible.
 
         Set "own_output" to True to let the extension print all the needed output to inform the user about the
-        license status. Otherwise some common information will be printed, if license check fails.
+        license status. Otherwise, some common information will be printed, if license check fails.
 
         :param own_output: Flag, if True no output will be printed.
         :return: True, if license is valid and available, else false.
         """
 
         # check/recheck a license only, if the license-timeout as been reached.
-        # Otherwise a check makes no sense and is too early.
+        # Otherwise, a check makes no sense and is too early.
         if not time.time() - self.last_check >= LICENSE_INTERVAL_SECS:
             return self.is_valid, self.server_reachable
 
@@ -139,7 +139,7 @@ class License:
 
     def free(self):
         """
-        Gives back a a floating license.
+        Gives back a floating license.
         Should normally be called at the end of a build process
         """
 

@@ -14,7 +14,11 @@ def get_providers():
 
 
 # LICENSE
-RSA_PUB_KEY = "<RSAKeyValue><Modulus>t5w/Rj4SijVJyQALRUzEJmV8Vin4P0SRCAqWSnttULrcIvkiEMhVS7OnUwUqWeRvrpDyvRy53hGHTgPIQG8pUrh0ZpX3KLRmEqBvtNEU6hOjALowi0Q/zEqYmahCh2fTb8k9FAfcMmO70TMIFfvYYGmogsmdrrCct+xEbGDM01Hhu+Go/61Jb8PpyRmZOgza5fbBC4v4rr9WF5wK6Jui7+P31bNSZDkDuxmx7dd5G+Gk2KImkRPxTZMBVQ6WmFiWFsac/KNvRskoKGlKQTaPUhpxsiPQgLnUVJPy4tzNL1qBzCXCMW3L2dgBM6W8j1kv6WbbouNbke6N+U3DIVehyQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>"
+RSA_PUB_KEY = "<RSAKeyValue><Modulus>t5w/Rj4SijVJyQALRUzEJmV8Vin4P0SRCAqWSnttULrcIvkiEMhVS7OnUwUqWeRvrpDyvRy53hGHTgPIQ"\
+              "G8pUrh0ZpX3KLRmEqBvtNEU6hOjALowi0Q/zEqYmahCh2fTb8k9FAfcMmO70TMIFfvYYGmogsmdrrCct+xEbGDM01Hhu+Go/61Jb8Pp"\
+              "yRmZOgza5fbBC4v4rr9WF5wK6Jui7+P31bNSZDkDuxmx7dd5G+Gk2KImkRPxTZMBVQ6WmFiWFsac/KNvRskoKGlKQTaPUhpxsiPQgLn"\
+              "UVJPy4tzNL1qBzCXCMW3L2dgBM6W8j1kv6WbbouNbke6N+U3DIVehyQ==" \
+              "</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>"
 API_TOKEN = "WyI0MDg4MjQyIiwibmJ4Y2FWeEtmRjIrMG8xZ2szeis2NGlZU09meDk5RGFGdG1vNGJjNSJd"
 
 SNE_PRODUCT_ID = 13000
