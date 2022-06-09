@@ -14,6 +14,7 @@ as Sphinx-Needs objects.
    azure
    codebeamer
    jira
+   excel
 
 .. _service_config:
 
