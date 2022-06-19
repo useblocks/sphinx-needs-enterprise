@@ -10,7 +10,7 @@ from sphinx_needs_enterprise.exceptions import (
     LicenseException,
 )
 from sphinx_needs_enterprise.license import License
-from sphinx_needs_enterprise.util import dict_get
+from sphinx_needs_enterprise.util import dict_get, jinja_parse
 
 
 class ServiceExtension(BaseService):
@@ -160,7 +160,7 @@ class ServiceExtension(BaseService):
 
             for regex, new_str in self.mapping_replaces.items():
                 self.content = re.sub(regex, new_str, self.content)
-            content_template = Template(self.content)
+            content_template = Template(self.content, autoescape=True)
             context = {"data": item, "options": options}
             content = content_template.render(context)
             content += "\n\n| \n"  # Add enough space between content and extra_data
@@ -180,10 +180,17 @@ class ServiceExtension(BaseService):
                         f'Got {type(selector)} with value "{selector}"'
                     )
                 if isinstance(selector, str):
-                    # Set the "hard-coded" string as value
+                    # Set the "hard-coded" string or
+                    # combine the "hard-coded" string and dynamic value
+                    selector = jinja_parse(item, selector)
+                    # Set the returned string as value
                     need_values[name] = selector
                 else:
-                    need_values[name] = str(dict_get(item, selector))
+                    # Ensures mapping option with value == None is not implemented. E.g. the links option
+                    # can't be == None since there will be nothing to link to and that will raise a warning
+                    value = str(dict_get(item, selector))
+                    if value != "None":
+                        need_values[name] = value
 
                 for regex, new_str in self.mapping_replaces.items():
                     need_values[name] = re.sub(regex, new_str, need_values[name])

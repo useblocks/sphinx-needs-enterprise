@@ -163,7 +163,7 @@ needs_services = {
             "id": ["sid"],
             "type": 'impl',
             "title": ["topic"],
-            "status": ["status"],
+            "status": "is_{{status}}",
             "links": ["links"],
         }
     }

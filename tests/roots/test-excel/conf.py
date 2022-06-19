@@ -33,23 +33,23 @@ extensions = [
 ]
 
 needs_services = {
-    'excel_config': {
-        'file': "/excel/needs.xlsx",
-        'start_row': 5,
-        'end_row': 15,
-        'end_col': 7,
-        'id_prefix': "EXCEL_TEST_IMPORT_",
-        'mappings': {
+    "excel_config": {
+        "file": "/excel/needs.xlsx",
+        "start_row": 5,
+        "end_row": 15,
+        "end_col": 7,
+        "id_prefix": "EXCEL_TEST_IMPORT_",
+        "mappings": {
             "id": ["id"],
-            "type": 'spec',
+            "type": "spec",
             "title": ["title"],
-            "status": ["status"],
+            "status": "is_{{status}}",
         },
-        'extra_data': {
+        "extra_data": {
             "AssignedTo": ["assignee"],
             "CreatedAt": ["created at"],
             "Updated": ["updated at"],
-        }
+        },
     }
 }
 

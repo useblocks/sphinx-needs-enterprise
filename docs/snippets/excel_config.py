@@ -1,4 +1,4 @@
-# Manipulates the content to add a link to the source issue
+# Manipulates the content of a need
 excel_content = """
 {% if info in data %}
 {{data.info}}
@@ -34,7 +34,7 @@ needs_services = {
             "id": ["sid"],
             "type": 'impl',
             "title": ["topic"],
-            "status": ["status"],
+            "status": "is_{{status}}",
             "links": ["links"],
         }
     }

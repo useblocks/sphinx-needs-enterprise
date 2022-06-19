@@ -200,7 +200,7 @@ After this you can use ``sne render`` to create files, e.g. rst-files, for your 
 
 .. code-block:: bash
 
-   sne render -j needs.JSON -t my_template.rst -o output.rst
+   sne render -j needs.json -t my_template.rst -o output.rst
 
 
 See our docs about the :ref:`sne` for more details.

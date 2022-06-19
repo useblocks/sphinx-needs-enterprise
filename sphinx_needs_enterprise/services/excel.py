@@ -18,7 +18,7 @@ DEFAULT_CONTENT = """
 def allowed_file(filename):
     pattern = r"^[\w\-\/\\]+?.(xlsx)$"
     check_file = re.search(pattern, filename)
-    return '.' in filename and check_file is not None
+    return "." in filename and check_file is not None
 
 
 class ExcelService(ServiceExtension):
@@ -44,14 +44,6 @@ class ExcelService(ServiceExtension):
         }
         dict_undefined_set(config, "mappings", mappings_default)
 
-        # mappings_replaces_default = {
-        #     r"^Task$": "task",
-        #     r"^Requirement$": "req",
-        #     r"^Specification$": "spec",
-        #     r"\\\\\\\\\\r\\n": "\n\n",
-        # }
-        # dict_undefined_set(config, "mappings_replaces", mappings_replaces_default)
-
         super().__init__(config, **kwargs)
 
     def request(self, options=None):
@@ -72,8 +64,14 @@ class ExcelService(ServiceExtension):
         if end_row is None or end_col is None:
             raise NeedsExcelException("NeedsExcelError: Either end_row or end_col must be specified.")
 
-        data = get_excel_data(str(spreadsheet_file_path), end_row=int(end_row), end_col=int(end_col),
-                              start_row=int(start_row), start_col=int(start_col), header_row=int(header_row))
+        data = get_excel_data(
+            str(spreadsheet_file_path),
+            end_row=int(end_row),
+            end_col=int(end_col),
+            start_row=int(start_row),
+            start_col=int(start_col),
+            header_row=int(header_row),
+        )
         for datum in data:
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
@@ -84,22 +82,37 @@ class ExcelService(ServiceExtension):
         return need_data
 
     def debug(self, options):
-        # params = self._prepare_request(options)
-        # request_params = {
-        #     "method": "GET",
-        #     "url": params["url"],
-        #     "auth": params["auth"],
-        #     "params": {
-        #         "queryString": params["query"],
-        #         "descriptionFormat": "HTML",
-        #         "descFormat": "HTML",
-        #     },
-        # }
-        # answer = self._send_request(request_params)
-        #
-        # debug_data = {"request": request_params, "answer": answer.json()}
-        debug_data = {}
+        file_path = options.get("file", str(self.config["file"]))
+        options["file_path"] = file_path  # Just to be sure that there is a value
 
+        start_row = options.get("start_row", self.config.get("start_row"))
+        end_row = options.get("end_row", self.config.get("end_row"))
+        start_col = options.get("start_col", self.config.get("start_col"))
+        end_col = options.get("end_col", self.config.get("end_col"))
+        header_row = options.get("header_row", self.config.get("header_row"))
+        # Absolute path starts with /, based on the conf.py directory. The leading forward slash (/) must be striped
+        spreadsheet_file_path = os.path.join(self.app.confdir, file_path.lstrip("/"))
+
+        if not allowed_file(file_path) or len(spreadsheet_file_path) == 0:
+            raise InvalidConfigException("Invalid spreadsheet file specified")
+
+        if end_row is None or end_col is None:
+            raise NeedsExcelException("NeedsExcelError: Either end_row or end_col must be specified.")
+
+        data = get_excel_data(
+            str(spreadsheet_file_path),
+            end_row=int(end_row),
+            end_col=int(end_col),
+            start_row=int(start_row),
+            start_col=int(start_col),
+            header_row=int(header_row),
+        )
+        for datum in data:
+            # Be sure "description" is set and valid
+            if "description" not in datum or datum["description"] is None:
+                datum["description"] = ""
+
+        debug_data = self._extract_data(data, options)
         return debug_data
 
 

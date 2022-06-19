@@ -69,6 +69,47 @@ E.g. if ``:end_col: 20`` then we retrieve the data in our spreadsheet file, endi
    For instance, if ``'mappings': {"id": ["sid"],}``, then the ``start_col`` and ``end_col`` should create a range
    which will retrieve data from the spreadsheet file that contains the **sid** column.
 
+content
+~~~~~~~
+{% raw %}
+``content`` takes a string, which gets interpreted as rst-code for the need-content area.
+Jinja support is also available, so that service data is available and can be accessed like
+``{{data.description}}``.
+
+Example for the Excel service configuration:
+
+.. code-block:: python
+
+    excel_content = """
+    {% if info in data %}
+    {{data.info}}
+    {% else %}
+    {{data.description}}
+    {% endif %}
+    """
+
+    needs_services = {
+    'excel_config': {
+        # ... some other values
+        'content': excel_content
+        }
+    }
+
+The set options for the ``needservice`` are available  under ``options``. Example:
+
+.. code-block:: python
+
+   my_content = """
+   Data retrieved from file: {{options.file}}
+
+   {{data.description}}
+
+   {% if options.mapping.status == "is_open" %}
+   **OPEN TASKS**
+   {% endif %}
+   """
+
+{% endraw %}
 
 Config
 ------
