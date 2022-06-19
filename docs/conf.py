@@ -156,10 +156,7 @@ needs_services = {
     },
     'excel_config_2': {
         'file': "/excel/needs.xlsx",
-        # 'header_row': 2,
-        'start_row': 2,
-        'end_row': 4,
-        'end_col': 8,
+        'end_col': 9,
         "content": excel_content,
         'id_prefix': "EXCEL_",
         'mappings': {
@@ -346,3 +343,15 @@ panels_css_variables = {
 if html_theme == "sphinx_immaterial":
     html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "navigation.html",
                             "localtoc.html", "searchbox.html"]}
+
+
+rst_epilog = """
+.. |ex| replace:: **Code** 
+
+.. |out| replace:: **Output** 
+
+.. |br| raw:: html 
+
+   <br>
+
+"""

@@ -83,7 +83,7 @@ Example
 Inside your ``conf.py`` file:
 
 .. literalinclude:: /snippets/cb_config.py
-      :language: python
+   :language: python
 
 Inside any ``rst`` file of your Sphinx project:
 
