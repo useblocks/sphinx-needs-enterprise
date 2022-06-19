@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = "test spreadsheet"
+project = "test excel"
 copyright = "2022, team useblocks"
 author = "team useblocks"
 

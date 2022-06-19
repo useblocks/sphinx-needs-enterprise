@@ -1,9 +1,10 @@
-import re
 import os
+import re
+
+from sphinx.errors import SphinxError
 
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
 from sphinx_needs_enterprise.util import dict_undefined_set, get_excel_data
-from sphinx.errors import SphinxError
 
 DEFAULT_CONTENT = """
 {% set desc_list = data.description.split('\n') %}
