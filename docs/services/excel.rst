@@ -168,6 +168,12 @@ Inside any ``rst`` file of your Sphinx project:
        :end_row: 4
        :start_col: 2
 
+   .. needservice:: excel_config
+      :file: /services/spreadsheets/needs.xlsx
+      :start_row: 20
+      :end_row: 21
+      :debug:
+
 .. container:: toggle
 
    .. container:: header
@@ -194,3 +200,9 @@ Inside any ``rst`` file of your Sphinx project:
       :start_row: 1
       :end_row: 4
       :start_col: 2
+
+   .. needservice:: excel_config
+      :file: /services/spreadsheets/needs.xlsx
+      :start_row: 20
+      :end_row: 21
+      :debug:

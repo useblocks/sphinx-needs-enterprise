@@ -20,3 +20,11 @@ Multiple items
 .. needservice:: excel_config
    :start_row: 2
    :end_row: 4
+
+Debugging Excel Service
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. needservice:: excel_config
+   :start_row: 2
+   :end_row: 4
+   :debug:

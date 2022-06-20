@@ -1,5 +1,6 @@
 import os
 import re
+from datetime import datetime as dt
 
 from sphinx.errors import SphinxError
 
@@ -107,12 +108,11 @@ class ExcelService(ServiceExtension):
             start_col=int(start_col),
             header_row=int(header_row),
         )
-        for datum in data:
-            # Be sure "description" is set and valid
-            if "description" not in datum or datum["description"] is None:
-                datum["description"] = ""
+        debug_data = []
+        for i in data:
+            # Convert datetime values to ISO format (i.e. string) for it to be JSON serializable
+            debug_data.append({key: (value.isoformat() if type(value) == dt else value) for key, value in i.items()})
 
-        debug_data = self._extract_data(data, options)
         return debug_data
 
 

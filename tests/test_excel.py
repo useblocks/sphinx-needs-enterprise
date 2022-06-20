@@ -21,6 +21,6 @@ def test_excel(app):
     assert "EXCEL_TEST_IMPORT_1003" in html
 
     assert "is_open" in html
-
+    assert "Debug data" in html
     assert "A need imported from a spreadsheet" in html
     assert "Marco Heinemann" not in html
