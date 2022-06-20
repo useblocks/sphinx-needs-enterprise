@@ -20,7 +20,6 @@ from sphinx_needs_enterprise.version import VERSION
 
 sys.path.insert(0, os.path.abspath("../sphinx_needs_enterprise"))
 
-
 # -- Project information -----------------------------------------------------
 
 project = "Sphinx-Needs Enterprise"
@@ -30,7 +29,6 @@ author = "team useblocks"
 
 # The full version, including alpha/beta/rc tags
 version = VERSION
-
 
 # -- General configuration ---------------------------------------------------
 
@@ -70,6 +68,14 @@ cb_content = """
 
 jira_content = """
 {{data.fields.description}}"""
+
+excel_content = """
+{% if info in data %}
+{{data.info}}
+{% else %}
+{{data.description}}
+{% endif %}
+"""
 
 needs_services = {
     "azure_config": {
@@ -129,6 +135,38 @@ needs_services = {
     },
     "elasticsearch_config": {"url": "http://127.0.0.1:9200", "index": "needs"},
     "test": {},
+    'excel_config': {
+        'file': "/excel/needs.xlsx",
+        'start_row': 5,
+        'end_row': 15,
+        'end_col': 7,
+        "content": excel_content,
+        'id_prefix': "EXCEL_",
+        'mappings': {
+            "id": ["id"],
+            "type": 'spec',
+            "title": ["title"],
+            "status": ["status"],
+        },
+        'extra_data': {
+            "AssignedTo": ["assignee"],
+            "CreatedAt": ["created at"],
+            "Updated": ["updated at"],
+        }
+    },
+    'excel_config_2': {
+        'file': "/excel/needs.xlsx",
+        'end_col': 9,
+        "content": excel_content,
+        'id_prefix': "EXCEL_",
+        'mappings': {
+            "id": ["sid"],
+            "type": 'impl',
+            "title": ["topic"],
+            "status": "is_{{status}}",
+            "links": ["links"],
+        }
+    }
 }
 
 needs_extra_options = ["author"]
@@ -176,7 +214,6 @@ templates_path = ["_templates"]
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
-
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -251,13 +288,11 @@ html_theme_options = {
     #     ]
 }
 
-
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
-
 
 # Material theme options (see theme.conf for more information)
 # html_theme_options = {
@@ -308,3 +343,15 @@ panels_css_variables = {
 if html_theme == "sphinx_immaterial":
     html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "navigation.html",
                             "localtoc.html", "searchbox.html"]}
+
+
+rst_epilog = """
+.. |ex| replace:: **Code** 
+
+.. |out| replace:: **Output** 
+
+.. |br| raw:: html 
+
+   <br>
+
+"""

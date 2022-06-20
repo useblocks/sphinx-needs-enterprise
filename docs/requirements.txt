@@ -4,7 +4,6 @@ sphinxcontrib-needs==0.7.9
 sphinx-copybutton
 
 # Sphinx-Material Theme + Fix to support Sphinx-Needs
-sphinx-material>=0.0.35
-sphinx-panels
 sphinx-design
 sphinx-immaterial
+openpyxl

@@ -22,6 +22,7 @@ sphinxcontrib-programoutput = ">=0.17"
 azure-devops = ">=6.0.0-beta.4"
 elasticsearch = ">=7.15"
 tqdm = ">=4.40"
+openpyxl = ">=3.0"
 
 [tool.poetry.dev-dependencies]
 # test dependencies

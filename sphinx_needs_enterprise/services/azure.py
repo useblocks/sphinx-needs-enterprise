@@ -35,7 +35,7 @@ class AzureService(ServiceExtension):
 
         # If no mapping is given, we need to use a need-type, which really exists.
         # So we take the first one from config, instead of hard-coding a value or
-        # getting it from the jira issue.
+        # getting it from the azure issue.
         default_need_type = str(self.app.config["needs_types"][0]["directive"])
 
         mappings_default = {
