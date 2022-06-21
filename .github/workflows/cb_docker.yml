@@ -23,5 +23,8 @@ jobs:
 
       - name: Check running containers
         run: docker ps -a
-      - name: run pytest
-        run: pytest ./tests/docker_cb_api_test.py
+
+      - name: GitHub Action for pytest
+        uses: cclauss/GitHub-Action-for-pytest@0.5.0
+        with:
+          args: pytest ./tests/docker_cb_api_test.py
