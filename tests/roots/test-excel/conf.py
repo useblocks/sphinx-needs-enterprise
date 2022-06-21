@@ -20,7 +20,7 @@
 project = "test excel"
 copyright = "2022, team useblocks"
 author = "team useblocks"
-
+version = "0.1.5"
 
 # -- General configuration ---------------------------------------------------
 
@@ -40,15 +40,15 @@ needs_services = {
         "end_col": 7,
         "id_prefix": "EXCEL_TEST_IMPORT_",
         "mappings": {
-            "id": ["id"],
+            "id": ["ID"],
             "type": "spec",
-            "title": ["title"],
-            "status": "is_{{status}}",
+            "title": ["TITLE"],
+            "status": "is_{{STATUS}}",
         },
         "extra_data": {
-            "AssignedTo": ["assignee"],
-            "CreatedAt": ["created at"],
-            "Updated": ["updated at"],
+            "AssignedTo": ["ASSIGNEE"],
+            "CreatedAt": ["CREATED AT"],
+            "Updated": ["UPDATED AT"],
         },
     }
 }
@@ -73,3 +73,5 @@ html_theme = "alabaster"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 # html_static_path = ["_static"]
+
+needs_build_json = True

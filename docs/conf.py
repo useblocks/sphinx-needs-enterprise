@@ -143,15 +143,15 @@ needs_services = {
         "content": excel_content,
         'id_prefix': "EXCEL_",
         'mappings': {
-            "id": ["id"],
+            "id": ["ID"],
             "type": 'spec',
-            "title": ["title"],
-            "status": ["status"],
+            "title": ["TITLE"],
+            "status": ["STATUS"],
         },
         'extra_data': {
-            "AssignedTo": ["assignee"],
-            "CreatedAt": ["created at"],
-            "Updated": ["updated at"],
+            "AssignedTo": ["ASSIGNEE"],
+            "CreatedAt": ["CREATED AT"],
+            "Updated": ["UPDATED AT"],
         }
     },
     'excel_config_2': {
@@ -219,7 +219,6 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
 
 html_theme = os.environ.get("THEME", "sphinx_immaterial")
 
@@ -240,15 +239,8 @@ html_theme_options = {
     "edit_uri": "blob/master/docs",
     "globaltoc_collapse": True,
     "features": [
-        # "navigation.expand",
-        # "navigation.tabs",
-        # "toc.integrate",
         "navigation.sections",
-        # "navigation.instant",
-        # "header.autohide",
         "navigation.top",
-        # "navigation.tracking",
-        # "search.highlight",
         "search.share",
     ],
     "palette": [
@@ -274,18 +266,6 @@ html_theme_options = {
         },
     ],
     "toc_title_is_page_title": True,
-    # "nav_links": [
-    #         {
-    #             "href": "https://sphinx-needs.com",
-    #             "internal": False,
-    #             "title": "Sphinx-Needs",
-    #         },
-    #         {
-    #             "href": "https://sphinxcontrib-needs.readthedocs.io/en/latest/",
-    #             "internal": False,
-    #             "title": "Sphinx-Needs Docs",
-    #         },
-    #     ]
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -293,52 +273,6 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 html_css_files = ["custom.css"]
-
-# Material theme options (see theme.conf for more information)
-# html_theme_options = {
-#     "table_classes": [""],
-#     # Set the name of the project to appear in the navigation.
-#     "nav_title": "Sphinx-Needs Enterprise",
-#     # Specify a base_url used to generate sitemap.xml. If not
-#     # specified, then no sitemap will be built.
-#     "base_url": "https://project.github.io/project",
-#     # Set the color and the accent color
-#     "theme_color": "#2a639a",
-#     "color_primary": "#2a639a",
-#     "color_accent": "#2a639a",
-#     # Set the repo location to get a badge with stats
-#     "repo_url": "https://github.com/useblocks/sphinx-needs-enterprise/",
-#     "repo_name": "",
-#     # Visible levels of the global TOC; -1 means unlimited
-#     "globaltoc_depth": 2,
-#     # If False, expand all TOC entries
-#     "globaltoc_collapse": True,
-#     # If True, show hidden TOC entries
-#     "globaltoc_includehidden": False,
-#     "nav_links": [
-#         {
-#             "href": "https://sphinx-needs.com",
-#             "internal": False,
-#             "title": "Sphinx-Needs",
-#         },
-#         {
-#             "href": "https://sphinxcontrib-needs.readthedocs.io/en/latest/",
-#             "internal": False,
-#             "title": "Sphinx-Needs Docs",
-#         },
-#     ],
-#     # "heroes": {
-#     #     "index": "Enterprise Solutions for Sphinx-Needs",
-#     #     "services/index": "Synchronize with external services",
-#     # },
-# }
-panels_css_variables = {
-    "tabs-color-label-active": "rgb(42, 99, 154)",
-    "tabs-color-label-inactive": "rgb(42, 99, 154, 0.6)",
-    "tabs-color-overline": "rgb(42, 99, 154)",
-    "tabs-color-underline": "rgb(42, 99, 154)",
-    "tabs-size-label": "0.9rem",
-}
 
 if html_theme == "sphinx_immaterial":
     html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "navigation.html",
