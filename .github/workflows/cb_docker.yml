@@ -1,0 +1,29 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      PG_PASS: ${{ secrets.PG_PASS }}
+      DATABASE_URL: postgresql://postgres:${{ secrets.SECRET_PASSWORD }}@postgres/postgres
+      DJANGO_SETTINGS_MODULE: app_name.settings.dev
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      PORT: 8000
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the docker-compose stack
+      run: docker-compose -f ./tests/docker_files/cb_docker-compose.yml up -d
+    - name: Wait on
+      uses: iFaxity/wait-on-action@v1
+      with:
+        resource: http://localhost:8080
+
+    - name: Check running containers
+      run: docker ps -a
+    - name: Check logs
+      run: docker logs backend

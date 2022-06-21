@@ -173,6 +173,8 @@ def test_codebeamer_api(docker_service):
     else:
         return False
 
+# TODO fix url selection, replace with docker_ip?
+
 # TODO assert x in api call
 
 # TODO test sne import export features
