@@ -24,6 +24,18 @@ jobs:
       - name: Check running containers
         run: docker ps -a
 
+      - name: set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Nox Dependencies
+        run: python -m pip install poetry nox nox-poetry pyparsing==3.0.4
+
+      - name: Final package list
+        run: pip freeze
+
+
       - name: GitHub Action for pytest
         uses: cclauss/GitHub-Action-for-pytest@0.5.0
         with:
