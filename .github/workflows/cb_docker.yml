@@ -37,6 +37,4 @@ jobs:
 
 
       - name: GitHub Action for pytest
-        uses: cclauss/GitHub-Action-for-pytest@0.5.0
-        with:
-          args: pytest ./tests/docker_cb_api_test.py
+        run: python -m pytest ./tests/docker_cb_api_test.py
