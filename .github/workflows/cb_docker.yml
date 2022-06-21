@@ -9,8 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Build the docker-compose stack
-      run: docker-compose -f ./tests/docker_files/cb_docker-compose.yml up -d
+    - name: Docker Compose Action
+      uses: isbang/compose-action@v1.1.0
+      with:
+        compose-file: "./tests/docker_files/cb_docker-compose.yml"
+
     - name: Wait on
       uses: iFaxity/wait-on-action@v1
       with:
