@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: cb docker
 
 on: [push]
 
@@ -8,16 +8,18 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Docker Compose Action
-      uses: isbang/compose-action@v1.1.0
-      with:
-        compose-file: "./tests/docker_files/cb_docker-compose.yml"
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Wait on
-      uses: iFaxity/wait-on-action@v1
-      with:
-        resource: http://localhost:8080
+      - name: Docker Compose Action
+        uses: isbang/compose-action@v1.1.0
+        with:
+          compose-file: "./tests/docker_files/cb_docker-compose.yml"
 
-    - name: Check running containers
-      run: docker ps -a
+      - name: Wait on
+        uses: iFaxity/wait-on-action@v1
+        with:
+          resource: http://localhost:8080
+
+      - name: Check running containers
+        run: docker ps -a
