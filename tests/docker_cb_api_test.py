@@ -165,7 +165,7 @@ def docker_service(docker_ip, docker_services):
 
     return url
 
-@pytest.mark.docker_needed
+@pytest.mark.cb_docker_needed
 def test_codebeamer_api():
     tracker_id = create_cb_sys_req("testname", "this is a test description")
 

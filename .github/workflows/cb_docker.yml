@@ -37,4 +37,4 @@ jobs:
 
 
       - name: GitHub Action for pytest
-        run: python -m pytest ./tests/docker_cb_api_test.py
+        run: python -m pytest ./tests/docker_cb_api_test.py -m cb_docker_needed
