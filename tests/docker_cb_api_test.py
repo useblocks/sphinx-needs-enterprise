@@ -1,5 +1,6 @@
 import os
 import time
+
 import pytest
 import requests
 from requests.auth import HTTPBasicAuth
@@ -8,7 +9,7 @@ url = "http://127.0.0.1:8080/rest/v3"
 url_v1 = "http://127.0.0.1:8080/rest"
 
 # default user + pw
-auth = requests.auth.HTTPBasicAuth("bond", "007")
+auth = HTTPBasicAuth("bond", "007")
 
 create_project_json = {
     "name": "Implement car software",
