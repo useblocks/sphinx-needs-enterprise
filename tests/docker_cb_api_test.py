@@ -1,26 +1,26 @@
-import requests
-from requests.auth import HTTPBasicAuth
-import pytest
 import os
 import time
+import pytest
+import requests
+from requests.auth import HTTPBasicAuth
 
-url = 'http://127.0.0.1:8080/rest/v3'
-url_v1 = 'http://127.0.0.1:8080/rest'
+url = "http://127.0.0.1:8080/rest/v3"
+url_v1 = "http://127.0.0.1:8080/rest"
 
 # default user + pw
 auth = requests.auth.HTTPBasicAuth("bond", "007")
 
 create_project_json = {
-  "name": "Implement car software",
-  "storyPoints": 5,
-  "description": "asdasd",
-  "subjects": [
-    {
-      "id": 1007,
-      "name": "As User, I want to have a software in my car, which is easy to use",
-      "type": "TrackerItemReference"
-    }
-  ]
+    "name": "Implement car software",
+    "storyPoints": 5,
+    "description": "asdasd",
+    "subjects": [
+        {
+            "id": 1007,
+            "name": "As User, I want to have a software in my car, which is easy to use",
+            "type": "TrackerItemReference",
+        }
+    ],
 }
 """
 # x = requests.post(url + "/project", json=myobj, auth=auth)
@@ -35,7 +35,6 @@ print(y.json())
 print(y.status_code)
 print(z.json())
 print(a.json())
-"""
 # b = requests.post(url + "/trackers/3873/items", json=create_project_json, auth=auth)
 # c = requests.get(url + "/trackers/3873/fields", auth=auth)
 # print(b.json())
@@ -43,6 +42,14 @@ print(a.json())
 # delete_project = requests.delete("".join([url_v1, "/project/", str(5)]), auth=auth)
 # print(delete_project.status_code)
 # print(delete_project.text)
+"""
+
+
+# TODO fix url selection, replace with docker_ip?
+
+# TODO assert x in api call
+
+# TODO test sne import export features
 
 
 def create_cb_project(project_name):
@@ -53,10 +60,9 @@ def create_cb_project(project_name):
     """
     # this uses v1 API
     create_project_json = {
-
         "name": project_name,
         "description": "A sample project to test and demonstrate the __REST API__",
-        "category": "Test"
+        "category": "Test",
     }
 
     # current_projects = requests.get(url + "/projects", auth=auth).json()
@@ -111,16 +117,15 @@ def create_cb_sys_req(name, description):
                 {
                     "id": 1007,
                     "name": "As User, I want to have a software in my car, which is easy to use",
-                    "type": "TrackerItemReference"
+                    "type": "TrackerItemReference",
                 }
-            ]
+            ],
         }
 
         if tracker_id != -1:
             response = requests.post(
-                "".join([url, "/trackers/", str(tracker_id), "/items"]),
-                auth=auth,
-                json=create_trackeritem_json)
+                "".join([url, "/trackers/", str(tracker_id), "/items"]), auth=auth, json=create_trackeritem_json
+            )
 
             assert response.status_code == 200
 
@@ -148,12 +153,10 @@ def docker_compose_file(pytestconfig):
 @pytest.fixture(scope="session")
 def docker_service(docker_ip, docker_services):
 
-    url = "http://{}:{}".format(docker_ip, 8080)
+    url = f"http://{docker_ip}:{8080}"
 
     time.sleep(30)
-    docker_services.wait_until_responsive(
-        timeout=180.0, pause=10, check=lambda: is_responsive(url)
-    )
+    docker_services.wait_until_responsive(timeout=180.0, pause=10, check=lambda: is_responsive(url))
 
     return url
 
@@ -166,16 +169,9 @@ def test_codebeamer_api():
     auth = requests.auth.HTTPBasicAuth("bond", "007")
 
     if tracker_id:
-        response = a = requests.get("".join([url + "/trackers/", str(tracker_id), "/items"]), auth=auth)
+        response = requests.get("".join([url + "/trackers/", str(tracker_id), "/items"]), auth=auth)
 
         assert response.status_code == status
 
     else:
         return False
-
-# TODO fix url selection, replace with docker_ip?
-
-# TODO assert x in api call
-
-# TODO test sne import export features
-
