@@ -52,6 +52,10 @@ print(a.json())
 
 # TODO test sne import export features
 
+# TODO filter pytest for tags, generate jira test tags, generate cb test tags
+
+# TODO non docker tests in seperate workflow, remove API test with docker from here with tags
+
 
 def create_cb_project(project_name):
     """
@@ -161,7 +165,7 @@ def docker_service(docker_ip, docker_services):
 
     return url
 
-
+@pytest.mark.docker_needed
 def test_codebeamer_api():
     tracker_id = create_cb_sys_req("testname", "this is a test description")
 
