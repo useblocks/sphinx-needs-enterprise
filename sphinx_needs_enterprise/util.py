@@ -67,10 +67,10 @@ def jinja_parse(context: dict, jinja_string: str) -> str:
     """
     try:
         content_template = Template(jinja_string, autoescape=True)
+        content = content_template.render(**context)
+        return content
     except TemplateSyntaxError as e:
         raise ReferenceError(f'There was an error in the jinja statement: "{jinja_string}". ' f"Error Msg: {e}")
-    content = content_template.render(**context)
-    return content
 
 
 def filter_excel_data(context: list[dict], filter_string: str) -> list[dict]:
