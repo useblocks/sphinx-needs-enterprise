@@ -28,6 +28,19 @@ prefix
 ~~~~~~
 A string, which is taken as prefix for the need-id. E.g. ``EXCEL_IMPORT_`` --> ``EXCEL_IMPORT_005``.
 
+query
+~~~~~
+
+A query string used to filter the data retrieved from the Excel service.
+The query string must be a valid Python statement.
+
+Example: This Python statement ``status == 'open' and assignee == 'Randy Duodu'`` can be used as:
+
+.. code-block:: rst
+
+   .. needservice:: Excel
+      :query: status == 'open' and assignee == 'Randy Duodu'
+
 header_row
 ~~~~~~~~~~
 A number indicating the row in the spreadsheet which contains the names for each column. This option is required.
