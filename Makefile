@@ -10,7 +10,7 @@ lint:
 
 .PHONY: test
 test:
-	poetry run pytest -v tests -m "not cb_needed,docker_needed"
+	poetry run pytest -v tests -m regular
 
 .PHONY: test
 test-local:
