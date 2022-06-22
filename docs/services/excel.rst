@@ -203,6 +203,7 @@ Inside any ``rst`` file of your Sphinx project:
 
    .. needservice:: excel_config
       :file: /services/spreadsheets/needs.xlsx
-      :start_row: 20
+      :query: status == 'open' and assignee == 'Randy Duodu'
+      :start_row: 2
       :end_row: 21
       :debug:

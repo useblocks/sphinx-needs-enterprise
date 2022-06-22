@@ -3,7 +3,7 @@ import operator
 import os
 from functools import reduce  # forward compatibility for Python 3
 
-from jinja2 import Template
+from jinja2 import Template, TemplateSyntaxError
 from openpyxl import load_workbook
 
 log = logging.getLogger(__name__)
@@ -31,27 +31,9 @@ def dict_undefined_set(dict_obj, key, value):
         dict_obj[key] = value
 
 
-def jinja_parse(context: dict, jinja_string: str) -> str:
-    """
-    Function to parse mapping options set to a string containing jinja template format.
-
-    :param context: Data to be used as context in rendering jinja template
-    :type: dict
-    :param jinja_string: A jinja template string
-    :type: str
-    :return: A rendered jinja template as string
-    :rtype: str
-
-    """
-    content_template = Template(jinja_string, autoescape=True)
-    content = content_template.render(**context)
-    return content
-
-
 def get_excel_data(
     file_path: str, end_row: int, end_col: int, start_row: int = 2, start_col: int = 1, header_row: int = 1
 ):
-
     if not os.path.exists(file_path):
         raise ReferenceError(f"Could not load spreadsheet file {file_path}")
 
@@ -70,3 +52,49 @@ def get_excel_data(
     wb.close()
 
     return finalised_data
+
+
+def jinja_parse(context: dict, jinja_string: str) -> str:
+    """
+    Function to parse mapping options set to a string containing jinja template format.
+
+    :param context: Data to be used as context in rendering jinja template
+    :type: dict
+    :param jinja_string: A jinja template string
+    :type: str
+    :return: A rendered jinja template as string
+    :rtype: str
+
+    """
+    try:
+        content_template = Template(jinja_string, autoescape=True)
+    except TemplateSyntaxError as e:
+        raise ReferenceError(f'There was an error in the jinja statement: "{jinja_string}". ' f"Error Msg: {e}")
+    content = content_template.render(**context)
+    return content
+
+
+def filter_excel_data(context: list[dict], filter_string: str) -> list[dict]:
+    """
+    Function to filter Excel service data and return the filtered data.
+
+    :param context: Data imported from the Excel service
+    :type: list[dict]
+    :param filter_string: A string containing Python statements
+    :type: str
+    :return: Filtered data
+    :rtype: list[dict]
+
+    """
+    data = context
+    query = filter_string
+
+    filtered_data: list[dict] = []
+    for row in data:
+        try:
+            if eval(query, {}, row) is True:
+                filtered_data.append(row)
+        except Exception as e:
+            raise ReferenceError(f'There was an error in the query statement: "{filter_string}". ' f"Error Msg: {e}")
+
+    return filtered_data

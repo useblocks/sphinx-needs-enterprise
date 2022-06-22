@@ -5,7 +5,11 @@ from datetime import datetime as dt
 from sphinx.errors import SphinxError
 
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
-from sphinx_needs_enterprise.util import dict_undefined_set, get_excel_data
+from sphinx_needs_enterprise.util import (
+    dict_undefined_set,
+    filter_excel_data,
+    get_excel_data,
+)
 
 DEFAULT_CONTENT = """
 {% set desc_list = data.description.split('\n') %}
@@ -23,7 +27,7 @@ def allowed_file(filename):
 
 
 class ExcelService(ServiceExtension):
-    options = ["file", "start_row", "end_row", "start_col", "end_col", "header_row"]
+    options = ["file", "start_row", "end_row", "start_col", "end_col", "header_row", "query"]
 
     def __init__(self, app, name, config, **kwargs):
         self.app = app
@@ -36,6 +40,7 @@ class ExcelService(ServiceExtension):
         dict_undefined_set(config, "id_prefix", "EXCEL_")
         dict_undefined_set(config, "content", DEFAULT_CONTENT)
         dict_undefined_set(config, "header_row", 1)
+        dict_undefined_set(config, "query", "")
 
         mappings_default = {
             "id": ["id"],
@@ -73,6 +78,12 @@ class ExcelService(ServiceExtension):
             start_col=int(start_col),
             header_row=int(header_row),
         )
+
+        # Filter data returned from Excel
+        query = options.get("query", self.config.get("query"))
+        if len(query) != 0:
+            data = filter_excel_data(data, query)
+
         for datum in data:
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
@@ -108,6 +119,12 @@ class ExcelService(ServiceExtension):
             start_col=int(start_col),
             header_row=int(header_row),
         )
+
+        # Filter data returned from Excel
+        query = options.get("query", self.config.get("query"))
+        if len(query) != 0:
+            data = filter_excel_data(data, query)
+
         debug_data = []
         for i in data:
             # Convert datetime values to ISO format (i.e. string) for it to be JSON serializable
