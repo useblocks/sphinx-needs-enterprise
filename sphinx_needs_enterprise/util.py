@@ -3,7 +3,7 @@ import operator
 import os
 from functools import reduce  # forward compatibility for Python 3
 
-from jinja2 import Template, TemplateSyntaxError
+from jinja2 import Template
 from openpyxl import load_workbook
 
 log = logging.getLogger(__name__)
@@ -67,10 +67,11 @@ def jinja_parse(context: dict, jinja_string: str) -> str:
     """
     try:
         content_template = Template(jinja_string, autoescape=True)
-        content = content_template.render(**context)
-        return content
-    except TemplateSyntaxError as e:
+    except Exception as e:
         raise ReferenceError(f'There was an error in the jinja statement: "{jinja_string}". ' f"Error Msg: {e}")
+
+    content = content_template.render(**context)
+    return content
 
 
 def filter_excel_data(context: list[dict], filter_string: str) -> list[dict]:

@@ -27,15 +27,26 @@ def test_excel(app):
     assert "Haiyang Zhang" in html
 
 
+@pytest.mark.sphinx(testroot="excel-incorrect")
+def test_excel_incorrect_filter_statement(app):
+    with pytest.raises(ReferenceError):
+        app.build()
+        assert isinstance(app.needs_services, ServiceManager)
+
+        manager = app.needs_services
+        service = manager.get("excel_config")
+        assert hasattr(service, "content")
+        assert service.content
+
+
 @pytest.mark.sphinx(testroot="excel")
-def test_excel_filter(app):
+def test_excel_correct_filter_statement(app):
     app.build()
     assert isinstance(app.needs_services, ServiceManager)
 
     manager = app.needs_services
     service = manager.get("excel_config")
     assert hasattr(service, "content")
-
     assert service.content
 
     html = Path(app.outdir, "index.html").read_text()
