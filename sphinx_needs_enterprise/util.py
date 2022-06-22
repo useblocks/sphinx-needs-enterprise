@@ -63,10 +63,9 @@ def get_excel_data(
     )[0]
     finalised_data: list[dict] = []
     for row in data:
-        output = {str(key).lower(): value for key, value in zip(column_header, row)}
+        output = {str(key): value for key, value in zip(column_header, row)}
         finalised_data.append(output)
 
     # Close the workbook after reading
     wb.close()
-
     return finalised_data

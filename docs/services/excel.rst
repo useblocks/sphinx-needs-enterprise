@@ -121,6 +121,7 @@ An ``Excel`` service configuration must be created inside your **conf.py** file.
    :ref:`common configuration description <service_config>`.
 
 The following documentation describes specific information for ``Excel`` service only.
+{% raw %}
 
 + **file** : The file path to the spreadsheet file to use if the `file`_ option is not specified
   under the ``.. needservice:: Excel`` directive.
@@ -132,6 +133,19 @@ The following documentation describes specific information for ``Excel`` service
   is not specified under the ``.. needservice:: Excel`` directive.
 + **end_col** : The column number to end retrieving data from in the spreadsheet file, if the `end_col`_ option
   is not specified under the ``.. needservice:: Excel`` directive.
++ **mapping** : The field names of an Excel service object do not often map to option names of Sphinx-Needs.
+  So mapping defines where a Sphinx-Needs option shall get its value inside the Excel service data. |br|
+  mapping must be a dictionary, where the **key** is the needs object name and the **value** is either
+  a Jinja string such as ``is_{{status}}`` or a list/tuple, which defines the location of the value in the retrieved
+  Excel service data object.
+
+  .. note::
+     When you use a Jinja string as value, you must ensure the column names in the spreadsheet file,
+     set as values for the mapping option, does not contain spaces because that will raise a
+     `Jinja Template Syntax Error <https://jinja.palletsprojects.com/en/3.1.x/api/#jinja2.TemplateSyntaxError>`_.
+     For example: Instead of the column name being ``CREATED AT`` use ``CREATED_AT``.
+
+{% endraw %}
 
 Example
 -------
