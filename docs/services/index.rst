@@ -109,13 +109,44 @@ Example: ``CB_`` will create IDs like ``CB_1002``.
 
 mapping
 ~~~~~~~
-Field names a service object do normally not map to option names of Sphinx-Needs.
-So ``mapping`` defines, from where a Sphinx-Needs option shall get its value inside the service data.
+{% raw %}
 
-``mapping`` must be a dictionary, where the **key** is the needs object name and the **value** is a list or tuple,
-which defines the location of the value in the retrieved service data object.
+The field names of a service object do not often map to option names of Sphinx-Needs.
+So **mapping** defines where a Sphinx-Needs option shall get its value inside the service data.
 
-**Example using Codebeamer**
+**mapping** must be a dictionary, where the **key** is the needs object name and the **value** is either
+a Jinja string such as ``is_{{status}}`` or a list/tuple, which defines the location of the value in the retrieved
+service data object.
+
+**Example using a Jinja string as value for the Excel service**
+
+Goal: The need option ``author`` shall be set to both the Last and First names.
+
+The last and first names information are stored in the retrieved Excel data under ``LAST_NAME`` and ``FIRST_NAME``.
+
+.. image:: /_images/excel_data.png
+   :align: center
+   :width: 80%
+
+So the final ``mapping`` entry looks like:
+
+.. code-block:: python
+
+    'mapping': {
+        'author': "{{LAST_NAME}} {{FIRST_NAME}}",
+    }
+
+
+.. note::
+   When you use a Jinja string as value, you must ensure the field names of a service object,
+   set as values for the mapping option, does not contain spaces because that will raise a
+   `Jinja Template Syntax Error <https://jinja.palletsprojects.com/en/3.1.x/api/#jinja2.TemplateSyntaxError>`_.
+   For example: Instead of the column name being ``CREATED AT`` use ``CREATED_AT``. Read more about the :ref:`conf_mapping`
+   configuration.
+
+{% endraw %}
+
+**Example using a list/tuple as value for the Codebeamer service**
 
 Goal: The need option ``author`` shall be set to the Assignee name.
 
@@ -133,7 +164,9 @@ So the final ``mapping`` entry looks like:
         'author': ['assignedTo', 0, 'name'],
     }
 
-**Note**: Combining data from multiple locations in a mapping definition is currently not supported.
+.. note::
+
+   Combining data from multiple locations in a mapping definition is currently not supported.
 
 .. _conf_mappings_replaces:
 

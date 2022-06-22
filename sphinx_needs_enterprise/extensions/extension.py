@@ -193,10 +193,10 @@ class ServiceExtension(BaseService):
                         need_values[name] = value
 
                 for regex, new_str in self.mapping_replaces.items():
-                    need_values[name] = re.sub(regex, new_str, need_values[name])
+                    need_values[name] = re.sub(regex, new_str, need_values.get(name, ""))
 
                 if name == "id":
-                    need_values[name] = prefix + need_values[name]
+                    need_values[name] = prefix + need_values.get(name, "")
 
             finale_data = {"content": content}
             finale_data.update(need_values)

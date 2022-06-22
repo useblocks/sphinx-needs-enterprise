@@ -41,6 +41,11 @@ Example: This Python statement ``status == 'open' and assignee == 'Randy Duodu'`
    .. needservice:: Excel
       :query: status == 'open' and assignee == 'Randy Duodu'
 
+.. note::
+   When you use the query option, the filter in the value must match the column names (such as case sensitivity)
+   in the spreadsheet file. For instance, if column name is **STATUS**, then use ``STATUS`` instead of ``status``
+   in the filter (i.e. ``STATUS == 'closed'``).
+
 header_row
 ~~~~~~~~~~
 A number indicating the row in the spreadsheet which contains the names for each column. This option is required.
@@ -134,6 +139,7 @@ An ``Excel`` service configuration must be created inside your **conf.py** file.
    :ref:`common configuration description <service_config>`.
 
 The following documentation describes specific information for ``Excel`` service only.
+{% raw %}
 
 + **file** : The file path to the spreadsheet file to use if the `file`_ option is not specified
   under the ``.. needservice:: Excel`` directive.
@@ -145,6 +151,19 @@ The following documentation describes specific information for ``Excel`` service
   is not specified under the ``.. needservice:: Excel`` directive.
 + **end_col** : The column number to end retrieving data from in the spreadsheet file, if the `end_col`_ option
   is not specified under the ``.. needservice:: Excel`` directive.
++ **mapping** : The field names of an Excel service object do not often map to option names of Sphinx-Needs.
+  So mapping defines where a Sphinx-Needs option shall get its value inside the Excel service data. |br|
+  mapping must be a dictionary, where the **key** is the needs object name and the **value** is either
+  a Jinja string such as ``is_{{status}}`` or a list/tuple, which defines the location of the value in the retrieved
+  Excel service data object.
+
+  .. note::
+     When you use a Jinja string as value, you must ensure the column names in the spreadsheet file,
+     set as values for the mapping option, does not contain spaces because that will raise a
+     `Jinja Template Syntax Error <https://jinja.palletsprojects.com/en/3.1.x/api/#jinja2.TemplateSyntaxError>`_.
+     For example: Instead of the column name being ``CREATED AT`` use ``CREATED_AT``.
+
+{% endraw %}
 
 Example
 -------
@@ -183,6 +202,7 @@ Inside any ``rst`` file of your Sphinx project:
 
    .. needservice:: excel_config
       :file: /services/spreadsheets/needs.xlsx
+      :query: STATUS == 'open' and ASSIGNEE == 'Randy Duodu'
       :start_row: 20
       :end_row: 21
       :debug:
@@ -216,7 +236,7 @@ Inside any ``rst`` file of your Sphinx project:
 
    .. needservice:: excel_config
       :file: /services/spreadsheets/needs.xlsx
-      :query: status == 'open' and assignee == 'Randy Duodu'
+      :query: STATUS == 'open' and ASSIGNEE == 'Randy Duodu'
       :start_row: 2
       :end_row: 21
       :debug:

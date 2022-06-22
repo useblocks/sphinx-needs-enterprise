@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -45,3 +46,30 @@ def test_excel_filter(app):
     assert "A need imported from a spreadsheet" in html
     assert "is_progress" in html
     assert "Marco Heinemann" in html
+
+
+@pytest.mark.sphinx(testroot="excel")
+def test_excel_json(app):
+    app.build()
+    needs_text = Path(app.outdir, "needs.json").read_text()
+    needs = json.loads(needs_text)
+    assert "created" in needs
+    need = needs["versions"]["0.1.5"]["needs"]["EXCEL_TEST_IMPORT_1019"]
+
+    check_keys = [
+        "id",
+        "type",
+        "description",
+        "full_title",
+        "is_need",
+        "is_part",
+        "links",
+        "status",
+        "tags",
+        "title",
+        "type_name",
+    ]
+
+    for key in check_keys:
+        if key not in need.keys():
+            raise AssertionError("%s not in exported need" % key)
