@@ -69,9 +69,9 @@ local_plantuml_path = os.path.join(os.path.dirname(__file__), "utils", "plantuml
 if on_rtd:
     # Deactivated using rtd plantuml version as it looks quite old.
     # plantuml = 'java -Djava.awt.headless=true -jar /usr/share/plantuml/plantuml.jar'
-    plantuml = "java -Djava.awt.headless=true -jar {}".format(local_plantuml_path)
+    plantuml = f"java -Djava.awt.headless=true -jar {local_plantuml_path}"
 else:
-    plantuml = "java -jar {}".format(local_plantuml_path)
+    plantuml = f"java -jar {local_plantuml_path}"
 
 # plantuml_output_format = 'png'
 plantuml_output_format = "svg_img"
