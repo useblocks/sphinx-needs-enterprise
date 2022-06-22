@@ -4,6 +4,8 @@ on:
     branches:
       - main
   pull_request:
+env:
+  test_tag: no_API
 jobs:
   tests:
     name: "Test (python: ${{ matrix.python-version }}, sphinx: ${{ matrix.sphinx-version }})"
