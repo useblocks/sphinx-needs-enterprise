@@ -28,6 +28,24 @@ prefix
 ~~~~~~
 A string, which is taken as prefix for the need-id. E.g. ``EXCEL_IMPORT_`` --> ``EXCEL_IMPORT_005``.
 
+query
+~~~~~
+
+A query string used to filter the data retrieved from the Excel service.
+The query string must be a valid Python statement.
+
+Example: This Python statement ``status == 'open' and assignee == 'Randy Duodu'`` can be used as:
+
+.. code-block:: rst
+
+   .. needservice:: Excel
+      :query: status == 'open' and assignee == 'Randy Duodu'
+
+.. note::
+   When you use the query option, the filter in the value must match the column names (such as case sensitivity)
+   in the spreadsheet file. For instance, if column name is **STATUS**, then use ``STATUS`` instead of ``status``
+   in the filter (i.e. ``STATUS == 'closed'``).
+
 header_row
 ~~~~~~~~~~
 A number indicating the row in the spreadsheet which contains the names for each column. This option is required.
@@ -184,6 +202,7 @@ Inside any ``rst`` file of your Sphinx project:
 
    .. needservice:: excel_config
       :file: /services/spreadsheets/needs.xlsx
+      :query: STATUS == 'open' and ASSIGNEE == 'Randy Duodu'
       :start_row: 20
       :end_row: 21
       :debug:
@@ -217,6 +236,8 @@ Inside any ``rst`` file of your Sphinx project:
 
    .. needservice:: excel_config
       :file: /services/spreadsheets/needs.xlsx
-      :start_row: 20
+      :query: STATUS == 'open' and ASSIGNEE == 'Randy Duodu'
+      :start_row: 2
       :end_row: 21
       :debug:
+

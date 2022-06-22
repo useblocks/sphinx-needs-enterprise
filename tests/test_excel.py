@@ -18,13 +18,34 @@ def test_excel(app):
 
     html = Path(app.outdir, "index.html").read_text()
 
-    assert "Import from Excel 2" in html
-    assert "EXCEL_TEST_IMPORT_1003" in html
+    assert "Import from Excel 19" in html
+    assert "EXCEL_TEST_IMPORT_1019" in html
 
-    assert "is_open" in html
+    assert "is_progress" in html
     assert "Debug data" in html
     assert "A need imported from a spreadsheet" in html
-    assert "Marco Heinemann" not in html
+    assert "Haiyang Zhang" in html
+
+
+@pytest.mark.sphinx(testroot="excel")
+def test_excel_filter(app):
+    app.build()
+    assert isinstance(app.needs_services, ServiceManager)
+
+    manager = app.needs_services
+    service = manager.get("excel_config")
+    assert hasattr(service, "content")
+
+    assert service.content
+
+    html = Path(app.outdir, "index.html").read_text()
+
+    assert "Import from Excel 16" in html
+    assert "EXCEL_TEST_IMPORT_1016" in html
+
+    assert "A need imported from a spreadsheet" in html
+    assert "is_progress" in html
+    assert "Marco Heinemann" in html
 
 
 @pytest.mark.sphinx(testroot="excel")
@@ -33,7 +54,7 @@ def test_excel_json(app):
     needs_text = Path(app.outdir, "needs.json").read_text()
     needs = json.loads(needs_text)
     assert "created" in needs
-    need = needs["versions"]["0.1.5"]["needs"]["EXCEL_TEST_IMPORT_1003"]
+    need = needs["versions"]["0.1.5"]["needs"]["EXCEL_TEST_IMPORT_1019"]
 
     check_keys = [
         "id",

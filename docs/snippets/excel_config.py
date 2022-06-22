@@ -15,15 +15,15 @@ needs_services = {
         "content": excel_content,
         'id_prefix': "EXCEL_",
         'mappings': {
-            "id": ["id"],
+            "id": ["ID"],
             "type": 'spec',
-            "title": ["title"],
-            "status": ["status"],
+            "title": ["TITLE"],
+            "status": ["STATUS"],
         },
         'extra_data': {
-            "AssignedTo": ["assignee"],
-            "CreatedAt": ["created at"],
-            "Updated": ["updated at"],
+            "AssignedTo": ["ASSIGNEE"],
+            "CreatedAt": ["CREATED AT"],
+            "Updated": ["UPDATED AT"],
         }
     },
     'excel_config_2': {
