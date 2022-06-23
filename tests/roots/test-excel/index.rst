@@ -19,7 +19,8 @@ Multiple items
 
 .. needservice:: excel_config
    :start_row: 2
-   :end_row: 4
+   :end_row: 21
+   :query: STATUS == 'progress' and ASSIGNEE == 'Marco Heinemann'
 
 Debugging Excel Service
 ~~~~~~~~~~~~~~~~~~~~~~~
