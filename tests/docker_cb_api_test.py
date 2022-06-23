@@ -167,12 +167,44 @@ def docker_service(docker_ip, docker_services):
 
 
 @pytest.mark.cb_docker_needed
-def test_codebeamer_api():
+@pytest.mark.ci_test
+def test_codebeamer_api_in_ci():
+
+    try:
+        in_gh_ci = os.getenv("CI")
+
+        if not in_gh_ci or in_gh_ci is None:
+            raise NameError
+
+    except NameError:
+        pytest.fail(f"Please add pytest marker filtering to your Configuration. "
+                    f"For local testing use 'pytest -m local'")
+
     tracker_id = create_cb_sys_req("testname", "this is a test description")
 
     status = 200
 
-    auth = requests.auth.HTTPBasicAuth("bond", "007")
+    auth = HTTPBasicAuth("bond", "007")
+
+    if tracker_id:
+        response = requests.get("".join([url + "/trackers/", str(tracker_id), "/items"]), auth=auth)
+
+        assert response.status_code == status
+
+    else:
+        return False
+
+
+@pytest.mark.cb_docker_needed
+@pytest.mark.local
+def test_codebeamer_api_in_CI(docker_service):
+
+
+    tracker_id = create_cb_sys_req("testname", "this is a test description")
+
+    status = 200
+
+    auth = HTTPBasicAuth("bond", "007")
 
     if tracker_id:
         response = requests.get("".join([url + "/trackers/", str(tracker_id), "/items"]), auth=auth)
