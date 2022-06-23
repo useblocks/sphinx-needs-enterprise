@@ -177,8 +177,9 @@ def test_codebeamer_api_in_ci():
             raise NameError
 
     except NameError:
-        pytest.fail(f"Please add pytest marker filtering to your Configuration. "
-                    f"For local testing use 'pytest -m local'")
+        pytest.fail(
+            "Please add pytest marker filtering to your Configuration. " "For local testing use 'pytest -m local'"
+        )
 
     tracker_id = create_cb_sys_req("testname", "this is a test description")
 
@@ -197,8 +198,7 @@ def test_codebeamer_api_in_ci():
 
 @pytest.mark.cb_docker_needed
 @pytest.mark.local
-def test_codebeamer_api_in_CI(docker_service):
-
+def test_codebeamer_api(docker_service):
 
     tracker_id = create_cb_sys_req("testname", "this is a test description")
 
