@@ -35,9 +35,5 @@ jobs:
       - name: Final package list
         run: pip freeze
 
-      - name: test env var
-        run: python -c "import os;print(os.getenv('CI'))"
-
-
       - name: GitHub Action for pytest
-        run: python -m pytest ./tests/docker_cb_api_test.py -m cb_docker_needed
+        run: python -m pytest ./tests/docker_cb_api_test.py -m "ci_test and cb_docker_needed"

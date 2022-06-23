@@ -10,11 +10,11 @@ lint:
 
 .PHONY: test
 test:
-	poetry run pytest -v tests -m regular
+	poetry run pytest -v tests -m "ci_test and not cb_docker_needed"
 
-.PHONY: test
+.PHONY: test-local
 test-local:
-	poetry run pytest -v tests
+	poetry run pytest -v tests -m local
 
 .PHONY: test-matrix
 test-matrix:
