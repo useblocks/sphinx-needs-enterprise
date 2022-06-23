@@ -167,6 +167,7 @@ def docker_service(docker_ip, docker_services):
 
 
 @pytest.mark.cb_docker_needed
+@pytest.mark.external_resource
 @pytest.mark.ci_test
 def test_codebeamer_api_in_ci():
 
@@ -197,6 +198,7 @@ def test_codebeamer_api_in_ci():
 
 
 @pytest.mark.cb_docker_needed
+@pytest.mark.external_resource
 @pytest.mark.local
 def test_codebeamer_api(docker_service):
 
