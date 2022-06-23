@@ -23,38 +23,8 @@ create_project_json = {
         }
     ],
 }
-"""
-# x = requests.post(url + "/project", json=myobj, auth=auth)
-y = requests.get(url + "/projects", auth=auth)
-time.sleep(1)
-z = requests.get(url + "/projects/3/trackers", auth=auth)
-time.sleep(1)
-a = requests.get(url + "/trackers/3873/items", auth=auth)
-
-# print(x.text)
-print(y.json())
-print(y.status_code)
-print(z.json())
-print(a.json())
-# b = requests.post(url + "/trackers/3873/items", json=create_project_json, auth=auth)
-# c = requests.get(url + "/trackers/3873/fields", auth=auth)
-# print(b.json())
-
-# delete_project = requests.delete("".join([url_v1, "/project/", str(5)]), auth=auth)
-# print(delete_project.status_code)
-# print(delete_project.text)
-"""
-
-
-# TODO fix url selection, replace with docker_ip?
-
-# TODO assert x in api call
 
 # TODO test sne import export features
-
-# TODO filter pytest for tags, generate jira test tags, generate cb test tags
-
-# TODO non docker tests in seperate workflow, remove API test with docker from here with tags
 
 
 def create_cb_project(project_name):
@@ -63,14 +33,16 @@ def create_cb_project(project_name):
     :param project_name: name as string
     :return: id of created project
     """
+
     # this uses v1 API
+    # more info here https://codebeamer.com/cb/wiki/117612
+
     create_project_json = {
         "name": project_name,
         "description": "A sample project to test and demonstrate the __REST API__",
         "category": "Test",
     }
 
-    # current_projects = requests.get(url + "/projects", auth=auth).json()
     current_projects = requests.get(url + "/projects", auth=auth).json()
 
     current_id = -1
@@ -80,12 +52,14 @@ def create_cb_project(project_name):
             current_id = p["id"]
 
     if current_id != -1:
-        # create a clean start
+        # create a clean start by deleting old project
         delete_project = requests.delete("".join([url_v1, "/project/", str(current_id)]), auth=auth)
 
+        # break if deletion did not work
         if delete_project.status_code != 200:
             return False
 
+    # get project info
     response = requests.post(url_v1 + "/project", json=create_project_json, auth=auth)
 
     if response.status_code != 201:
@@ -96,8 +70,18 @@ def create_cb_project(project_name):
 
 
 def create_cb_sys_req(name, description):
-    # System Requirement Specifications < API name fo tracker
+    """
+
+    @param name: system requirement name
+    @param description: req description
+    @return: tracker id under which the sys req is saved
+    """
+
+    # create project
     project_id = create_cb_project("test_project")
+
+    # this uses v3 API
+    # more info: https://codebeamer.com/cb/wiki/11375767
 
     if not project_id:
         raise ConnectionError
@@ -134,6 +118,9 @@ def create_cb_sys_req(name, description):
 
             assert response.status_code == 200
 
+        else:
+            pytest.fail(f"could not access codebeamer API with tracker_id: {tracker_id}")
+
         return tracker_id
 
     else:
@@ -141,6 +128,11 @@ def create_cb_sys_req(name, description):
 
 
 def is_responsive(url):
+    """
+    waits until and url returns status code 200
+    @param url: url
+    @return: False if url not reachable
+    """
     try:
         response = requests.get(url)
         print("docker response: " + str(response.status_code))
@@ -151,13 +143,13 @@ def is_responsive(url):
 
 
 @pytest.fixture(scope="session")
-def docker_compose_file(pytestconfig):
-    return os.path.join(str(pytestconfig.rootdir), "tests/docker_files/cb_docker-compose.yml")
-
-
-@pytest.fixture(scope="session")
 def docker_service(docker_ip, docker_services):
-
+    """
+    pytest-docker service
+    @param docker_ip:
+    @param docker_services:
+    @return:
+    """
     url = f"http://{docker_ip}:{8080}"
 
     time.sleep(30)
@@ -170,7 +162,12 @@ def docker_service(docker_ip, docker_services):
 @pytest.mark.external_resource
 @pytest.mark.ci_test
 def test_codebeamer_api_in_ci():
-
+    """
+    testcase for GitHub CI. This requires a running cb docker container.
+    assumes codebeamer docker instance is running on 127.0.0.1:8080
+    @return:
+    """
+    # detect if we are in GitHub CI environment, fail test if we are not. This should only be executed on GH
     try:
         in_gh_ci = os.getenv("CI")
 
@@ -182,6 +179,7 @@ def test_codebeamer_api_in_ci():
             "Please add pytest marker filtering to your Configuration. " "For local testing use 'pytest -m local'"
         )
 
+    # get tracker id of new sys req tracker
     tracker_id = create_cb_sys_req("testname", "this is a test description")
 
     status = 200
@@ -189,29 +187,50 @@ def test_codebeamer_api_in_ci():
     auth = HTTPBasicAuth("bond", "007")
 
     if tracker_id:
+        # access newly created requirement, check if API call successful
         response = requests.get("".join([url + "/trackers/", str(tracker_id), "/items"]), auth=auth)
 
         assert response.status_code == status
 
     else:
-        return False
+        pytest.fail(f"could not access codebeamer API with tracker_id: {tracker_id}")
+
+
+@pytest.fixture(scope="session")
+def docker_compose_file(pytestconfig):
+    """
+    specifies custom docker-compose file for pytest-docker
+    @param pytestconfig:
+    @return: path to file
+    """
+    return os.path.join(str(pytestconfig.rootdir), "tests/docker_files/cb_docker-compose.yml")
 
 
 @pytest.mark.cb_docker_needed
 @pytest.mark.external_resource
 @pytest.mark.local
 def test_codebeamer_api(docker_service):
+    """
+    testcase for local running, this spins up a docker container from a file specified in docker_compose_file
+    if not previously run may take some time to download the containers.
 
+    @param docker_service: pytest-docker fixture
+    @return:
+    """
+
+    # get tracker id of new sys req tracker
     tracker_id = create_cb_sys_req("testname", "this is a test description")
 
     status = 200
 
+    # cb API default user
     auth = HTTPBasicAuth("bond", "007")
 
     if tracker_id:
+        # access newly created requirement, check if API call successful
         response = requests.get("".join([url + "/trackers/", str(tracker_id), "/items"]), auth=auth)
 
         assert response.status_code == status
 
     else:
-        return False
+        pytest.fail(f"could not access codebeamer API with tracker_id: {tracker_id}")
