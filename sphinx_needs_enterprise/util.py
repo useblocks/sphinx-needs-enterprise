@@ -2,6 +2,7 @@ import logging
 import operator
 import os
 from functools import reduce  # forward compatibility for Python 3
+from typing import Dict, List
 
 from jinja2 import Template
 from openpyxl import load_workbook
@@ -43,7 +44,7 @@ def get_excel_data(
     column_header = list(
         ws.iter_rows(min_col=start_col, max_col=end_col, min_row=header_row, max_row=header_row, values_only=True)
     )[0]
-    finalised_data: list[dict] = []
+    finalised_data: List[Dict] = []
     for row in data:
         output = {str(key): value for key, value in zip(column_header, row)}
         finalised_data.append(output)
@@ -53,7 +54,7 @@ def get_excel_data(
     return finalised_data
 
 
-def jinja_parse(context: dict, jinja_string: str) -> str:
+def jinja_parse(context: Dict, jinja_string: str) -> str:
     """
     Function to parse mapping options set to a string containing jinja template format.
 
@@ -74,22 +75,22 @@ def jinja_parse(context: dict, jinja_string: str) -> str:
     return content
 
 
-def filter_excel_data(context: list[dict], filter_string: str) -> list[dict]:
+def filter_excel_data(context: List[Dict], filter_string: str) -> List[Dict]:
     """
     Function to filter Excel service data and return the filtered data.
 
     :param context: Data imported from the Excel service
-    :type: list[dict]
+    :type: List[Dict]
     :param filter_string: A string containing Python statements
     :type: str
     :return: Filtered data
-    :rtype: list[dict]
+    :rtype: List[Dict]
 
     """
     data = context
     query = filter_string
 
-    filtered_data: list[dict] = []
+    filtered_data: List[Dict] = []
     for row in data:
         try:
             if eval(query, {}, row) is True:
