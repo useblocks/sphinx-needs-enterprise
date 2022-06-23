@@ -16,6 +16,10 @@ test:
 test-local:
 	poetry run pytest -v tests -m local
 
+.PHONY: test-no-ext
+test-no-ext:
+	poetry run pytest -v tests -m "local and not external_resource"
+
 .PHONY: test-matrix
 test-matrix:
 	nox
