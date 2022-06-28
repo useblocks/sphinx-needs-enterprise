@@ -1,10 +1,11 @@
+import json
 import os
 import time
 
 import pytest
 import requests
 from requests.auth import HTTPBasicAuth
-from tests.data_providers import cb_data_provider
+from tests.data_providers.cb_data_provider import CbDataProvider
 
 url = "http://127.0.0.1:8080/rest/v3"
 url_v1 = "http://127.0.0.1:8080/rest"
@@ -26,106 +27,6 @@ create_project_json = {
 }
 
 # TODO test sne import export features
-
-
-def create_cb_project(project_name):
-    """
-
-    :param project_name: name as string
-    :return: id of created project
-    """
-
-    # this uses v1 API
-    # more info here https://codebeamer.com/cb/wiki/117612
-
-    create_project_json = {
-        "name": project_name,
-        "description": "A sample project to test and demonstrate the __REST API__",
-        "category": "Test",
-    }
-
-    current_projects = requests.get(url + "/projects", auth=auth).json()
-
-    current_id = -1
-
-    for p in current_projects:
-        if p["name"] == project_name:
-            current_id = p["id"]
-
-    if current_id != -1:
-        # create a clean start by deleting old project
-        delete_project = requests.delete("".join([url_v1, "/project/", str(current_id)]), auth=auth)
-
-        # break if deletion did not work
-        if delete_project.status_code != 200:
-            return False
-
-    # get project info
-    response = requests.post(url_v1 + "/project", json=create_project_json, auth=auth)
-
-    if response.status_code != 201:
-        return False
-
-    else:
-        return response.json()["id"]
-
-
-def create_cb_sys_req(name, description):
-    """
-
-    @param name: system requirement name
-    @param description: req description
-    @return: tracker id under which the sys req is saved
-    """
-
-    # create project
-    project_id = create_cb_project("test_project")
-
-    # this uses v3 API
-    # more info: https://codebeamer.com/cb/wiki/11375767
-
-    if not project_id:
-        raise ConnectionError
-
-    trackers = requests.get("".join([url, "/projects/", str(project_id), "/trackers"]), auth=auth).json()
-
-    if trackers:
-
-        tracker_id = -1
-
-        for x in trackers:
-            # find correct tracker
-            if x["name"] == "System Requirement Specifications":
-                tracker_id = x["id"]
-                break
-
-        create_trackeritem_json = {
-            "name": name,
-            "storyPoints": 5,
-            "description": description,
-            "subjects": [
-                {
-                    "id": 1007,
-                    "name": "As User, I want to have a software in my car, which is easy to use",
-                    "type": "TrackerItemReference",
-                }
-            ],
-        }
-
-        if tracker_id != -1:
-            response = requests.post(
-                "".join([url, "/trackers/", str(tracker_id), "/items"]), auth=auth, json=create_trackeritem_json
-            )
-
-            assert response.status_code == 200
-
-        else:
-            pytest.fail(f"could not access codebeamer API with tracker_id: {tracker_id}")
-
-        return tracker_id
-
-    else:
-        raise ConnectionError
 
 
 def is_responsive(url):
@@ -180,11 +81,11 @@ def test_codebeamer_api_in_ci():
             "Please add pytest marker filtering to your Configuration. " "For local testing use 'pytest -m local'"
         )
 
-    data_provider = cb_data_provider.cb_data_provider("./cb_input.json", "http://127.0.0.1:8080")
+    data_provider = CbDataProvider("./cb_input.json", "http://127.0.0.1:8080")
     # get tracker id of new sys req tracker
     project_id = data_provider.create_cb_project("testproject", "project description")
 
-    tracker_id = data_provider.create_cb_sys_req(project_id, "testname", "this is a sysreq description")
+    tracker_id = data_provider.create_cb_item(project_id, "testname", "this is a sysreq description")
 
     status = 200
 
@@ -222,11 +123,11 @@ def test_codebeamer_api(docker_service):
     @return:
     """
 
-    data_provider = cb_data_provider.cb_data_provider("./cb_input.json", "http://127.0.0.1:8080")
+    data_provider = CbDataProvider("./cb_input.json", "http://127.0.0.1:8080")
     # get tracker id of new sys req tracker
     project_id = data_provider.create_cb_project("testproject", "project description")
 
-    tracker_id = data_provider.create_cb_sys_req(project_id, "testname", "this is a sysreq description")
+    tracker_id = data_provider.create_cb_item(project_id, "testname", "this is a sysreq description")
 
     status = 200
 
@@ -241,3 +142,26 @@ def test_codebeamer_api(docker_service):
 
     else:
         pytest.fail(f"could not access codebeamer API with tracker_id: {tracker_id}")
+
+
+@pytest.mark.cb_docker_needed
+@pytest.mark.external_resource
+@pytest.mark.local
+def test_cb_input(docker_service):
+    data_provider = CbDataProvider("./cb_input.json", "http://127.0.0.1:8080")
+
+    input_filepath = data_provider.generate_input()
+
+    data_structure_from_input = data_provider.generate_data_from_input(input_filepath)
+
+    with open(input_filepath, "r") as infile:
+
+        json_input = json.loads(infile.read())
+
+        project_count = 0
+
+        for x in json_input["projects"]:
+            if len(x) > 0:
+                project_count += 1
+
+        assert len(data_structure_from_input) == project_count

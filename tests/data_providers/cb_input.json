@@ -1,1 +1,54 @@
-# find structure for input data
+{
+  "projects": {
+    "testproject": {
+      "project_description": "project description test",
+      "Contacts": [],
+      "Releases": [],
+      "User": [],
+      "Stories": [],
+      "Risks": [],
+      "Teams": [],
+      "Customer Requirement Specifications": [],
+      "System Requirement Specifications": [
+        {
+          "name": "test_sysreq",
+          "description": "sysreq test descr"
+        }
+      ],
+      "Change": [],
+      "Requests": [],
+      "Bugs": [],
+      "Tasks": [],
+      "Test Cases": [],
+      "Test Sets": [],
+      "Test Configurations": [],
+      "Test Runs": [],
+      "Timekeeping": []
+    },
+    "testproject_2": {
+      "project_description": "project description test",
+      "Contacts": [],
+      "Releases": [],
+      "User": [],
+      "Stories": [],
+      "Risks": [],
+      "Teams": [],
+      "Customer Requirement Specifications": [],
+      "System Requirement Specifications": [],
+      "Change": [],
+      "Requests": [],
+      "Bugs": [
+        {
+          "name": "test_bug",
+          "description": "bug description test 1234"
+        }
+      ],
+      "Tasks": [],
+      "Test Cases": [],
+      "Test Sets": [],
+      "Test Configurations": [],
+      "Test Runs": [],
+      "Timekeeping": []
+    }
+  }
+}

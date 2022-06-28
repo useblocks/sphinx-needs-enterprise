@@ -1,8 +1,11 @@
+import json
+import os.path
+
 import requests
 from requests.auth import HTTPBasicAuth
 
 
-class cb_data_provider():
+class CbDataProvider:
 
     def __init__(self, input_path, cb_ip_address):
 
@@ -16,6 +19,84 @@ class cb_data_provider():
     def get_http_basic_auth():
         # default user + pw
         return HTTPBasicAuth("bond", "007")
+
+    def generate_input(self):
+        """
+
+        Tracker names in codebeamer
+
+        Contacts
+        Releases
+        User Stories
+        Risks
+        Teams
+        Customer Requirement Specifications
+        System Requirement Specifications
+        Change Requests
+        Bugs
+        Tasks
+        Test Cases
+        Test Sets
+        Test Configurations
+        Test Runs
+        Timekeeping
+
+        @return:
+        """
+
+        input_json = {"projects": {
+            "testproject": {
+
+                "project_description": "project description test",
+                "Contacts": [],
+                "Releases": [],
+                "User": [],
+                "Stories": [],
+                "Risks": [],
+                "Teams": [],
+                "Customer Requirement Specifications": [],
+                "System Requirement Specifications": [{"name": "test_sysreq", "description": "sysreq test descr"}],
+                "Change": [],
+                "Requests": [],
+                "Bugs": [],
+                "Tasks": [],
+                "Test Cases": [],
+                "Test Sets": [],
+                "Test Configurations": [],
+                "Test Runs": [],
+                "Timekeeping": [],
+
+            },
+
+            "testproject_2": {
+
+                "project_description": "project description test",
+                "Contacts": [],
+                "Releases": [],
+                "User": [],
+                "Stories": [],
+                "Risks": [],
+                "Teams": [],
+                "Customer Requirement Specifications": [],
+                "System Requirement Specifications": [],
+                "Change": [],
+                "Requests": [],
+                "Bugs": [{"name": "test_bug", "description": "bug description test 1234"}],
+                "Tasks": [],
+                "Test Cases": [],
+                "Test Sets": [],
+                "Test Configurations": [],
+                "Test Runs": [],
+                "Timekeeping": [],
+
+            }
+        }
+        }
+
+        with open("./data_providers/cb_input.json", "w+") as cb_input:
+            cb_input.write(json.dumps(input_json, indent=2))
+
+            return os.path.abspath("./data_providers/cb_input.json")
 
     def delete_all_projects(self):
 
@@ -89,11 +170,11 @@ class cb_data_provider():
         else:
             return response.json()["id"]
 
-    def create_cb_sys_req(self, project_id, name, description):
+    def create_cb_item(self, project_id, tracker_name, item_name, item_description, item_id):
         """
 
         @param project_id: project id to append to
-        @param name: system requirement name
+        @param tracker_name: tracker name
         @param description: req description
         @return: tracker id under which the sys req is saved
         """
@@ -117,17 +198,17 @@ class cb_data_provider():
 
             for x in trackers:
                 # find correct tracker
-                if x["name"] == "System Requirement Specifications":
+                if x["name"] == tracker_name:
                     tracker_id = x["id"]
                     break
 
             create_trackeritem_json = {
-                "name": name,
+                "name": item_name,
                 "storyPoints": 5,
-                "description": description,
+                "description": item_description,
                 "subjects": [
                     {
-                        "id": 1007,
+                        "id": item_id,
                         "name": "As User, I want to have a software in my car, which is easy to use",
                         "type": "TrackerItemReference",
                     }
@@ -150,3 +231,44 @@ class cb_data_provider():
 
         else:
             raise ConnectionError
+
+    def generate_data_from_input(self, input_filepath):
+
+        with open(input_filepath) as input_file:
+            json_input = json.loads(input_file.read())
+
+            data_structure = {}
+
+            item_id = 1234
+
+            for project in json_input["projects"].keys():
+
+                data = json_input["projects"][project]
+
+                data_structure[project] = {}
+                data_structure[project]["id"] = None
+
+                data_structure[project]["items"] = {}
+                data_structure[project]["items"]["id"] = None
+
+                project_id = self.create_cb_project(project, data["project_description"])
+
+                if project_id:
+                    data_structure[project]["id"] = project_id
+#  "System Requirement Specifications": [{"name": "test_sysreq", "description": "sysreq test descr"}],
+
+                    for tracker_name, items in data.items():
+                        if isinstance(items, str):
+                            continue
+
+                        for item in items:
+                            response_tracker_id = self.create_cb_item(project_id, tracker_name, item["name"], item["description"], item_id)
+
+                            if response_tracker_id:
+                                item_id += 1
+                                data_structure[project]["items"]["id"] = response_tracker_id
+
+                            else:
+                                data_structure["projects"][project]["items"]["id"] = False
+
+        return data_structure
