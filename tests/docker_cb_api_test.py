@@ -7,6 +7,8 @@ import requests
 from requests.auth import HTTPBasicAuth
 from tests.data_providers.cb_data_provider import CbDataProvider
 
+from pathlib import Path
+
 url = "http://127.0.0.1:8080/rest/v3"
 url_v1 = "http://127.0.0.1:8080/rest"
 
@@ -158,6 +160,7 @@ def test_cb_input(docker_service):
 
     with open(input_filepath, "r") as infile:
 
+        # get wanted structure
         json_input = json.loads(infile.read())
 
         project_count = 0
@@ -167,3 +170,13 @@ def test_cb_input(docker_service):
                 project_count += 1
 
         assert len(data_structure_from_input) == project_count
+
+
+@pytest.mark.parametrize("test_app", [{"buildername": "html", "srcdir": "doc_test/cb_directives_test"}], indirect=True)
+def test_cb_needservice(test_app):
+
+    app = test_app
+    app.build()
+
+    srcdir = Path(app.srcdir)
+    out_dir = srcdir / "_build"

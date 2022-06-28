@@ -23,6 +23,8 @@ class CbDataProvider:
     def generate_input(self):
         """
 
+        generates cb_input.json
+
         Tracker names in codebeamer
 
         Contacts
@@ -41,7 +43,7 @@ class CbDataProvider:
         Test Runs
         Timekeeping
 
-        @return:
+        @return: abs path where to find the json file
         """
 
         input_json = {"projects": {
@@ -131,7 +133,7 @@ class CbDataProvider:
 
         :param project_name: name as string
         @param description: project description
-        :return: id of created project
+        :return: id of created project or False if something has failed
         """
 
         # this uses v1 API
@@ -215,7 +217,10 @@ class CbDataProvider:
                 ],
             }
 
+            # continue if correct tracker is present
             if tracker_id != -1:
+
+                # create item in tracker
                 response = requests.post(
                     "".join([url, "/trackers/", str(tracker_id), "/items"]), auth=auth, json=create_trackeritem_json
                 )
@@ -233,8 +238,13 @@ class CbDataProvider:
             raise ConnectionError
 
     def generate_data_from_input(self, input_filepath):
+        """
 
+        @param input_filepath: abs filepath to an inpu json file. see generate_input()
+        @return: dict showing the data structure that was created
+        """
         with open(input_filepath) as input_file:
+
             json_input = json.loads(input_file.read())
 
             data_structure = {}
@@ -251,17 +261,19 @@ class CbDataProvider:
                 data_structure[project]["items"] = {}
                 data_structure[project]["items"]["id"] = None
 
+                # create each project
                 project_id = self.create_cb_project(project, data["project_description"])
 
                 if project_id:
                     data_structure[project]["id"] = project_id
-#  "System Requirement Specifications": [{"name": "test_sysreq", "description": "sysreq test descr"}],
 
+                    # create items in correct tracker
                     for tracker_name, items in data.items():
                         if isinstance(items, str):
                             continue
 
                         for item in items:
+
                             response_tracker_id = self.create_cb_item(project_id, tracker_name, item["name"], item["description"], item_id)
 
                             if response_tracker_id:
