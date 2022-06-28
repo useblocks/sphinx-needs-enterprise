@@ -85,7 +85,8 @@ def test_codebeamer_api_in_ci():
     # get tracker id of new sys req tracker
     project_id = data_provider.create_cb_project("testproject", "project description")
 
-    tracker_id = data_provider.create_cb_item(project_id, "testname", "this is a sysreq description")
+    tracker_id = data_provider.create_cb_item(project_id, "System Requirement Specifications", "testname",
+                                              "this is a sysreq description", 4321)
 
     status = 200
 
@@ -127,7 +128,8 @@ def test_codebeamer_api(docker_service):
     # get tracker id of new sys req tracker
     project_id = data_provider.create_cb_project("testproject", "project description")
 
-    tracker_id = data_provider.create_cb_item(project_id, "testname", "this is a sysreq description")
+    tracker_id = data_provider.create_cb_item(project_id, "System Requirement Specifications",
+                                              "testname", "this is a sysreq description", 4321)
 
     status = 200
 
