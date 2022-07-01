@@ -8,6 +8,7 @@ list:
 lint:
 	poetry run flake8 ${SRC_FILES}
 
+# test requiring external resources such as docker containers are tested separately
 .PHONY: test
 test:
 	poetry run pytest -v tests -m "ci_test and not cb_docker_needed"

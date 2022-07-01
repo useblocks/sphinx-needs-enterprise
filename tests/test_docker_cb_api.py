@@ -172,10 +172,10 @@ def test_cb_input(docker_service):
         assert len(data_structure_from_input) == project_count
 
 
-@pytest.mark.parametrize("test_app", [{"buildername": "html", "srcdir": "roots/test-cb-directive"}], indirect=True)
-def test_cb_needservice(test_app):
-    app = test_app
+@pytest.mark.cb_docker_needed
+@pytest.mark.external_resource
+@pytest.mark.local
+@pytest.mark.sphinx(testroot="cb-directive")
+def test_codebeamer(app):
     app.build()
-
-    srcdir = Path(app.srcdir)
-    out_dir = srcdir / "_build"
+    pass
