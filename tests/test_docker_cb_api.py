@@ -172,9 +172,8 @@ def test_cb_input(docker_service):
         assert len(data_structure_from_input) == project_count
 
 
-@pytest.mark.parametrize("test_app", [{"buildername": "html", "srcdir": "doc_test/cb_directives_test"}], indirect=True)
+@pytest.mark.parametrize("test_app", [{"buildername": "html", "srcdir": "roots/test-cb-directive"}], indirect=True)
 def test_cb_needservice(test_app):
-
     app = test_app
     app.build()
 

@@ -23,7 +23,7 @@ def test_app(make_app, request):
     builder_params = request.param
 
     # copy plantuml.jar to current test temdir
-    plantuml_jar_file = path(__file__).parent.abspath() / "doc_test/utils"
+    plantuml_jar_file = path(__file__).parent.abspath() / "roots/test-cb-directive/utils"
     shutil.copytree(plantuml_jar_file, sphinx_test_tempdir / "utils")
 
     # copy test srcdir to test temporary directory sphinx_test_tempdir
