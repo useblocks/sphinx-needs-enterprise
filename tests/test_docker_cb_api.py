@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 import time
 
 import pytest
@@ -176,11 +177,13 @@ def test_cb_input(docker_service):
 @pytest.mark.external_resource
 @pytest.mark.local
 @pytest.mark.sphinx(testroot="cb-directive")
-def test_codebeamer(app, docker_service):
+def test_codebeamer_needservice(app, docker_service):
     data_provider = CbDataProvider("./cb_input.json", "http://127.0.0.1:8080")
     input_filepath = data_provider.generate_input()
 
     data_structure_from_input = data_provider.generate_data_from_input(input_filepath)
+
+    # subprocess.run(["../.venv/bin/sne", "export", "-c" "../docs/conf.py", "codebeamer_config", "-j", "needs.json"], capture_output=True)
 
     app.build()
 
@@ -195,3 +198,35 @@ def test_codebeamer(app, docker_service):
 
     assert "cb_import" in html
 
+
+@pytest.mark.cb_docker_needed
+@pytest.mark.external_resource
+@pytest.mark.ci_test
+@pytest.mark.sphinx(testroot="cb-directive")
+def test_ci_codebeamer_needservice(app):
+    data_provider = CbDataProvider("./cb_input.json", "http://127.0.0.1:8080")
+    input_filepath = data_provider.generate_input()
+
+    data_structure_from_input = data_provider.generate_data_from_input(input_filepath)
+
+    # subprocess.run(["../.venv/bin/sne", "export", "-c" "../docs/conf.py", "codebeamer_config", "-j", "needs.json"], capture_output=True)
+
+    app.build()
+
+    srcdir = Path(app.srcdir)
+    out_dir = srcdir / "_build"
+
+    # test if constraints_results / constraints_passed is properly set
+    html = Path(out_dir, "index.html").read_text()
+
+    assert "test_sysreq" in html
+    assert "bug description test 1234" in html
+
+    assert "cb_import" in html
+
+
+@pytest.mark.external_resource
+@pytest.mark.ci_test
+def empty_test():
+    
+    assert 1 == 1
