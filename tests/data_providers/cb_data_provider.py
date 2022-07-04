@@ -1,5 +1,6 @@
 import json
 import os.path
+import time
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -147,8 +148,8 @@ class CbDataProvider:
 
         auth = self.get_http_basic_auth()
 
-        current_projects = requests.get(self.v1_api + "/projects", auth=auth).json()
-
+        current_projects_response = requests.get(self.v1_api + "/projects", auth=auth)
+        current_projects = current_projects_response.json()
         current_id = -1
 
         for p in current_projects:
@@ -282,5 +283,10 @@ class CbDataProvider:
 
                             else:
                                 data_structure["projects"][project]["items"]["id"] = False
+
+                            time.sleep(1)
+
+                # getting 429 Too many requests Error
+                time.sleep(1)
 
         return data_structure

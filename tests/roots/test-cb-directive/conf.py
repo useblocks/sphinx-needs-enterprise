@@ -42,7 +42,7 @@ needs_services = {
         "user": "bond",
         "password": "007",
         "prefix": "CB_IMPORT_",
-        "query": "project.name IN ('my_project', 'another_project') and type = 'Requirement' and status = 'Draft'",
+        "query": "project.name IN ('testproject', 'testproject_2') and type = 'Requirement'",
         "mappings": {
             "type": "spec",
             "tags": "cb_import, example",
