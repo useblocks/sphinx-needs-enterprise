@@ -1,5 +1,6 @@
 import json
 import os
+import pathlib
 import time
 from pathlib import Path
 
@@ -179,7 +180,10 @@ def test_cb_input(docker_service):
 @pytest.mark.local
 @pytest.mark.sphinx(testroot="cb-directive")
 def test_codebeamer_needservice(app, docker_service):
-    data_provider = CbDataProvider("./data_providers/cb_input.json", "http://127.0.0.1:8080")
+
+    file_abs_path = pathlib.Path(__file__).parent.absolute()
+
+    data_provider = CbDataProvider(file_abs_path.joinpath("./data_providers/cb_input.json"), "http://127.0.0.1:8080")
     input_filepath = data_provider.generate_input()
 
     data_provider.generate_data_from_input(input_filepath)
@@ -203,7 +207,10 @@ def test_codebeamer_needservice(app, docker_service):
 @pytest.mark.ci_test
 @pytest.mark.sphinx(testroot="cb-directive")
 def test_ci_codebeamer_needservice(app):
-    data_provider = CbDataProvider("./data_providers/cb_input.json", "http://127.0.0.1:8080")
+
+    file_abs_path = pathlib.Path(__file__).parent.absolute()
+
+    data_provider = CbDataProvider(file_abs_path.joinpath("./data_providers/cb_input.json"), "http://127.0.0.1:8080")
     input_filepath = data_provider.generate_input()
 
     data_provider.generate_data_from_input(input_filepath)
