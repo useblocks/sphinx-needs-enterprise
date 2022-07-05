@@ -10,9 +10,9 @@ repository = "http://github.com/useblocks/sphinx-needs-enterprise"
 documentation = "https://useblocks.com/sphinx-needs-enterprise"
 
 [tool.poetry.dependencies]
-python = ">=3.6.2,<4.0"
+python = ">3.7,<4.0"
 sphinx = ">=4.2"
-sphinxcontrib-needs = ">=0.7.4"
+sphinxcontrib-needs = ">=0.7.9,<1.0"
 licensing = ">=0.31"
 requests = ">=2"
 jinja2 = ">=2"
