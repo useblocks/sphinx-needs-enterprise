@@ -234,3 +234,8 @@ def test_codebeamer_api(docker_service):
 
     else:
         pytest.fail(f"could not access codebeamer API with tracker_id: {tracker_id}")
+
+
+@pytest.mark.ci_test
+def empty_test():
+    assert 1 == 1
