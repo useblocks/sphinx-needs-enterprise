@@ -237,5 +237,5 @@ def test_codebeamer_api(docker_service):
 
 
 @pytest.mark.ci_test
-def empty_test():
+def test_empty():
     assert 1 == 1
