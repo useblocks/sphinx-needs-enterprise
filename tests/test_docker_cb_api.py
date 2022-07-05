@@ -1,6 +1,5 @@
 import json
 import os
-import subprocess
 import time
 from pathlib import Path
 
@@ -183,9 +182,7 @@ def test_codebeamer_needservice(app, docker_service):
     data_provider = CbDataProvider("./data_providers/cb_input.json", "http://127.0.0.1:8080")
     input_filepath = data_provider.generate_input()
 
-    data_structure_from_input = data_provider.generate_data_from_input(input_filepath)
-
-    # subprocess.run(["../.venv/bin/sne", "export", "-c" "../docs/conf.py", "codebeamer_config", "-j", "needs.json"], capture_output=True)
+    data_provider.generate_data_from_input(input_filepath)
 
     app.build()
 
@@ -209,9 +206,7 @@ def test_ci_codebeamer_needservice(app):
     data_provider = CbDataProvider("./data_providers/cb_input.json", "http://127.0.0.1:8080")
     input_filepath = data_provider.generate_input()
 
-    data_structure_from_input = data_provider.generate_data_from_input(input_filepath)
-
-    # subprocess.run(["../.venv/bin/sne", "export", "-c" "../docs/conf.py", "codebeamer_config", "-j", "needs.json"], capture_output=True)
+    data_provider.generate_data_from_input(input_filepath)
 
     app.build()
 
