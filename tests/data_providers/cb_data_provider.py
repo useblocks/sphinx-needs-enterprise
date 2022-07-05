@@ -7,7 +7,6 @@ from requests.auth import HTTPBasicAuth
 
 
 class CbDataProvider:
-
     def __init__(self, input_path, cb_ip_address):
 
         self.file = input_path
@@ -47,53 +46,49 @@ class CbDataProvider:
         @return: abs path where to find the json file
         """
 
-        input_json = {"projects": {
-            "testproject": {
-
-                "project_description": "project description test",
-                "Contacts": [],
-                "Releases": [],
-                "User": [],
-                "Stories": [],
-                "Risks": [],
-                "Teams": [],
-                "Customer Requirement Specifications": [],
-                "System Requirement Specifications": [{"name": "test_sysreq", "description": "sysreq test descr"}],
-                "Change": [],
-                "Requests": [],
-                "Bugs": [],
-                "Tasks": [],
-                "Test Cases": [],
-                "Test Sets": [],
-                "Test Configurations": [],
-                "Test Runs": [],
-                "Timekeeping": [],
-
-            },
-
-            "testproject_2": {
-
-                "project_description": "project description test",
-                "Contacts": [],
-                "Releases": [],
-                "User": [],
-                "Stories": [],
-                "Risks": [],
-                "Teams": [],
-                "Customer Requirement Specifications": [],
-                "System Requirement Specifications": [],
-                "Change": [],
-                "Requests": [],
-                "Bugs": [{"name": "test_bug", "description": "bug description test 1234"}],
-                "Tasks": [],
-                "Test Cases": [],
-                "Test Sets": [],
-                "Test Configurations": [],
-                "Test Runs": [],
-                "Timekeeping": [],
-
+        input_json = {
+            "projects": {
+                "testproject": {
+                    "project_description": "project description test",
+                    "Contacts": [],
+                    "Releases": [],
+                    "User": [],
+                    "Stories": [],
+                    "Risks": [],
+                    "Teams": [],
+                    "Customer Requirement Specifications": [],
+                    "System Requirement Specifications": [{"name": "test_sysreq", "description": "sysreq test descr"}],
+                    "Change": [],
+                    "Requests": [],
+                    "Bugs": [],
+                    "Tasks": [],
+                    "Test Cases": [],
+                    "Test Sets": [],
+                    "Test Configurations": [],
+                    "Test Runs": [],
+                    "Timekeeping": [],
+                },
+                "testproject_2": {
+                    "project_description": "project description test",
+                    "Contacts": [],
+                    "Releases": [],
+                    "User": [],
+                    "Stories": [],
+                    "Risks": [],
+                    "Teams": [],
+                    "Customer Requirement Specifications": [],
+                    "System Requirement Specifications": [],
+                    "Change": [],
+                    "Requests": [],
+                    "Bugs": [{"name": "test_bug", "description": "bug description test 1234"}],
+                    "Tasks": [],
+                    "Test Cases": [],
+                    "Test Sets": [],
+                    "Test Configurations": [],
+                    "Test Runs": [],
+                    "Timekeeping": [],
+                },
             }
-        }
         }
 
         with open(self.file, "w+") as cb_input:
@@ -275,7 +270,9 @@ class CbDataProvider:
 
                         for item in items:
 
-                            response_tracker_id = self.create_cb_item(project_id, tracker_name, item["name"], item["description"], item_id)
+                            response_tracker_id = self.create_cb_item(
+                                project_id, tracker_name, item["name"], item["description"], item_id
+                            )
 
                             if response_tracker_id:
                                 item_id += 1

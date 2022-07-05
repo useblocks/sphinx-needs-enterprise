@@ -2,13 +2,13 @@ import json
 import os
 import subprocess
 import time
+from pathlib import Path
 
 import pytest
 import requests
 from requests.auth import HTTPBasicAuth
-from tests.data_providers.cb_data_provider import CbDataProvider
 
-from pathlib import Path
+from tests.data_providers.cb_data_provider import CbDataProvider
 
 url = "http://127.0.0.1:8080/rest/v3"
 url_v1 = "http://127.0.0.1:8080/rest"
@@ -88,8 +88,9 @@ def test_codebeamer_api_in_ci():
     # get tracker id of new sys req tracker
     project_id = data_provider.create_cb_project("testproject", "project description")
 
-    tracker_id = data_provider.create_cb_item(project_id, "System Requirement Specifications", "testname",
-                                              "this is a sysreq description", 4321)
+    tracker_id = data_provider.create_cb_item(
+        project_id, "System Requirement Specifications", "testname", "this is a sysreq description", 4321
+    )
 
     status = 200
 
@@ -131,8 +132,9 @@ def test_codebeamer_api(docker_service):
     # get tracker id of new sys req tracker
     project_id = data_provider.create_cb_project("testproject", "project description")
 
-    tracker_id = data_provider.create_cb_item(project_id, "System Requirement Specifications",
-                                              "testname", "this is a sysreq description", 4321)
+    tracker_id = data_provider.create_cb_item(
+        project_id, "System Requirement Specifications", "testname", "this is a sysreq description", 4321
+    )
 
     status = 200
 
@@ -228,5 +230,5 @@ def test_ci_codebeamer_needservice(app):
 @pytest.mark.external_resource
 @pytest.mark.ci_test
 def test_empty():
-    
+
     assert 1 == 1
