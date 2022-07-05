@@ -1,8 +1,8 @@
 import nox
 from nox_poetry import session
 
-PYTHON_VERSIONS = ["3.6", "3.8", "3.9"]
-SPHINX_VERSIONS = ["3.2", "3.5", "4.1", "4.2"]
+PYTHON_VERSIONS = ["3.8", "3.9", "3.10"]
+SPHINX_VERSIONS = ["4.2", "5.0.2"]
 TEST_DEPENDENCIES = ["pytest"]
 LINT_DEPENDENCIES = [
     "flake8",
@@ -33,13 +33,13 @@ def tests(session, sphinx):
         session.skip("unsupported combination")
 
 
-@session(python="3.9")
+@session(python="3.10")
 def lint(session):
     session.install(*LINT_DEPENDENCIES)
     session.run("make", "lint", external=True)
 
 
-@session(python="3.9")
+@session(python="3.10")
 def linkcheck(session):
     session.install(".")
     # LinkCheck cn handle rate limits since Sphinx 3.4, which is needed as
