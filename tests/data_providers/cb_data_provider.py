@@ -96,10 +96,10 @@ class CbDataProvider:
         }
         }
 
-        with open("./data_providers/cb_input.json", "w+") as cb_input:
+        with open(self.file, "w+") as cb_input:
             cb_input.write(json.dumps(input_json, indent=2))
 
-            return os.path.abspath("./data_providers/cb_input.json")
+            return os.path.abspath(self.file)
 
     def delete_all_projects(self):
 
