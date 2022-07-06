@@ -97,6 +97,10 @@ class CbDataProvider:
             return os.path.abspath(self.file)
 
     def delete_all_projects(self):
+        """
+        deletes all projects in the cb instance
+        @return: True if successful, False if not
+        """
 
         # get projects
         # use v1 to delete projects
@@ -126,7 +130,6 @@ class CbDataProvider:
 
     def create_cb_project(self, project_name, description):
         """
-
         :param project_name: name as string
         @param description: project description
         :return: id of created project or False if something has failed
@@ -236,10 +239,12 @@ class CbDataProvider:
 
     def generate_data_from_input(self, input_filepath):
         """
-
-        @param input_filepath: abs filepath to an inpu json file. see generate_input()
+        @param input_filepath: abs filepath to an input json file. see generate_input()
         @return: dict showing the data structure that was created
         """
+
+        # TODO rework return dict to be able to better check if correct data has been added
+
         with open(input_filepath) as input_file:
 
             json_input = json.loads(input_file.read())
@@ -266,6 +271,8 @@ class CbDataProvider:
 
                     # create items in correct tracker
                     for tracker_name, items in data.items():
+
+                        # skip entries such as "description" for the parent project
                         if isinstance(items, str):
                             continue
 

@@ -245,6 +245,7 @@ def test_sne_import(docker_service):
 
     conf_file = os.path.join(current_dir, "roots/test-sne-import/conf.py")
     output_dir = os.path.join(current_dir, "roots/test-sne-import/")
+
     subprocess.run(["sne", "import", "-c", conf_file, "codebeamer_config", "-o", output_dir, "-w"],
                    capture_output=True)
 
