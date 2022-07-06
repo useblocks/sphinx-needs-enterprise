@@ -14,7 +14,7 @@ import os
 import sys
 import datetime
 
-from docutils.parsers.rst import directives
+# from docutils.parsers.rst import directives
 
 from sphinx_needs_enterprise.version import VERSION
 
@@ -187,10 +187,13 @@ def rstjinja(app, docname, source):
     Render our pages as a jinja template for fancy templating goodness.
     """
     # Make sure we're outputting HTML
-    if app.builder.format != "html":
+    if app.builder.format != "html" and app.builder.name != "linkcheck":
         return
     src = source[0]
-    rendered = app.builder.templates.render_string(src, app.config.html_context)
+    from jinja2 import Template
+
+    template = Template(src, autoescape=True)
+    rendered = template.render(**app.config.html_context)
     source[0] = rendered
 
 
