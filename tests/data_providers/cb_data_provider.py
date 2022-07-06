@@ -147,9 +147,12 @@ class CbDataProvider:
         current_projects = current_projects_response.json()
         current_id = -1
 
+        print(current_projects)
+
         for p in current_projects:
             if p["name"] == project_name:
                 current_id = p["id"]
+                break
 
         if current_id != -1:
             # create a clean start by deleting old project
