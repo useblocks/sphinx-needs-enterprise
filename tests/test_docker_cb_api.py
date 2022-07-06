@@ -1,6 +1,7 @@
 import json
 import os
 import pathlib
+import subprocess
 import time
 from pathlib import Path
 
@@ -229,8 +230,73 @@ def test_ci_codebeamer_needservice(app):
     assert "cb_import" in html
 
 
+@pytest.mark.cb_docker_needed
+@pytest.mark.external_resource
+@pytest.mark.local
+@pytest.mark.sphinx(testroot="sne-import")
+def test_sne_import(docker_service):
+
+    current_dir = os.getcwd()
+
+    data_provider = CbDataProvider(os.path.join(current_dir, "data_providers/cb_input.json"), "http://127.0.0.1:8080")
+    input_filepath = data_provider.generate_input()
+
+    data_provider.generate_data_from_input(input_filepath)
+
+    conf_file = os.path.join(current_dir, "roots/test-sne-import/conf.py")
+    output_dir = os.path.join(current_dir, "roots/test-sne-import/")
+    subprocess.run(["sne", "import", "-c", conf_file, "codebeamer_config", "-o", output_dir, "-w"],
+                   capture_output=True)
+
+    with open(input_filepath, "r") as input_file:
+
+        input_dict = json.loads(input_file.read())
+
+    with open(os.path.join(output_dir, "needs.json"), "r") as output_file:
+        output = output_file.read()
+
+        assert "cb_import" in output
+
+        for req in input_dict["projects"]["testproject"]["System Requirement Specifications"]:
+            assert req["name"] in output
+            assert req["description"] in output
+
+        for bug in input_dict["projects"]["testproject_2"]["Bugs"]:
+            assert bug["name"] in output
+            assert bug["description"] in output
+
+
+@pytest.mark.cb_docker_needed
 @pytest.mark.external_resource
 @pytest.mark.ci_test
-def test_empty():
+@pytest.mark.sphinx(testroot="sne-import")
+def test_sne_import():
 
-    assert 1 == 1
+    current_dir = os.getcwd()
+
+    data_provider = CbDataProvider(os.path.join(current_dir, "data_providers/cb_input.json"), "http://127.0.0.1:8080")
+    input_filepath = data_provider.generate_input()
+
+    data_provider.generate_data_from_input(input_filepath)
+
+    conf_file = os.path.join(current_dir, "roots/test-sne-import/conf.py")
+    output_dir = os.path.join(current_dir, "roots/test-sne-import/")
+    subprocess.run(["sne", "import", "-c", conf_file, "codebeamer_config", "-o", output_dir, "-w"],
+                   capture_output=True)
+
+    with open(input_filepath, "r") as input_file:
+
+        input_dict = json.loads(input_file.read())
+
+    with open(os.path.join(output_dir, "needs.json"), "r") as output_file:
+        output = output_file.read()
+
+        assert "cb_import" in output
+
+        for req in input_dict["projects"]["testproject"]["System Requirement Specifications"]:
+            assert req["name"] in output
+            assert req["description"] in output
+
+        for bug in input_dict["projects"]["testproject_2"]["Bugs"]:
+            assert bug["name"] in output
+            assert bug["description"] in output
