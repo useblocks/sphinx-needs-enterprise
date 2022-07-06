@@ -270,11 +270,12 @@ def test_sne_import(docker_service):
 @pytest.mark.external_resource
 @pytest.mark.ci_test
 @pytest.mark.sphinx(testroot="sne-import")
-def test_sne_import():
+def test_ci_sne_import():
 
-    current_dir = os.getcwd()
+    current_dir = os.path.join(os.getcwd(), "tests/")
 
-    data_provider = CbDataProvider(os.path.join(current_dir, "data_providers/cb_input.json"), "http://127.0.0.1:8080")
+    data_provider = CbDataProvider(os.path.join(current_dir, "data_providers/cb_input.json"),
+                                   "http://127.0.0.1:8080")
     input_filepath = data_provider.generate_input()
 
     data_provider.generate_data_from_input(input_filepath)
@@ -300,3 +301,8 @@ def test_sne_import():
         for bug in input_dict["projects"]["testproject_2"]["Bugs"]:
             assert bug["name"] in output
             assert bug["description"] in output
+
+
+@pytest.mark.ci_test
+def test_empty():
+    assert 1 == 1
