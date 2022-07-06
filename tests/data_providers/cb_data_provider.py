@@ -151,7 +151,7 @@ class CbDataProvider:
 
         for p in current_projects:
             if p["name"] == project_name:
-                current_id = p["id"]
+                current_id = p["uri"].split("/")[-1]
                 break
 
         if current_id != -1:
