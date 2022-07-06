@@ -10,7 +10,7 @@ sne export
     Using provider "elasticsearch" for given service elasticsearch_config
 
     Reading json data: Done
-    Connectiong to Elasticsearch url: http://127.0.0.1:9200
+    Connection to Elasticsearch url: ``http://127.0.0.1:9200``
     Creating index needs
     ████████████████████████████████████████████████████████████████████████████████ 100% | Uploading need JIRA_PX-2:
     Uploaded 8 elements.

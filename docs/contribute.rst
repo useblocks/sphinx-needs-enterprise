@@ -82,7 +82,7 @@ Open a terminal and switch folder to ``/docker/codebeamer``.
 
 Then run ``docker-compose down && docker-compose up -d``.
 
-After everything is running, open a browser with this address http://127.0.0.1:8080/.
+After everything is running, open a browser with this address ``http://127.0.0.1:8080/``.
 
 Login data is:
 :username: bond
@@ -98,12 +98,12 @@ Open a terminal and switch folder to ``/docker/jira``.
 
 Then run ``docker-compose up -d``.
 
-After everything is running, open a browser with this address http://127.0.0.1:8081/.
+After everything is running, open a browser with this address ``http://127.0.0.1:8081/``.
 
 You will be asked several questions and need to login with an atlassian cloud account to create an evaluation
 license for your specific server.
 
-To test the REST API open http://127.0.0.1:8081/rest/api/2/search in a browser to get json based content, which
+To test the REST API open ``http://127.0.0.1:8081/rest/api/2/search`` in a browser to get json based content, which
 includes all available issues.
 
 The JIRA container should be stopped with ``docker-compose stop``. Use ``stop`` instead of ``down``, as ``down`` will
@@ -131,7 +131,7 @@ Then run ``docker-compose up -d``. This will start an ``ElasticSearch`` server a
 ``ElasticSearch`` is listening on Port ``9200`` and ``9300``.
 ``Kibana`` on port ``5601``.
 
-To test everything, open http://127.0.0.1:5601 or http://127.0.0.1:5601/app/home#/tutorial_directory/sampleData
+To test everything, open ``http://127.0.0.1:5601`` or ``http://127.0.0.1:5601/app/home#/tutorial_directory/sampleData``
 to add some sample data.
 
 
