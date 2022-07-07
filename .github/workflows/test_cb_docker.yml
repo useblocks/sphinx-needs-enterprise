@@ -45,4 +45,7 @@ jobs:
         run: pip freeze
 
       - name: GitHub Action for pytest
-        run: python -m pytest tests -m "ci_test and cb_docker_needed"
+        run: python -m pytest tests/test_docker_cb_api.py -m "ci_test and cb_docker_needed"
+
+      - name: GitHub Action for pytest
+        run: python -m pytest tests/test_docker_cb_api.py -m "ci_test and cb_docker_needed"
