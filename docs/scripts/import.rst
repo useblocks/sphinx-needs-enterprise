@@ -12,7 +12,7 @@ which can be used by ``.. needimport::``.
     Importing config from /home/daniel/workspace/sphinx/sphinx-needs-enterprise/docs/conf.py
     Using provider "jira" for given service jira
 
-    URL: http://127.0.0.1:8081/rest/api/2/search
+    URL: ``http://127.0.0.1:8081/rest/api/2/search``
     Query: project = PX
     Sending request:  Done
     Retrieved 2 elements

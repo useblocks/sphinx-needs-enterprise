@@ -6,15 +6,16 @@
 
 # -- Path setup --------------------------------------------------------------
 
+import datetime
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
 import sys
-import datetime
 
-from docutils.parsers.rst import directives
+# from docutils.parsers.rst import directives
 
 from sphinx_needs_enterprise.version import VERSION
 
@@ -45,7 +46,6 @@ extensions = [
     "sphinxcontrib.programoutput",
     "sphinx_copybutton",
     "sphinx_immaterial",
-
 ]
 
 needs_enterprise_license = os.getenv("NEEDS_SNE_LICENSE", "")
@@ -135,38 +135,38 @@ needs_services = {
     },
     "elasticsearch_config": {"url": "http://127.0.0.1:9200", "index": "needs"},
     "test": {},
-    'excel_config': {
-        'file': "/excel/needs.xlsx",
-        'start_row': 5,
-        'end_row': 15,
-        'end_col': 7,
+    "excel_config": {
+        "file": "/excel/needs.xlsx",
+        "start_row": 5,
+        "end_row": 15,
+        "end_col": 7,
         "content": excel_content,
-        'id_prefix': "EXCEL_",
-        'mappings': {
+        "id_prefix": "EXCEL_",
+        "mappings": {
             "id": ["ID"],
-            "type": 'spec',
+            "type": "spec",
             "title": ["TITLE"],
             "status": ["STATUS"],
         },
-        'extra_data': {
+        "extra_data": {
             "AssignedTo": ["ASSIGNEE"],
             "CreatedAt": ["CREATED AT"],
             "Updated": ["UPDATED AT"],
-        }
+        },
     },
-    'excel_config_2': {
-        'file': "/excel/needs.xlsx",
-        'end_col': 9,
+    "excel_config_2": {
+        "file": "/excel/needs.xlsx",
+        "end_col": 9,
         "content": excel_content,
-        'id_prefix': "EXCEL_",
-        'mappings': {
+        "id_prefix": "EXCEL_",
+        "mappings": {
             "id": ["sid"],
-            "type": 'impl',
+            "type": "impl",
             "title": ["topic"],
             "status": "is_{{status}}",
             "links": ["links"],
-        }
-    }
+        },
+    },
 }
 
 needs_extra_options = ["author"]
@@ -187,10 +187,13 @@ def rstjinja(app, docname, source):
     Render our pages as a jinja template for fancy templating goodness.
     """
     # Make sure we're outputting HTML
-    if app.builder.format != "html":
+    if app.builder.format != "html" and app.builder.name != "linkcheck":
         return
     src = source[0]
-    rendered = app.builder.templates.render_string(src, app.config.html_context)
+    from jinja2 import Template
+
+    template = Template(src, autoescape=True)
+    rendered = template.render(**app.config.html_context)
     source[0] = rendered
 
 
@@ -275,8 +278,7 @@ html_static_path = ["_static"]
 html_css_files = ["custom.css"]
 
 if html_theme == "sphinx_immaterial":
-    html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "navigation.html",
-                            "localtoc.html", "searchbox.html"]}
+    html_sidebars = {"**": ["logo-text.html", "globaltoc.html", "navigation.html", "localtoc.html", "searchbox.html"]}
 
 
 rst_epilog = """
@@ -289,3 +291,4 @@ rst_epilog = """
    <br>
 
 """
+

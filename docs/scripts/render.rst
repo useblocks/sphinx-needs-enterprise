@@ -91,7 +91,7 @@ Default template
        :id: CB_1018
        :status: Draft
 
-       `Codebeamer Link to Issue 1018 <http://127.0.0.1:8080/issue/1018>`_
+       Codebeamer Link to Issue 1018 ``<http://127.0.0.1:8080/issue/1018>``
 
        Example content
 
@@ -102,7 +102,7 @@ Default template
        :id: CB_1091
        :status: Draft
 
-       `Codebeamer Link to Issue 1091 <http://127.0.0.1:8080/issue/1091>`_
+       Codebeamer Link to Issue 1091 ``<http://127.0.0.1:8080/issue/1091>``
 
        Example content
 
