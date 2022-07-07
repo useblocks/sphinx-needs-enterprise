@@ -23,12 +23,22 @@ If a test needs a running external service, e.g. to debug things easier, mark it
 
 New markers must be registered in ``pytest.ini``.
 
+Local tests should be run with ``pytest -m local``. You can use ``make test-local`` to run all tests this way.
+
+
 Currently supported are::
 
+* ``local``: Test that can be run locally. May require external resources
+* ``external_resource``: Marks tests that require external resources.
+* ``cb_needed``: local tests
 * ``cb_needed``: Needs a running codebeamer server.
+* ``cb_docker_needed``: Needs a running docker codebeamer server.
+* ``ci_test``: Marks remote tests that are executed only in GitHub workflows.
+* ``sphinx``: testing sphinx.
 
-Marked tests normally do not get executed during CI runs, as ``make test`` invokes
-pytest like this: ``poetry run pytest -v tests -m "not cb_needed"``.
+Only tests marked with `ci_test`` get executed during CI runs. For local tests use ``make test-local``, this invokes
+``poetry run pytest -v tests -m local``. Please be aware that local test can sometimes require locally running docker
+containers. Local tests requiring external resources can be disabled by running ``make test-no-ext``
 
 So if you register a new marker, please update also the related Makefile command.
 

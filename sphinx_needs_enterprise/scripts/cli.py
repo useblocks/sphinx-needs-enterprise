@@ -247,7 +247,7 @@ def docker(operation, browser):
     for element in os.listdir(docker_path):
         subelement = os.path.join(docker_path, element)
         if os.path.isdir(subelement):
-            subfolder_file = os.path.join(subelement, "docker-compose.yml")
+            subfolder_file = os.path.join(subelement, "cb_docker-compose.yml")
             if os.path.exists(subfolder_file):
                 docker_files.append(subfolder_file)
 

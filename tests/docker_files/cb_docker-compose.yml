@@ -1,0 +1,56 @@
+# Copyright by Intland Software, https://www.intland.com
+#
+# All rights reserved.
+#
+# Please note that if you change this docker file, we do not take any responsibility and we are not liable for
+# any damage caused through use of this image, be it indirect, special, incidental
+# or consequential damages (including but not limited to damages for loss of business, loss of profits, interruption or the like).
+
+version: '2.1'
+
+services:
+
+  codebeamer-db:
+    image: intland/postgres:debian-12.6.3
+    environment:
+      - POSTGRESQL_USER=user
+      - POSTGRESQL_PASSWORD=pass
+      - POSTGRESQL_DATABASE=codebeamer
+      - TZ=UTC
+    volumes:
+      - codebeamer-db-data:/var/lib/postgresql/data
+    networks:
+      - cb
+
+  codebeamer-app:
+    image: intland/codebeamer:latest
+    ports:
+      - 8080:8080
+    environment:
+      - DEBUG=false
+      - TZ=Europe/Berlin
+      - WAIT_HOSTS=codebeamer-db:5432
+      - WAIT_HOSTS_TIMEOUT=120
+      - "CB_database_JDBC_Username=user"
+      - "CB_database_JDBC_Password=pass"
+      - "CB_database_JDBC_Driver=org.postgresql.Driver"
+      - "CB_database_JDBC_ConnectionURL=jdbc:postgresql://codebeamer-db:5432/codebeamer"
+    volumes:
+      - codebeamer-app-logo:/home/appuser/codebeamer/tomcat/webapps/ROOT/config/logo
+      - codebeamer-app-repository-docs:/home/appuser/codebeamer/repository/docs
+      - codebeamer-app-repository-search:/home/appuser/codebeamer/repository/search
+      - codebeamer-app-logs:/home/appuser/codebeamer/logs
+      - codebeamer-app-tmp:/home/appuser/codebeamer/tomcat/tmp
+    networks:
+      - cb
+
+networks:
+  cb:
+
+volumes:
+  codebeamer-db-data:
+  codebeamer-app-logo:
+  codebeamer-app-repository-docs:
+  codebeamer-app-repository-search:
+  codebeamer-app-logs:
+  codebeamer-app-tmp:
