@@ -266,6 +266,8 @@ class CbDataProvider:
                 # create each project
                 project_id = self.create_cb_project(project, data["project_description"])
 
+                time.sleep(2)
+
                 if project_id:
                     data_structure[project]["id"] = project_id
 
@@ -289,9 +291,9 @@ class CbDataProvider:
                             else:
                                 data_structure["projects"][project]["items"]["id"] = False
 
-                            time.sleep(1)
+                            time.sleep(2)
 
                 # getting 429 Too many requests Error
-                time.sleep(1)
+                time.sleep(2)
 
         return data_structure
