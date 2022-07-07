@@ -1,0 +1,31 @@
+{
+    "created": "2022-07-04T16:24:56.924126",
+    "current_version": "0.1.5",
+    "project": "Sphinx-Needs Enterprise",
+    "versions": {
+        "0.1.5": {
+            "created": "2022-07-04T16:24:56.924111",
+            "filters": {},
+            "filters_amount": 0,
+            "needs": {
+                "CB_1000": {
+                    "description": "\n`Codebeamer Link to Issue 1000 <{cb_server}/issue/1000>`_\n\n&lt;span class=&#39;wikiContent&#39;&gt;this is to be exported to a needs.json&lt;/span&gt;\n\n| \n\n| **assignedBy**: None\n| **createdAt**: 2022-07-04T16:22:09.390\n| **updated**: 2022-07-04T16:22:09.390\n| **type**: Requirement\n",
+                    "id": "CB_1000",
+                    "status": "New",
+                    "tags": "cb_import, example",
+                    "title": "new system requirement for export",
+                    "type": "spec"
+                },
+                "CB_1001": {
+                    "description": "\n`Codebeamer Link to Issue 1001 <{cb_server}/issue/1001>`_\n\n&lt;span class=&#39;wikiContent&#39;&gt;export this&lt;/span&gt;\n\n| \n\n| **assignedBy**: None\n| **createdAt**: 2022-07-04T16:22:36.573\n| **updated**: 2022-07-04T16:22:36.573\n| **type**: Requirement\n",
+                    "id": "CB_1001",
+                    "status": "New",
+                    "tags": "cb_import, example",
+                    "title": "second sys req for testing and export",
+                    "type": "spec"
+                }
+            },
+            "needs_amount": 2
+        }
+    }
+}
