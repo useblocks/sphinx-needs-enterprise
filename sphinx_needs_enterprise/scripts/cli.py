@@ -126,7 +126,7 @@ def export_cmd(service, needs_file, conf, version, extra, hours, skip):
     needs = needs_data["versions"][version]["needs"]
 
     url = service_obj.url
-    click.echo(f"Connectiong to Elasticsearch url: {url}")
+    click.echo(f"Connecting to Elasticsearch url: {url}")
     es = elasticsearch.Elasticsearch([url])
 
     es_index = service_obj.index
