@@ -131,6 +131,7 @@ project.
 
 Needservice directive
 ---------------------
+
 Use ``needservice`` to get the external data directly into your documentation.
 
 .. tab-set::
@@ -168,6 +169,7 @@ Use ``needservice`` to get the external data directly into your documentation.
 
 SNE script
 ----------
+
 The ``sne`` script provides solutions for different tasks like getting and storing external data or rendering templates.
 
 Use ``sne import`` as command in your terminal to store external data in JSON files for later manipulation
@@ -207,6 +209,7 @@ See our docs about the :ref:`sne` for more details.
 
 Service configuration
 ---------------------
+
 Service names like ``jira_config`` are referencing a detailed configuration inside the
 ``conf.py`` file of a Sphinx project.
 
@@ -244,6 +247,7 @@ This configuration is shared by ``needservice`` and the ``sne`` script.
 
 License
 -------
+
 ``Sphinx-Needs Enterprise`` is **free to use for private projects**.
 
 **Commercial projects must obtain a commercial license**, which guarantees an ongoing and professional development of
@@ -252,94 +256,95 @@ License
 
 Sphinx-Needs Ecosystem
 ----------------------
+
 In the last years, we have created additional information and extensions, which are based on or related to Sphinx-Needs:
 
 .. grid:: 2
-    :gutter: 2
+   :gutter: 2
 
-    .. grid-item-card::
-        :columns: 12 6 6 6
-        :link: https://sphinx-needs.com
-        :img-top: /_static/sphinx-needs-card.png
-        :class-card: border
+   .. grid-item-card::
+      :columns: 12 6 6 6
+      :link: https://sphinx-needs.com
+      :img-top: /_static/sphinx-needs-card.png
+      :class-card: border
 
-        Sphinx-Needs.com
-        ^^^^^^^^^^^^^^^^
-        The website presents the essential Sphinx-Needs functions and related extensions.
+      Sphinx-Needs.com
+      ^^^^^^^^^^^^^^^^
+      The website presents the essential Sphinx-Needs functions and related extensions.
 
-        Also, it is a good entry point to understand the benefits and get an idea about the complete ecosystem of Sphinx-Needs.
-        +++
+      Also, it is a good entry point to understand the benefits and get an idea about the complete ecosystem of Sphinx-Needs.
+      +++
 
-        .. button-link:: https://sphinx-needs.com
-            :color: primary
-            :outline:
-            :align: center
-            :expand:
+      .. button-link:: https://sphinx-needs.com
+         :color: primary
+         :outline:
+         :align: center
+         :expand:
 
-            :octicon:`globe;1em;sd-text-primary` Sphinx-Needs.com
+         :octicon:`globe;1em;sd-text-primary` Sphinx-Needs.com
 
-    .. grid-item-card::
-        :columns: 12 6 6 6
-        :link: https://sphinxcontrib-needs.readthedocs.io/en/latest/
-        :img-top: /_static/sphinx-needs-card.png
-        :class-card: border
+   .. grid-item-card::
+      :columns: 12 6 6 6
+      :link: https://sphinxcontrib-needs.readthedocs.io/en/latest/
+      :img-top: /_static/sphinx-needs-card.png
+      :class-card: border
 
-        Sphinx-Needs
-        ^^^^^^^^^^^^
-        Create, update, link, filter and present need objects like Requirements, Specifications, Bugs and many more.
+      Sphinx-Needs
+      ^^^^^^^^^^^^
+      Create, update, link, filter and present need objects like Requirements, Specifications, Bugs and many more.
 
-        The base extension provides all of its functionality under the MIT license for free.
-        +++
+      The base extension provides all of its functionality under the MIT license for free.
+      +++
 
-        .. button-link:: https://sphinxcontrib-needs.readthedocs.io/en/latest/
-            :color: primary
-            :outline:
-            :align: center
-            :expand:
+      .. button-link:: https://sphinxcontrib-needs.readthedocs.io/en/latest/
+         :color: primary
+         :outline:
+         :align: center
+         :expand:
 
-            :octicon:`book;1em;sd-text-primary` Technical Docs
+         :octicon:`book;1em;sd-text-primary` Technical Docs
 
-    .. grid-item-card::
-        :columns: 12 6 6 6
-        :link: https://useblocks.com/sphinx-needs-enterprise/
-        :img-top: /_static/sphinx-needs-enterprise-card.png
-        :class-card: border
+   .. grid-item-card::
+      :columns: 12 6 6 6
+      :link: https://useblocks.com/sphinx-needs-enterprise/
+      :img-top: /_static/sphinx-needs-enterprise-card.png
+      :class-card: border
 
-        Sphinx-Needs Enterprise
-        ^^^^^^^^^^^^^^^^^^^^^^^
-        Synchronize Sphinx-Needs data with external, company internal systems like CodeBeamer, Jira or Azure Boards.
+      Sphinx-Needs Enterprise
+      ^^^^^^^^^^^^^^^^^^^^^^^
+      Synchronize Sphinx-Needs data with external, company internal systems like CodeBeamer, Jira or Azure Boards.
 
-        Provides scripts to baseline data and makes CI usage easier.
-        +++
+      Provides scripts to baseline data and makes CI usage easier.
+      +++
 
-        .. button-link:: http://useblocks.com/sphinx-needs-enterprise/
-            :color: primary
-            :outline:
-            :align: center
-            :expand:
+      .. button-link:: http://useblocks.com/sphinx-needs-enterprise/
+         :color: primary
+         :outline:
+         :align: center
+         :expand:
 
-            :octicon:`book;1em;sd-text-primary` Technical Docs
+         :octicon:`book;1em;sd-text-primary` Technical Docs
 
-    .. grid-item-card::
-        :columns: 12 6 6 6
-        :link: https://sphinx-test-reports.readthedocs.io/en/latest/
-        :img-top: /_static/sphinx-test-reports-logo.png
-        :class-card: border
+   .. grid-item-card::
+      :columns: 12 6 6 6
+      :link: https://sphinx-test-reports.readthedocs.io/en/latest/
+      :img-top: /_static/sphinx-test-reports-logo.png
+      :class-card: border
 
-        Sphinx-Test-Reports
-        ^^^^^^^^^^^^^^^^^^^
-        Extension to import test results from XML files as **need** objects.
+      Sphinx-Test-Reports
+      ^^^^^^^^^^^^^^^^^^^
+      Extension to import test results from XML files as **need** objects.
 
-        Created **need** objects can be filtered and linked to specification objects.
-        +++
+      Created **need** objects can be filtered and linked to specification objects.
+      +++
 
-        .. button-link:: https://sphinx-test-reports.readthedocs.io/en/latest/
-            :color: primary
-            :outline:
-            :align: center
-            :expand:
+      .. button-link:: https://sphinx-test-reports.readthedocs.io/en/latest/
+         :color: primary
+         :outline:
+         :align: center
+         :expand:
 
-            :octicon:`book;1em;sd-text-primary` Technical Docs
+         :octicon:`book;1em;sd-text-primary` Technical Docs
 
 
 Other Sphinx extensions
@@ -348,47 +353,47 @@ During the use of Sphinx-Needs in popular companies’ internal projects,
 we have created other Sphinx extensions to support the work of teams in the automotive industry:
 
 .. grid:: 2
-    :gutter: 2
+   :gutter: 2
 
-    .. grid-item-card::
-        :columns: 12 6 6 6
-        :link: https://sphinx-collections.readthedocs.io/en/latest/
-        :img-top: /_static/sphinx_collections_logo.png
-        :class-card: border
+   .. grid-item-card::
+      :columns: 12 6 6 6
+      :link: https://sphinx-collections.readthedocs.io/en/latest/
+      :img-top: /_static/sphinx_collections_logo.png
+      :class-card: border
 
-        Sphinx Collections
-        ^^^^^^^^^^^^^^^^^^
-        Extension to collect or generate files from different sources and include them in the Sphinx source folder.
+      Sphinx Collections
+      ^^^^^^^^^^^^^^^^^^
+      Extension to collect or generate files from different sources and include them in the Sphinx source folder.
 
-        It supports sources like Git repositories, Jinja based files or symlinks.
-        +++
+      It supports sources like Git repositories, Jinja based files or symlinks.
+      +++
 
-        .. button-link:: https://sphinx-collections.readthedocs.io/en/latest/
-            :color: primary
-            :outline:
-            :align: center
-            :expand:
+      .. button-link:: https://sphinx-collections.readthedocs.io/en/latest/
+         :color: primary
+         :outline:
+         :align: center
+         :expand:
 
-            :octicon:`book;1em;sd-text-primary` Technical Docs
+         :octicon:`book;1em;sd-text-primary` Technical Docs
 
-    .. grid-item-card::
-        :columns: 12 6 6 6
-        :link: https://sphinx-bazel.readthedocs.io/en/latest/
-        :img-top: /_static/sphinx_bazel_logo.png
-        :class-card: border
+   .. grid-item-card::
+      :columns: 12 6 6 6
+      :link: https://sphinx-bazel.readthedocs.io/en/latest/
+      :img-top: /_static/sphinx_bazel_logo.png
+      :class-card: border
 
-        Sphinx Bazel
-        ^^^^^^^^^^^^
-        Provides a Bazel domain in Sphinx documentation and allows the automated import of Bazel files and their documentation.
-        +++
+      Sphinx Bazel
+      ^^^^^^^^^^^^
+      Provides a Bazel domain in Sphinx documentation and allows the automated import of Bazel files and their documentation.
+      +++
 
-        .. button-link:: https://sphinx-bazel.readthedocs.io/en/latest/
-            :color: primary
-            :outline:
-            :align: center
-            :expand:
+      .. button-link:: https://sphinx-bazel.readthedocs.io/en/latest/
+         :color: primary
+         :outline:
+         :align: center
+         :expand:
 
-            :octicon:`book;1em;sd-text-primary` Technical Docs
+         :octicon:`book;1em;sd-text-primary` Technical Docs
 
 
 .. toctree::

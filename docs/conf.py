@@ -292,3 +292,15 @@ rst_epilog = """
 
 """
 
+linkcheck_ignore = [
+    r"http://localhost:\d+",
+    r"http://127.0.0.1:\d+",
+]
+
+linkcheck_request_headers = {
+    "*": {
+        "User-Agent": "Mozilla/5.0",
+    }
+}
+
+linkcheck_workers = 5
