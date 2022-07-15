@@ -27,7 +27,7 @@ author = "team useblocks"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinxcontrib.plantuml", "sphinxcontrib.needs", "sphinx_revealjs", "sphinx.ext.mathjax"]
+extensions = ["sphinxcontrib.plantuml", "sphinx_needs", "sphinx_revealjs", "sphinx.ext.mathjax"]
 
 revealjs_script_conf = """
 {

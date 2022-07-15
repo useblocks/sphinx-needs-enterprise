@@ -1,4 +1,4 @@
 sphinx
-sphinxcontrib-needs==0.7.9
+sphinx-needs==1.0.1
 sphinxcontrib-plantuml
 sphinx-revealjs

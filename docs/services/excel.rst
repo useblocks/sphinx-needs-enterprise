@@ -5,12 +5,12 @@ Excel
 The ``Excel`` service imports data from spreadsheets to Sphinx-project using Sphinx-Needs and creates Sphinx-Needs objects on the fly during build time.
 
 The implementation is based on the :ref:`services mechanism <needs:services>` of
-`Sphinx-Needs <https://sphinxcontrib-needs.readthedocs.io/en/latest/>`__.
+`Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`__.
 
 The ``Excel`` service allows to retrieve external data from spreadsheets during documentation build and
 to create Sphinx-Needs objects based on this data.
 After the creation of the Sphinx-Needs objects, it supports every function from
-`Sphinx-Needs <https://sphinxcontrib-needs.readthedocs.io/en/latest/>`__, which includes Filtering, Linking,
+`Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`__, which includes Filtering, Linking,
 Updating and much more.
 
 Options

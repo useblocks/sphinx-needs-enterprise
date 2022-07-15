@@ -2,7 +2,7 @@ import re
 
 import requests
 from jinja2 import Template
-from sphinxcontrib.needs.services.base import BaseService
+from sphinx_needs.services.base import BaseService
 
 from sphinx_needs_enterprise.exceptions import (
     CommunicationException,

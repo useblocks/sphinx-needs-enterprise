@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 import pytest
-from sphinxcontrib.needs.services.manager import ServiceManager
+from sphinx_needs.services.manager import ServiceManager
 
 
 @pytest.mark.sphinx(testroot="excel")

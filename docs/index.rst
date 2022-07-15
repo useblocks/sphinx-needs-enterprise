@@ -285,7 +285,7 @@ In the last years, we have created additional information and extensions, which 
 
    .. grid-item-card::
       :columns: 12 6 6 6
-      :link: https://sphinxcontrib-needs.readthedocs.io/en/latest/
+      :link: https://sphinx-needs.readthedocs.io/en/latest/
       :img-top: /_static/sphinx-needs-card.png
       :class-card: border
 
@@ -296,7 +296,7 @@ In the last years, we have created additional information and extensions, which 
       The base extension provides all of its functionality under the MIT license for free.
       +++
 
-      .. button-link:: https://sphinxcontrib-needs.readthedocs.io/en/latest/
+      .. button-link:: https://sphinx-needs.readthedocs.io/en/latest/
          :color: primary
          :outline:
          :align: center
