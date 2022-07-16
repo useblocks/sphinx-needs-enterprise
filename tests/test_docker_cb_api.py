@@ -246,8 +246,7 @@ def test_sne_import(docker_service):
     conf_file = os.path.join(current_dir, "roots/test-sne-import/conf.py")
     output_dir = os.path.join(current_dir, "roots/test-sne-import/")
 
-    subprocess.run(["sne", "import", "-c", conf_file, "codebeamer_config", "-o", output_dir, "-w"],
-                   capture_output=True)
+    subprocess.run(["sne", "import", "-c", conf_file, "codebeamer_config", "-o", output_dir, "-w"], capture_output=True)
 
     with open(input_filepath, "r") as input_file:
 
@@ -275,16 +274,14 @@ def test_ci_sne_import():
 
     current_dir = os.path.join(os.getcwd(), "tests/")
 
-    data_provider = CbDataProvider(os.path.join(current_dir, "data_providers/cb_input.json"),
-                                   "http://127.0.0.1:8080")
+    data_provider = CbDataProvider(os.path.join(current_dir, "data_providers/cb_input.json"), "http://127.0.0.1:8080")
     input_filepath = data_provider.generate_input()
 
     data_provider.generate_data_from_input(input_filepath)
 
     conf_file = os.path.join(current_dir, "roots/test-sne-import/conf.py")
     output_dir = os.path.join(current_dir, "roots/test-sne-import/")
-    subprocess.run(["sne", "import", "-c", conf_file, "codebeamer_config", "-o", output_dir, "-w"],
-                   capture_output=True)
+    subprocess.run(["sne", "import", "-c", conf_file, "codebeamer_config", "-o", output_dir, "-w"], capture_output=True)
 
     with open(input_filepath, "r") as input_file:
 

@@ -9,11 +9,11 @@ import elasticsearch
 import jinja2
 from tqdm import tqdm
 
-# API has changed with Sphinx-Needs version 0.7.3
+# API has changed with Sphinx-Needs version 1.0.1
 try:
-    from sphinxcontrib.needs.utils import NeedsList
+    from sphinx_needs.utils import NeedsList
 except ImportError:
-    from sphinxcontrib.needs.needsfile import NeedsList
+    from sphinx_needs.needsfile import NeedsList
 
 from sphinx_needs_enterprise.scripts.loader import service_loader
 

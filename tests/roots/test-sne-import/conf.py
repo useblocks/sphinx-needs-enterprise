@@ -34,7 +34,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
     "sphinx.ext.ifconfig",
-    "sphinxcontrib.needs",
+    "sphinx_needs",
     "sphinx_needs_enterprise",
 ]
 

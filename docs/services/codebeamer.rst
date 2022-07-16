@@ -5,16 +5,16 @@ Codebeamer
 
 The ``Codebeamer`` service synchronizes
 data between `codebeamer <https://codebeamer.com/>`_ from `Intland <https://intland.com/>`_ and the
-Requirement Engineering extension `Sphinx-Needs <https://sphinxcontrib-needs.readthedocs.io/en/latest/>`_ from
+Requirement Engineering extension `Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`_ from
 `useblocks <https://useblocks.com>`_.
 
 The implementation is based on the :ref:`services mechanism <needs:services>` of
-`Sphinx-Needs <https://sphinxcontrib-needs.readthedocs.io/en/latest/>`__.
+`Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`__.
 
 The ``Codebeamer`` service allows to retrieve external data during documentation build and
 to create Sphinx-Needs objects based on this data.
 After the created Sphinx-Needs objects support every function from
-`Sphinx-Needs <https://sphinxcontrib-needs.readthedocs.io/en/latest/>`__, which includes Filtering, Linking,
+`Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`__, which includes Filtering, Linking,
 Updating and much more.
 
 Options
