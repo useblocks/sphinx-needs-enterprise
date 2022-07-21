@@ -245,13 +245,13 @@ The set options for the ``needservice`` are available  under ``options``. Exampl
 
 extra_data
 ~~~~~~~~~~
-There may be information stored inside services data fields, which can not be mapped to Sphinx-Needs options, but
-which shall be make available inside the need object.
+There may be information stored inside a service's data fields that can not be mapped to Sphinx-Needs options, but
+shall be made available inside the needed object.
 
-This can be done by using ``extra_data``, which adds this kind of information to the end of the content of a
+This can be done by using ``extra_data``, which adds this  kind of information to the end of the content of a
 need object.
 
-The logic and syntax is the same as used by :ref:`conf_mapping`.
+The logic and syntax are the same as used by :ref:`conf_mapping`.
 
 .. code-block:: python
 
@@ -265,9 +265,9 @@ The logic and syntax is the same as used by :ref:`conf_mapping`.
 
 raw
 ~~~
-Outputs the need content to a codeblock without any modifications.
+Outputs the needed content to a codeblock without any modifications.
 
-For some service a content transformation (e.g. wiki-syntax to html or rst) is needed, to get a nice looking and
+For some services a content transformation (e.g. wiki-syntax to HTML or rst) is needed, to get a nice looking and
 "working" representation of the content.
 
 Default: False
@@ -278,10 +278,10 @@ Supported Services: Codebeamer
 
 wiki2html
 ~~~~~~~~~
-Transforms a need content, which is using a wiki-like syntax, to a format, which can be used by Sphinx (e.g
+Transforms a needed content, that uses a wiki-like syntax, to a format Sphinx can use (e.g
 rst or HTML).
 
-Most services do not need to support this configuration options, as they provide by default a Sphinx compatible
+Most services do not need to support these configuration options, as they provide by default a Sphinx compatible
 output.
 
 Default: True

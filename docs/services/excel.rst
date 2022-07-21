@@ -7,8 +7,8 @@ The ``Excel`` service imports data from spreadsheets to Sphinx-project using Sph
 The implementation is based on the :ref:`services mechanism <needs:services>` of
 `Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`__.
 
-The ``Excel`` service allows to retrieve external data from spreadsheets during documentation build and
-to create Sphinx-Needs objects based on this data.
+The ``Excel`` service allows retrieving external data from spreadsheets during documentation build and
+creates Sphinx-Needs objects based on this data.
 After the creation of the Sphinx-Needs objects, it supports every function from
 `Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`__, which includes Filtering, Linking,
 Updating and much more.
@@ -51,7 +51,7 @@ header_row
 A number indicating the row in the spreadsheet which contains the names for each column. This option is required.
 |br| **Default value**: 1
 
-E.g. if ``:header_row: 2`` then we retrieve the column names from row number **2** in our spreadsheet file.
+E.g. if ``:header_row: 2`` then retrieve the column names from row number **2** in our spreadsheet file.
 
 start_row
 ~~~~~~~~~

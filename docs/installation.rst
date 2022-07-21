@@ -17,7 +17,7 @@ Run ``pip install sphinx-needs-enterprise``.
 
 Registration
 ------------
-After installation, the extensions needs to be registered in the ``conf.py`` file:
+After installation, the extensions need to be registered in the ``conf.py`` file:
 
 .. code-block:: python
 

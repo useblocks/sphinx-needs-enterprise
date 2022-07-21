@@ -11,8 +11,8 @@ Requirement Engineering extension `Sphinx-Needs <https://sphinx-needs.readthedoc
 The implementation is based on the :ref:`services mechanism <needs:services>` of
 `Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`__.
 
-The ``Codebeamer`` service allows to retrieve external data during documentation build and
-to create Sphinx-Needs objects based on this data.
+The ``Codebeamer`` service allows retrieving external data during documentation build and
+creates Sphinx-Needs objects based on this data.
 After the created Sphinx-Needs objects support every function from
 `Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`__, which includes Filtering, Linking,
 Updating and much more.
@@ -34,7 +34,7 @@ A string, which is taken as prefix for the need-id. E.g. ``CB_IMPORT_`` --> ``CB
 raw
 ~~~
 If set to "True", the description content gets presented inside a code-block and is not handled as rst-valid text
-anymore. Use it to avoid sphinx build errors, is the item description is based on wiki or html syntax.
+anymore. Use it to avoid sphinx build errors, if the item description is based on wiki or Html syntax.
 
 Default: False
 
@@ -42,7 +42,7 @@ Default: False
 
 wiki2html
 ~~~~~~~~~
-If set to "True", wiki-based item content gets transformed to html and is presented in a
+If set to "True", wiki-based item content gets transformed to HTML and is presented in a
 ``.. raw:: html`` directive.
 
 Default: True
@@ -112,7 +112,7 @@ Inside any ``rst`` file of your Sphinx project:
 {% else %}
 .. hint::
 
-   The below examples are just images, as no Codebeamer instance was available during documentation build.
+   The below are examples of just images, since no Codebeamer instance was available during documentation build.
 
 .. image:: /_images/cb_example.png
    :align: center

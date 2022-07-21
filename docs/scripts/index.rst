@@ -25,9 +25,9 @@ terminal:
 
 .. note::
 
-   Please take into account that not all services are supporting all functions like ``sne import`` or ``sne export``.
+   Please take into account that not all services supports all functions like ``sne import`` or ``sne export``.
 
-   Take a look on the service badges on our main page, to figure out what is currently supported.
+   Take a look at the service badges on our main page, to figure out what a service currently supports.
 
 
 
