@@ -3,7 +3,7 @@
 License
 =======
 ``Sphinx-Needs Enterprise`` is released under the ``BSL 1.1``, the Business Source License.
-Which mostly means the usage is free for private projects, but commercial projects need to purchase a license.
+This means the usage is free for private projects, but commercial projects need to purchase a license.
 
 To obtain a license key please visit
 `sphinx-needs.com <https://sphinx-needs.com>`_ or get in contact with
@@ -17,7 +17,7 @@ of a Sphinx project.
 The value of ``needs_enterprise_license`` must be a string in the format ``ABCDE-FGHIJ-KLMNO-PQRST``.
 
 If no license key is set for ``needs_enterprise_license``, the **private mode** is activated and Sphinx-Needs
-Enterprise can be used for private, none commercial projects.
+Enterprise can be used for private, non commercial projects.
 
 With no license key set, you will get some hints during startup and end of the build.
 Mainly telling you that **private mode** is active and that it would be nice to support Sphinx-Needs, if used
@@ -39,9 +39,9 @@ Default: False
 License check workflow
 ----------------------
 As all licenses are Floating licenses, they can be used by multiple users, but not in parallel.
-The amount of parallel usages is defined by purchased keys per license.
+The amount of parallel usage is defined by purchased keys per license.
 
-The license key status gets checked during initialisation of the Sphinx-Needs Enterprise extension.
+The license key status gets checked during the initialisation of the Sphinx-Needs Enterprise extension.
 
 If ``needs_enterprise_license`` is not set or set to ``PRIVATE``, the **private mode** gets directly activated
 and no request to the external license server in the cloud is made.
@@ -50,14 +50,14 @@ If a license is set, then the license server of `Cryptolens <https://cryptolens.
 license key.
 
 During license validation, the current license gets blocked by the current machine for 5 minutes.
-If the build takes longer as 5 minutes, this block gets renewed every 5 minutes.
+If the build takes longer than 5 minutes, we renew the license block.
 
 After the build has finished (and was not interrupted by the user or has crashed) the blocked license gets freed and is
 immediately available for the next machine.
 
 If all available license keys are used, Sphinx-Needs Enterprise waits 5 seconds until the license server is asked again.
-After 3 unsuccessful attempts, the license is set into **private mode** for the current build and the builds goes on.
-If this happens more then 2-3 times a day, please consider to request additional license keys.
+After 3 unsuccessful attempts, the license is set into **private mode** for the current build and the build goes on.
+If this happens more than 2-3 times a day, please consider requesting additional license keys.
 
 .. hint::
 
@@ -69,13 +69,13 @@ FAQ
 
 .. dropdown:: Why is it not free for all?
 
-    ``Sphinx-Needs`` and related extensions are mostly used by process driven companies.
-    And so most of our users and contributors must follow company internal rules, if they want to contribute to an
+    ``Sphinx-Needs`` and related extensions are mostly used by process-driven companies.
+    And so most of our users and contributors must follow company internal rules if they want to contribute to an
     Open-Source project.
     They also use Sphinx-Needs mostly during their daily work, so motivation to spend additional time
     on it after work is low.
 
-    This makes it hard for the ``Sphinx-Needs`` community to gain enough contributors, even if the amout of users is
+    This makes it hard for the ``Sphinx-Needs`` community to gain enough contributors, even if the amount of users is
     quite high and most of them are developers.
 
     So we have created ``Sphinx-Needs Enterprise``, which shall help to retrieve some kind of money back from companies,
@@ -83,7 +83,7 @@ FAQ
     ``Sphinx-Needs Enterprise``.
 
     The money gets completely spent on development power for ``Sphinx-Needs`` and related extensions.
-    And we hope that one day a fulltime engineer can work on it thanks to the license fees.
+    And we hope that one day a full-time engineer can work on it thanks to the license fees.
 
 .. dropdown:: Any chance of a discount?
 

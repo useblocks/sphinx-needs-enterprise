@@ -21,7 +21,7 @@ Each need gets automatically a new option named ``uploaded_at``, which has the c
 
    Please take into account that not all services are supporting all functions like ``sne import`` or ``sne export``.
 
-   Take a look on the service badges on our main page, to figure out what is currently supported.
+   Take a look at the service badges on our main page, to figure out what is currently supported.
 
 arguments
 ---------
@@ -56,7 +56,7 @@ Default: ``conf.py`` (in the current working directory)
 
 -j / --json
 ~~~~~~~~~~~
-Location of a ``needs.json`` compatible file, which data shall exported to the service.
+Location of a ``needs.json`` compatible file in which we shall export the service data to.
 
 ``sne export elasticsearch -j docs/needs.json``
 
@@ -82,9 +82,9 @@ Default: None
 
 -h / --hours
 ~~~~~~~~~~~~
-Allows to manipulate the ``updated_at`` value of each need.
+Allows you to manipulate the ``updated_at`` value of each need.
 
-Useful to test uploads with the same data but with different timestamp.
+Useful to test uploads with the same data but with a different timestamp.
 
 Allows positive and negative floating numbers (e.g. '2' or '-3.5'), which will be added or subtracted from current
 time.
@@ -95,7 +95,7 @@ Default: 0
 
 -s / --skip
 ~~~~~~~~~~~
-Skips every x element during export. So if 10 needs are defined inside ``needs.json'' and ``skip = 2``, then ony ``5``
+Skips every *x* element during export. So if 10 needs are defined inside ``needs.json'' and ``skip = 2``, then only ``5``
 needs get exported.
 
 Useful also only for tests, to scaling down the test data to export.

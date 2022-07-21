@@ -19,7 +19,7 @@ synchronizing data between ``Sphinx-Needs`` and tools like Jira, Azure, GitHub, 
 
 
 .. grid:: 4
-   :gutter: 1
+   :gutter:
 
    .. grid-item-card::
       :columns: 12 6 3 3

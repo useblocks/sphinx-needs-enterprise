@@ -10,8 +10,8 @@ life cycle management extension `Sphinx-Needs <https://sphinx-needs.readthedocs.
 The implementation is based on the :ref:`services mechanism <needs:services>` of
 `Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`__.
 
-The ``Azure`` service allows to retrieve external data during documentation build and
-to create Sphinx-Needs objects based on this data.
+The ``Azure`` service allows you to retrieve external data during documentation build and
+creates Sphinx-Needs objects based on this data.
 After the created Sphinx-Needs objects support every function from
 `Sphinx-Needs <https://sphinx-needs.readthedocs.io/en/latest/>`__, which includes Filtering, Linking,
 Updating and much more.
@@ -38,7 +38,7 @@ An Azure service configuration must be created inside your ``conf.py`` file.
    For details about most configuration options, please take a look into the
    :ref:`common configuration description <service_config>`.
 
-The following documentation describes service specific information for ``Azure`` only.
+The following documentation describes service - specific information for ``Azure`` only.
 
 url
 ~~~
@@ -48,9 +48,9 @@ Please see :ref:`conf_url` for more details.
 
 token
 ~~~~~
-Instead of a ``user`` and a ``password``, Azure DevOps need a personal access token.
+Instead of a ``user`` and a ``password``, Azure DevOps needs a personal access token.
 
-Which can be created under ``https://dev.azure.com/<company>/_usersSettings/tokens``.
+You can create a personal access token under ``https://dev.azure.com/<company>/_usersSettings/tokens``.
 
 Example
 -------

@@ -39,7 +39,7 @@ Default: ``needs.rst`` in the current working directory
 Own template file
 -----------------
 {% raw %}
-The template is using `Jinja <https://jinja.palletsprojects.com/en/3.0.x/>`_ as template language.
+The template uses `Jinja <https://jinja.palletsprojects.com/en/3.0.x/>`_ as template language.
 
 The complete data from the loaded json file is available under the name ``data``.
 Example for getting the project name of a loaded ``needs.json`` use ``{{ data.project}}``.

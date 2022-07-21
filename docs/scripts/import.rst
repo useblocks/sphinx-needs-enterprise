@@ -15,7 +15,7 @@ which can be used by ``.. needimport::``.
     URL: ``http://127.0.0.1:8081/rest/api/2/search``
     Query: project = PX
     Sending request:  Done
-    Retrieved 2 elements
+    Retrieved 2 element
     Version to use: 3.0.1
     Reusing needs.json: /home/daniel/workspace/sphinx/sphinx-needs-enterprise/needs.json
     Erasing existing data for version 3.0.1.
@@ -24,17 +24,17 @@ which can be used by ``.. needimport::``.
 
    Please take into account that not all services are supporting all functions like ``sne import`` or ``sne export``.
 
-   Take a look on the service badges on our main page, to figure out what is currently supported.
+   Take a look at the service badges on our main page, to figure out what a service currently supports.
 
 use case
 --------
 ``sne import`` can be used to retrieve and store baselines of external data at a specific point of time.
-So instead of getting always the latest data via ``.. needservice:: jira`` during each build, ``sne import`` can
+So instead of always getting the latest data via ``.. needservice:: jira`` during each build, ``sne import`` can
 be used to request and store this data only once in a ``needs.json`` file.
 This file can be stored inside your source version system, so that each developer works on the same data.
 To get the data into your documentation, use ``.. needimport:: needs.json``.
 
-For huge requests and big teams this can reduce the amount of requests against the external service dramatically and
+For huge requests and big teams, this can reduce the number of requests against the external service dramatically and
 it makes sure that each build is using the same data.
 
 arguments

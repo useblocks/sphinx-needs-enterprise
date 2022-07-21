@@ -5,5 +5,5 @@ sphinx-copybutton
 
 # Sphinx-Material Theme + Fix to support Sphinx-Needs
 sphinx-design
-sphinx-immaterial
+sphinx-immaterial==0.7.3
 openpyxl

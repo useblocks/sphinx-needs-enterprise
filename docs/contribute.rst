@@ -5,7 +5,7 @@ Contribute
 
 Code linting
 ------------
-Use ``make format`` to run ``black`` on your code, which should fix most of possible linter errors.
+Use ``make format`` to run ``black`` on your code, which should fix most of the possible linter errors.
 
 To run all our configured linter, run ``make lint``.
 
@@ -37,7 +37,7 @@ Currently supported are::
 * ``sphinx``: testing sphinx.
 
 Only tests marked with `ci_test`` get executed during CI runs. For local tests use ``make test-local``, this invokes
-``poetry run pytest -v tests -m local``. Please be aware that local test can sometimes require locally running docker
+``poetry run pytest -v tests -m local``. Please be aware that local tests can sometimes require locally running docker
 containers. Local tests requiring external resources can be disabled by running ``make test-no-ext``
 
 So if you register a new marker, please update also the related Makefile command.
@@ -49,15 +49,13 @@ Sphinx support
 How to run test cases based on a Sphinx project is nearly undocumented by Sphinx itself.
 Some information can be found here: https://github.com/sphinx-doc/sphinx/issues/7008
 
-
-
 Doc build
 ---------
 
 With external services
 ~~~~~~~~~~~~~~~~~~~~~~
-This build is for systems, which have e.g. a running CodeBeamer instance available, so that real data can
-be fetched during build.
+This build is for systems, which have e.g. a running CodeBeamer instance available so that real data can
+be fetched during the build.
 
 On project root: ``make docs-html``
 
@@ -65,9 +63,9 @@ Under ``/docs``: ``make html``
 
 Without external services / CI Build
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-If the documentation build shall act like it is performed on our used CI system (github actions),
-an environment variable must be set. The build will then contain images instead of trying to reach
-external services during build.
+If the documentation build shall act like it is performed on our used CI system (GitHub actions),
+the ``ON_CI`` environment variable must be set. The build will then contain images instead of trying to reach
+external services during the  build.
 
 On project root: ``make ci-docs-html``
 
@@ -99,7 +97,7 @@ Login data is:
 :password: 007
 
 To use the current documentation with the new codebeamer instance, you should create a project based on the ``agile``
-template. In this case some elements, like issues, get automatically created and the used filters inside this
+template. In this case, some elements, like issues, get automatically created and the used filters inside this
 documentation should already match some of them.
 
 Jira via docker
