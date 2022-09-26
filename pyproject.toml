@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sphinx-needs-enterprise"
-version = "0.1.5"
+version = "1.0.0"
 description = ""
 authors = ["team useblocks"]
 

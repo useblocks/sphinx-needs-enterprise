@@ -1,12 +1,17 @@
 Changelog
 =========
 
-0.1.5
+1.0.1
 -----
 **Released**: under development
 
+1.0.0
+-----
+**Released**: 26.09.2022
+
 * Improvement: Added needs options check for creating needs from services import.
   `#40 <https://github.com/useblocks/sphinx-needs-enterprise/issues/40>`_
+* Improvement: Works with Sphinx-Needs ``>=1.0.1`` (only).
 
 0.1.4
 -----
