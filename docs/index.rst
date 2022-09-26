@@ -18,8 +18,7 @@ synchronizing data between ``Sphinx-Needs`` and tools like Jira, Azure, GitHub, 
 ``Sphinx-Needs Enterprise`` features are supporting the following services and tools:
 
 
-.. grid:: 4
-   :gutter:
+.. grid:: 2
 
    .. grid-item-card::
       :columns: 12 6 3 3

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sphinx-needs-enterprise"
-version = "0.1.5"
+version = "1.0.0"
 description = ""
 authors = ["team useblocks"]
 
@@ -12,7 +12,7 @@ documentation = "https://useblocks.com/sphinx-needs-enterprise"
 [tool.poetry.dependencies]
 python = ">3.7,<4.0"
 sphinx = ">=4.2"
-sphinx-needs = "==1.0.1"
+sphinx-needs = ">=1.0.1"
 licensing = ">=0.31"
 requests = ">=2"
 jinja2 = ">=2"
