@@ -70,7 +70,8 @@ def jinja_parse(context: Dict, jinja_string: str) -> str:
         content_template = Template(jinja_string, autoescape=True)
     except Exception as e:
         raise ReferenceError(f'There was an error in the jinja statement: "{jinja_string}". ' f"Error Msg: {e}")
-
+    # remove self from response dict, if not, render comlains about receiving "self" twice
+    context.pop("self", None)
     content = content_template.render(**context)
     return content
 
