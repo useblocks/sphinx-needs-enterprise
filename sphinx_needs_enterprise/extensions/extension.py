@@ -12,6 +12,7 @@ from sphinx_needs_enterprise.exceptions import (
 from sphinx_needs_enterprise.license import License
 from sphinx_needs_enterprise.util import dict_get, jinja_parse
 
+import os
 
 class ServiceExtension(BaseService):
     def __init__(
@@ -108,7 +109,15 @@ class ServiceExtension(BaseService):
         query = options.get("query", self.query)
         query = query + self.query_postfix
 
-        request = {"url": url, "auth": auth, "query": query, "params": {}}
+        cert_location = options.get("ssl_cert_abspath")
+
+        if os.path.isabs(cert_location):
+            abs_cert_location = cert_location
+
+        else:
+            cert_location = ""
+
+        request = {"url": url, "auth": auth, "query": query, "params": {}, "cert_abspath": abs_cert_location}
         return request
 
     def _send_request(self, request):
@@ -126,7 +135,14 @@ class ServiceExtension(BaseService):
         #     'queryString': query
         # }
 
-        result = requests.request(**request)
+        # add option to specify self signed certificate location
+        if not request["cert_abspath"].isempty():
+            result = requests.request(**request, verify=request["cert_abspath"])
+
+        else:
+            result = requests.request(**request)
+
+        
         if result.status_code >= 300:
             raise CommunicationException(f"Problems accessing {result.url}.\nReason: {result.text}")
 
