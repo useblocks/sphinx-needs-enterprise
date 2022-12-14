@@ -48,6 +48,9 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     click.echo(f'Query: {params["query"]}')
     click.echo("Sending request:  ", nl=False)
     options["ssl_cert_abspath"] = params["cert_abspath"]
+    if params["cert_abspath"]:
+        abspath = params["cert_abspath"]
+        click.echo(f"Using provided cert at path: {abspath}")
     data = service_obj.request(options)
     click.echo("Done")
     click.echo(f"Retrieved {len(data)} elements")
