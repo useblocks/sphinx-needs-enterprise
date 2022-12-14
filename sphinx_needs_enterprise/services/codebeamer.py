@@ -33,7 +33,7 @@ class CodebeamerService(ServiceExtension):
         dict_undefined_set(config, "url", "http://127.0.0.1:8080")
         dict_undefined_set(config, "query", "")
         dict_undefined_set(config, "id_prefix", "CB_")
-        dict_undefined_set(config, "url_postfix", "/v3/items/query")
+        dict_undefined_set(config, "url_postfix", "/api/v3/items/query")
         dict_undefined_set(config, "content", DEFAULT_CONTENT)
         dict_undefined_set(config, "raw", "False")
         dict_undefined_set(config, "wiki2html", "True")
