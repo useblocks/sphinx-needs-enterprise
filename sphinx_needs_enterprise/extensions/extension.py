@@ -113,17 +113,18 @@ class ServiceExtension(BaseService):
         query = query + self.query_postfix
 
         cert_location = options.get("ssl_cert_abspath", self.ssl_location)
-
-        if os.path.isabs(cert_location):
-            abs_cert_location = cert_location
-
+        if cert_location:
+            if os.path.isabs(cert_location):
+                abs_cert_location = cert_location
         else:
-            cert_location = ""
+            abs_cert_location = ""
+
+
 
         request = {"url": url, "auth": auth, "query": query, "params": {}, "cert_abspath": abs_cert_location}
         return request
 
-    def _send_request(self, request):
+    def _send_request(self, request, cert_abspath=""):
         """
         Sends the final request.
 
@@ -139,8 +140,8 @@ class ServiceExtension(BaseService):
         # }
 
         # add option to specify self signed certificate location
-        if not request["cert_abspath"].isempty():
-            result = requests.request(**request, verify=request["cert_abspath"])
+        if cert_abspath:
+            result = requests.request(**request, verify=cert_abspath)
 
         else:
             result = requests.request(**request)

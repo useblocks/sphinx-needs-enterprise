@@ -76,7 +76,7 @@ class CodebeamerService(ServiceExtension):
             },
         }
 
-        answer = self._send_request(request_params)
+        answer = self._send_request(request_params, params["cert_abspath"])
         data = answer.json()["items"]
         for datum in data:
             # Be sure "description" is set and valid
