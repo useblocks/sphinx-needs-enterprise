@@ -86,7 +86,7 @@ class CodebeamerService(ServiceExtension):
                 # Transform the Codebeamer wiki syntax to HTML.
                 # Must be done by an API request for each item.
                 url = options.get("url", self.url)
-                url = url + "/api/v3/projects/2/wiki2html"
+                url = url + "/api/v3/projects/63/wiki2html"
 
                 auth = (options.get("user", self.user), options.get("password", self.password))
 
