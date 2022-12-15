@@ -76,7 +76,7 @@ class CodebeamerService(ServiceExtension):
                 "descFormat": "HTML",
             },
         }
-
+        time.sleep(0.25)
         answer = self._send_request(request_params, params["cert_abspath"])
         data = answer.json()["items"]
         print(f"Number of requests for translating: {len(data)}")
@@ -93,7 +93,7 @@ class CodebeamerService(ServiceExtension):
                 # Transform the Codebeamer wiki syntax to HTML.
                 # Must be done by an API request for each item.
                 url = options.get("url", self.url)
-                url = url + "/v3/projects/63/wiki2html"
+                url = url + "/api/v3/projects/63/wiki2html"
 
                 auth = (options.get("user", self.user), options.get("password", self.password))
 
@@ -105,7 +105,7 @@ class CodebeamerService(ServiceExtension):
                     "data": json.dumps({"markup": datum["description"]}),
                 }
 
-                wiki2html_answer = self._send_request(wiki2html_params)
+                wiki2html_answer = self._send_request(wiki2html_params, params["cert_abspath"])
                 datum["description"] = wiki2html_answer.text
 
         need_data = self._extract_data(data, options)
