@@ -79,11 +79,7 @@ class CodebeamerService(ServiceExtension):
         time.sleep(0.25)
         answer = self._send_request(request_params, params["cert_abspath"])
         data = answer.json()["items"]
-        print(f"Number of requests for translating: {len(data)}")
-        i = 1
         for datum in data:
-            print(i)
-            i += 1
             time.sleep(0.25)
             
             # Be sure "description" is set and valid
