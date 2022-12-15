@@ -2,6 +2,7 @@ import json
 
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
 from sphinx_needs_enterprise.util import dict_undefined_set
+import time
 
 DEFAULT_CONTENT = """
 {% set desc_list = data.description.split('\n') %}
@@ -78,7 +79,13 @@ class CodebeamerService(ServiceExtension):
 
         answer = self._send_request(request_params, params["cert_abspath"])
         data = answer.json()["items"]
+        print(f"Number of requests for translating: {len(data)}")
+        i = 1
         for datum in data:
+            print(i)
+            i += 1
+            time.sleep(0.25)
+            
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
                 datum["description"] = ""
