@@ -1,3 +1,4 @@
+import os
 import re
 
 import requests
@@ -12,7 +13,6 @@ from sphinx_needs_enterprise.exceptions import (
 from sphinx_needs_enterprise.license import License
 from sphinx_needs_enterprise.util import dict_get, jinja_parse
 
-import os
 
 class ServiceExtension(BaseService):
     def __init__(
@@ -119,8 +119,6 @@ class ServiceExtension(BaseService):
         else:
             abs_cert_location = ""
 
-
-
         request = {"url": url, "auth": auth, "query": query, "params": {}, "cert_abspath": abs_cert_location}
         return request
 
@@ -146,7 +144,6 @@ class ServiceExtension(BaseService):
         else:
             result = requests.request(**request)
 
-        
         if result.status_code >= 300:
             raise CommunicationException(f"Problems accessing {result.url}.\nReason: {result.text}")
 

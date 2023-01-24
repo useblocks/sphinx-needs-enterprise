@@ -77,6 +77,10 @@ url
 ~~~
 Please see :ref:`conf_url` for details.
 
+ssl_cert_abspath
+~~~~~~~~~~~~~~~~
+Specifies an absolute path to a folder containing for example a self signed certificate for the codebeamer URL.
+
 
 Example
 -------

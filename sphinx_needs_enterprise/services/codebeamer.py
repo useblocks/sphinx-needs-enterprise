@@ -1,8 +1,8 @@
 import json
+import time
 
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
 from sphinx_needs_enterprise.util import dict_undefined_set
-import time
 
 DEFAULT_CONTENT = """
 {% set desc_list = data.description.split('\n') %}
@@ -76,12 +76,12 @@ class CodebeamerService(ServiceExtension):
                 "descFormat": "HTML",
             },
         }
-        time.sleep(0.25)
+        time.sleep(0.1)
         answer = self._send_request(request_params, params["cert_abspath"])
         data = answer.json()["items"]
         for datum in data:
-            time.sleep(0.25)
-            
+            time.sleep(0.1)
+
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
                 datum["description"] = ""

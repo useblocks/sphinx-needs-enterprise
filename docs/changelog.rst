@@ -1,9 +1,15 @@
 Changelog
 =========
 
+1.0.2
+-----
+**Released**: under developement
+
 1.0.1
 -----
-**Released**: under development
+**Released**: 24.01.2023
+
+* Improvement: Added :ref: `ssl_cert_abspath` to allow self signed certificates for codebeamer service.
 
 1.0.0
 -----
