@@ -9,7 +9,7 @@ Changelog
 -----
 **Released**: 24.01.2023
 
-* Improvement: Added :ref: `ssl_cert_abspath` to allow self signed certificates for codebeamer service.
+* Improvement: Added :ref: `ssl_cert_abspath` to allow self signed certificates for codebeamer service. This uses the verify option in the `requests library <https://requests.readthedocs.io/en/latest/api/>`.
 
 1.0.0
 -----
