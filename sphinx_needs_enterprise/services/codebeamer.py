@@ -41,7 +41,7 @@ class CodebeamerService(ServiceExtension):
         dict_undefined_set(config, "wiki2html_id", 2)
         dict_undefined_set(config, "cb_request_delay_ms", 0)
 
-        delay = self.config.get("cb_request_delay_ms") / 1000
+        delay = config.get("cb_request_delay_ms") / 1000
         if delay:
             time.sleep(delay)
             print(delay)
