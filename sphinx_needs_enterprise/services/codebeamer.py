@@ -38,6 +38,14 @@ class CodebeamerService(ServiceExtension):
         dict_undefined_set(config, "content", DEFAULT_CONTENT)
         dict_undefined_set(config, "raw", "False")
         dict_undefined_set(config, "wiki2html", "True")
+        dict_undefined_set(config, "wiki2html_id", 2)
+        dict_undefined_set(config, "cb_request_delay_ms", 0)
+
+        delay = self.config.get("cb_request_delay_ms") / 1000
+        if delay:
+            time.sleep(delay)
+            print(delay)
+
 
         mappings_default = {
             "id": ["id"],
@@ -76,11 +84,13 @@ class CodebeamerService(ServiceExtension):
                 "descFormat": "HTML",
             },
         }
-        time.sleep(0.1)
         answer = self._send_request(request_params, params["cert_abspath"])
         data = answer.json()["items"]
         for datum in data:
-            time.sleep(0.1)
+            delay = self.config.get("cb_request_delay_ms") / 1000
+            if delay:
+                time.sleep(delay)
+                print(delay)
 
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
@@ -89,7 +99,9 @@ class CodebeamerService(ServiceExtension):
                 # Transform the Codebeamer wiki syntax to HTML.
                 # Must be done by an API request for each item.
                 url = options.get("url", self.url)
-                url = url + "/api/v3/projects/63/wiki2html"
+                wiki2html_id = self.config.get("wiki2html_id", 2)
+
+                url = url + f"/api/v3/projects/{wiki2html_id}/wiki2html"
 
                 auth = (options.get("user", self.user), options.get("password", self.password))
 
