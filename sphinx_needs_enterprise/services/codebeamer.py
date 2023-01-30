@@ -87,7 +87,7 @@ class CodebeamerService(ServiceExtension):
         answer = self._send_request(request_params, params["cert_abspath"])
         data = answer.json()["items"]
         for datum in data:
-            delay = self.config.get("cb_request_delay_ms") / 1000
+            delay = options.get("cb_request_delay_ms") / 1000
             if delay:
                 time.sleep(delay)
                 print(delay)
