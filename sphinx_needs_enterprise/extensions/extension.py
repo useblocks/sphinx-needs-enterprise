@@ -1,3 +1,4 @@
+import os
 import re
 
 import requests
@@ -29,6 +30,7 @@ class ServiceExtension(BaseService):
         mappings=None,
         mappings_replaces=None,
         extra_data=None,
+        ssl_location=None,
         **kwargs,
     ):
 
@@ -51,6 +53,8 @@ class ServiceExtension(BaseService):
         self.mappings = mappings or config.get("mappings", {})
         self.mapping_replaces = mappings_replaces or config.get("mappings_replaces", {})
         self.extra_data = extra_data or config.get("extra_data", {})
+
+        self.ssl_location = ssl_location or config.get("ssl_cert_abspath", "")
 
         self.license_key = None
         self.product_id = None
@@ -108,10 +112,17 @@ class ServiceExtension(BaseService):
         query = options.get("query", self.query)
         query = query + self.query_postfix
 
-        request = {"url": url, "auth": auth, "query": query, "params": {}}
+        cert_location = options.get("ssl_cert_abspath", self.ssl_location)
+        if cert_location:
+            if os.path.isabs(cert_location):
+                abs_cert_location = cert_location
+        else:
+            abs_cert_location = ""
+
+        request = {"url": url, "auth": auth, "query": query, "params": {}, "cert_abspath": abs_cert_location}
         return request
 
-    def _send_request(self, request):
+    def _send_request(self, request, cert_abspath=""):
         """
         Sends the final request.
 
@@ -126,7 +137,13 @@ class ServiceExtension(BaseService):
         #     'queryString': query
         # }
 
-        result = requests.request(**request)
+        # add option to specify self signed certificate location
+        if cert_abspath:
+            result = requests.request(**request, verify=cert_abspath)
+
+        else:
+            result = requests.request(**request)
+
         if result.status_code >= 300:
             raise CommunicationException(f"Problems accessing {result.url}.\nReason: {result.text}")
 
