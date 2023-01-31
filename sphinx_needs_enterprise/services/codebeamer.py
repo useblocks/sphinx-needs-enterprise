@@ -40,18 +40,12 @@ class CodebeamerService(ServiceExtension):
         dict_undefined_set(config, "url", "http://127.0.0.1:8080")
         dict_undefined_set(config, "query", "")
         dict_undefined_set(config, "id_prefix", "CB_")
-        dict_undefined_set(config, "url_postfix", "/api/v3/items/query")
+        dict_undefined_set(config, "url_postfix", "/rest/v3/items/query")
         dict_undefined_set(config, "content", DEFAULT_CONTENT)
         dict_undefined_set(config, "raw", "False")
         dict_undefined_set(config, "wiki2html", "True")
         dict_undefined_set(config, "wiki2html_id", 2)
         dict_undefined_set(config, "cb_request_delay_ms", 0)
-
-        delay = config.get("cb_request_delay_ms") / 1000
-        if delay:
-            time.sleep(delay)
-            print(delay)
-
 
         mappings_default = {
             "id": ["id"],
@@ -78,6 +72,12 @@ class CodebeamerService(ServiceExtension):
         raw = options.get("raw", str(self.config["raw"]))
         options["raw"] = raw  # Just to be sure that there is a value
 
+        cb_request_delay_ms = options.get("cb_request_delay_ms", self.config["cb_request_delay_ms"])
+        options["cb_request_delay_ms"] = cb_request_delay_ms
+
+        wiki2html_id = options.get("wiki2html_id", self.config["wiki2html_id"])
+        options["wiki2html_id"] = wiki2html_id
+
         params = self._prepare_request(options)
 
         request_params = {
@@ -93,10 +93,9 @@ class CodebeamerService(ServiceExtension):
         answer = self._send_request(request_params, params["cert_abspath"])
         data = answer.json()["items"]
         for datum in data:
-            delay = options.get("cb_request_delay_ms") / 1000
+            delay = cb_request_delay_ms / 1000
             if delay:
                 time.sleep(delay)
-                print(delay)
 
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
