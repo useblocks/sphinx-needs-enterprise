@@ -9,7 +9,9 @@ Changelog
 -----
 **Released**: 24.01.2023
 
-* Improvement: Added :ref: `ssl_cert_abspath` to allow self signed certificates for codebeamer service. This uses the verify option in the `requests library <https://requests.readthedocs.io/en/latest/api/>`.
+* Improvement: Added :ref:`ssl_cert_abspath` to allow self signed certificates for codebeamer service. This uses the verify option in the `requests library <https://requests.readthedocs.io/en/latest/api/>`.
+* Improvement: Added :ref:`cb_request_delay_ms` to configure a delay between codebeamer API :ref:`wiki2html` requests.
+* Improvement: Added :ref:`cb_wiki2html_id` to change the project id used when using :ref:`wiki2html` 
 
 1.0.0
 -----

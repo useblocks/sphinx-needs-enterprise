@@ -49,6 +49,23 @@ Default: True
 
 If ``raw`` is set as well, content gets transformed to HTML, but is presented inside a ``code-block``.
 
+.. _cb_wiki2html_id:
+
+wiki2html_id
+~~~~~~~~~~~~
+
+Integer value to specify which project id to use when request :ref:`cb_wiki2html` requests. 
+
+Default: 2
+
+.. _cb_request_delay_ms:
+
+cb_request_delay_ms
+~~~~~~~~~~~~~~~~~~~
+Integer value to set a delay between :ref:`cb_wiki2html` requests to the API.
+
+Default: 0
+
 .. _cb_debug:
 
 debug

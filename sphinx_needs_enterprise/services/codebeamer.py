@@ -24,13 +24,7 @@ DEFAULT_CONTENT = """
 
 
 class CodebeamerService(ServiceExtension):
-    options = [
-        "query", 
-        "prefix", 
-        "raw", 
-        "wiki2html", 
-        "wiki2html_id", 
-        "cb_request_delay_ms"]
+    options = ["query", "prefix", "raw", "wiki2html", "wiki2html_id", "cb_request_delay_ms"]
 
     def __init__(self, app, name, config, **kwargs):
         self.app = app
