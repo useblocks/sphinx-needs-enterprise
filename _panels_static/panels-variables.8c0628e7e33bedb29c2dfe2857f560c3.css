@@ -1,0 +1,7 @@
+:root {
+--tabs-color-label-active: rgb(42, 99, 154);
+--tabs-color-label-inactive: rgb(42, 99, 154, 0.6);
+--tabs-color-overline: rgb(42, 99, 154);
+--tabs-color-underline: rgb(42, 99, 154);
+--tabs-size-label: 0.9rem;
+}
