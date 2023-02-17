@@ -55,7 +55,7 @@ class JiraService(ServiceExtension):
         request_params = {
             "method": "GET",
             "url": params["url"],
-            "Authorization": "Basic " + base64_auth.decode('UTF-8'),
+            "auth": "Basic " + base64_auth.decode('UTF-8'),
             "params": {"jql": params["query"]},
         }
 
