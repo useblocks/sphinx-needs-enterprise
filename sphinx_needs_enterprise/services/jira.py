@@ -47,7 +47,10 @@ class JiraService(ServiceExtension):
 
 
         # b64 encode username:token
-        base64_auth = b64encode("".join([params["auth"][0], ":", params["auth"][1]]))
+        base64_auth = b64encode(
+            ("".join([params["auth"][0], ":", params["auth"][1]]))
+            .encode('UTF-8')
+            )
 
         request_params = {
             "method": "GET",
