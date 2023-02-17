@@ -1,3 +1,4 @@
+from base64 import b64encode
 from jira2markdown import convert as jira_convert
 from m2r2 import convert as md_convert
 
@@ -41,10 +42,17 @@ class JiraService(ServiceExtension):
     def request(self, options=None):
         params = self._prepare_request(options)
 
+        # according to Jira docs password auth is deprecated
+        # https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/
+
+
+        # b64 encode username:token
+        base64_auth = b64encode("".join(params["auth"][0], ":", params["auth"][1])
+
         request_params = {
             "method": "GET",
             "url": params["url"],
-            "auth": params["auth"],
+            "Authorization": "Basic " + base64_auth,
             "params": {"jql": params["query"]},
         }
 
