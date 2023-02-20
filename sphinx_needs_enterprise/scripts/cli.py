@@ -51,11 +51,6 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
         options["query"] = query
     params = service_obj._prepare_request(options)
     
-    if options["bearer_auth"]:
-        click.echo("------------ USING BEARER ------------")
-            
-        params["auth"] = BearerAuth(options["password"])
-
     # Getting data
     click.echo()
     click.echo(f'URL: {params["url"]}')

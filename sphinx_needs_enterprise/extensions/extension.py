@@ -14,6 +14,14 @@ from sphinx_needs_enterprise.license import License
 from sphinx_needs_enterprise.util import dict_get, jinja_parse
 
 
+class BearerAuth(requests.auth.AuthBase):
+    def __init__(self, token):
+        self.token = token
+    def __call__(self, r):
+        r.headers["authorization"] = "Bearer " + self.token
+        return r
+
+
 class ServiceExtension(BaseService):
     def __init__(
         self,
@@ -31,6 +39,7 @@ class ServiceExtension(BaseService):
         mappings_replaces=None,
         extra_data=None,
         ssl_location=None,
+        bearer_auth=None,
         **kwargs,
     ):
 
@@ -55,6 +64,7 @@ class ServiceExtension(BaseService):
         self.extra_data = extra_data or config.get("extra_data", {})
 
         self.ssl_location = ssl_location or config.get("ssl_cert_abspath", "")
+        self.bearer_auth = ssl_location or config.get("enable_bearer_auth", "")
 
         self.license_key = None
         self.product_id = None
@@ -108,7 +118,15 @@ class ServiceExtension(BaseService):
         url = options.get("url", self.url)
         url = url + self.url_postfix
 
-        auth = (options.get("user", self.user), options.get("password", self.password))
+        bearer_auth = options.get("enable_bearer_auth", self.bearer_auth)
+
+        if bearer_auth:
+
+            auth = BearerAuth(options.get("password", self.password))
+
+        else:
+
+            auth = (options.get("user", self.user), options.get("password", self.password))
         query = options.get("query", self.query)
         query = query + self.query_postfix
 

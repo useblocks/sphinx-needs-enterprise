@@ -6,12 +6,6 @@ from m2r2 import convert as md_convert
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
 from sphinx_needs_enterprise.util import dict_undefined_set
 
-class BearerAuth(requests.auth.AuthBase):
-    def __init__(self, token):
-        self.token = token
-    def __call__(self, r):
-        r.headers["authorization"] = "Bearer " + self.token
-        return r
 
 class JiraService(ServiceExtension):
     options = ["query", "prefix"]
@@ -52,25 +46,13 @@ class JiraService(ServiceExtension):
         # according to Jira docs password auth is deprecated
         # https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/
 
-        print("------------ OPTIONS ------------")
-        print(options)
-        if options["bearer_auth"]:
-            
-            request_params = {
-                "method": "GET",
-                "url": params["url"],
-                "auth": BearerAuth(params["auth"][1]),
-                "params": {"jql": params["query"]},
-            }
 
-        else:
-
-            request_params = {
-                "method": "GET",
-                "url": params["url"],
-                "auth": params["auth"],
-                "params": {"jql": params["query"]},
-            }
+        request_params = {
+            "method": "GET",
+            "url": params["url"],
+            "auth": params["auth"],
+            "params": {"jql": params["query"]},
+        }
 
         answer = self._send_request(request_params)
         data = answer.json()["issues"]
