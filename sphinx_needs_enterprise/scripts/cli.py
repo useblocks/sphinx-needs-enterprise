@@ -53,7 +53,7 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
 
 
     print("------------ OPTIONS ------------")
-    print(options)
+    click.echo(f"OPTIONS {options}")
     
     if options["bearer_auth"]:
             
