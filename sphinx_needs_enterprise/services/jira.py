@@ -52,6 +52,7 @@ class JiraService(ServiceExtension):
         # according to Jira docs password auth is deprecated
         # https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/
 
+        print("------------ OPTIONS ------------")
         print(options)
         if options["bearer_auth"]:
             
