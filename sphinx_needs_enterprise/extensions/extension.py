@@ -13,13 +13,6 @@ from sphinx_needs_enterprise.exceptions import (
 from sphinx_needs_enterprise.license import License
 from sphinx_needs_enterprise.util import dict_get, jinja_parse
 
-class BearerAuth(requests.auth.AuthBase):
-    def __init__(self, token):
-        self.token = token
-    def __call__(self, r):
-        r.headers["authorization"] = "Bearer " + self.token
-        return r
-
 
 class ServiceExtension(BaseService):
     def __init__(
@@ -149,7 +142,7 @@ class ServiceExtension(BaseService):
             result = requests.request(**request, verify=cert_abspath)
 
         else:
-            result = requests.request(**request, auth=BearerAuth(request["auth"][1]))
+            result = requests.request(**request)
 
         if result.status_code >= 300:
             raise CommunicationException(f"Problems accessing {result.url}.\nReason: {result.text}")
