@@ -52,7 +52,7 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     params = service_obj._prepare_request(options)
 
 
-    print("------------ OPTIONS ------------")
+    click.echo("------------ OPTIONS ------------")
     click.echo(f"OPTIONS {options}")
     
     if options["bearer_auth"]:
