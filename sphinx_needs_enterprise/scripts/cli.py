@@ -1,5 +1,6 @@
 import json
 import os
+import requests
 import subprocess
 import webbrowser
 from datetime import datetime, timedelta
@@ -16,6 +17,14 @@ except ImportError:
     from sphinx_needs.needsfile import NeedsList
 
 from sphinx_needs_enterprise.scripts.loader import service_loader
+
+
+class BearerAuth(requests.auth.AuthBase):
+    def __init__(self, token):
+        self.token = token
+    def __call__(self, r):
+        r.headers["authorization"] = "Bearer " + self.token
+        return r
 
 
 @click.group()
@@ -41,6 +50,14 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     if query:
         options["query"] = query
     params = service_obj._prepare_request(options)
+
+
+    print("------------ OPTIONS ------------")
+    print(options)
+    
+    if options["bearer_auth"]:
+            
+        options["auth"] = BearerAuth(params["auth"][1])
 
     # Getting data
     click.echo()
