@@ -107,8 +107,6 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     i = 1
     for datum in data:
         needlist.add_need(version, datum)
-        i += 1
-        print(i)
 
     click.echo("\nStoring data to json file: ", nl=False)
     needlist.write_json()

@@ -118,10 +118,21 @@ class CodebeamerService(ServiceExtension):
 
             # there are more items than shown, request more pages
             if total > page_size:
-                total_page_count = total // page_size
+
+                # minimum amount of pages needed for example if pageSize = 100 and 1000 objects
+                min_pages = total // page_size
+
+                # if page_size multiple of amount of objects, no additional query needed
+                if total % page_size == 0:
+
+                    total_page_count = min_pages
+
+                else:
+                    # one more pagination request needed to get remainder of data
+                    total_page_count = min_pages + 1
 
                 # request pages 2 - last page
-                for i in range(1, total_page_count):
+                for i in range(total_page_count):
                     
                     time.sleep(delay)
 
