@@ -74,7 +74,6 @@ class CodebeamerService(ServiceExtension):
 
         params = self._prepare_request(options)
 
-        current_page = 1
         delay = 1
         current_page = 1
         RETRY_LIMIT = 3
@@ -127,6 +126,7 @@ class CodebeamerService(ServiceExtension):
                     time.sleep(delay)
 
                     current_page += 1
+                    request_params["params"]["page"] = current_page
 
                     print(f"querying page {current_page}")
 
@@ -188,6 +188,8 @@ class CodebeamerService(ServiceExtension):
                 datum["description"] = wiki2html_answer.text
 
         need_data = self._extract_data(data, options)
+
+        print(len(need_data))
 
         return need_data
 

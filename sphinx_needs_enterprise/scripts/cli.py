@@ -104,9 +104,11 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
                 f"Warning: new created needs from imported data do not have such needs options: \
                 {not_included_options}"
             )
-
+    i = 1
     for datum in data:
         needlist.add_need(version, datum)
+        i += 1
+        print(i)
 
     click.echo("\nStoring data to json file: ", nl=False)
     needlist.write_json()
