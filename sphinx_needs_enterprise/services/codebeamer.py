@@ -74,18 +74,78 @@ class CodebeamerService(ServiceExtension):
 
         params = self._prepare_request(options)
 
+        current_page = 1
+        delay = 2
+        current_page = 1
+        RETRY_LIMIT = 3
+
         request_params = {
             "method": "GET",
             "url": params["url"],
             "auth": params["auth"],
             "params": {
                 "queryString": params["query"],
+                "pageSize": 250,
+                "page": current_page,
                 "descriptionFormat": "HTML",
                 "descFormat": "HTML",
             },
         }
-        answer = self._send_request(request_params, params["cert_abspath"])
-        data = answer.json()["items"]
+        result = self._send_request(request_params, params["cert_abspath"])
+        
+        
+        response_json = result.json()
+
+        combined_objects = response_json["items"]
+        print(len(combined_objects))
+
+        retries = 0
+        if result.status_code != 200:
+            while retries < RETRY_LIMIT:
+                result = self._send_request(request_params, params["cert_abspath"])
+                retries += 1
+                time.sleep(0.5)
+
+        # check return code
+
+        if result.status_code == 200:
+
+            total = response_json["total"]
+            page_size = response_json["pageSize"]
+
+            # there are more items than shown, request more pages
+            if total > page_size:
+                total_page_count = total // page_size
+
+                # request pages 2 - last page
+                for i in range(1, total_page_count):
+                    current_page += 1
+
+                    result = self._send_request(request_params, params["cert_abspath"])
+
+                    status = result.status_code
+
+                    retries = 0
+                    
+                    if status != 200:
+
+                        while retries < RETRY_LIMIT:
+                            result = self._send_request(request_params, params["cert_abspath"])
+                            retries += 1
+                            time.sleep(0.5)
+
+                        
+                    response_json = result.json()
+
+                    [combined_objects.append(item) for item in response_json["items"]]
+
+                    retries += 1
+
+                    time.sleep(delay)
+        
+        
+        
+        data = combined_objects
         for datum in data:
             delay = cb_request_delay_ms / 1000
             if delay:
