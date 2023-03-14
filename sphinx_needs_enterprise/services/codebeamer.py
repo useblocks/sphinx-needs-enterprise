@@ -97,7 +97,7 @@ class CodebeamerService(ServiceExtension):
         response_json = result.json()
 
         combined_objects = response_json["items"]
-        print(combined_objects)
+        print(len(combined_objects))
 
         retries = 0
         if result.status_code != 200:
@@ -109,6 +109,10 @@ class CodebeamerService(ServiceExtension):
         # check return code
 
         if result.status_code == 200:
+            
+            print("start pagination")
+
+
 
             total = response_json["total"]
             page_size = response_json["pageSize"]
@@ -123,6 +127,8 @@ class CodebeamerService(ServiceExtension):
                     time.sleep(delay)
 
                     current_page += 1
+
+                    print(f"querying page {current_page}")
 
                     result = self._send_request(request_params, params["cert_abspath"])
 
@@ -142,11 +148,14 @@ class CodebeamerService(ServiceExtension):
 
                     [combined_objects.append(item) for item in response_json["items"]]
 
+                    print(len(combined_objects))
+
                     retries += 1
 
                     
         
-        
+        print("starting wiki2html requests")
+        print(len(combined_objects))
         
         data = combined_objects
         for datum in data:
