@@ -75,7 +75,7 @@ class CodebeamerService(ServiceExtension):
         params = self._prepare_request(options)
 
         current_page = 1
-        delay = 2
+        delay = 1
         current_page = 1
         RETRY_LIMIT = 3
 
@@ -119,6 +119,9 @@ class CodebeamerService(ServiceExtension):
 
                 # request pages 2 - last page
                 for i in range(1, total_page_count):
+                    
+                    time.sleep(delay)
+
                     current_page += 1
 
                     result = self._send_request(request_params, params["cert_abspath"])
@@ -141,7 +144,7 @@ class CodebeamerService(ServiceExtension):
 
                     retries += 1
 
-                    time.sleep(delay)
+                    
         
         
         
