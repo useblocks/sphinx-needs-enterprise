@@ -85,7 +85,7 @@ class CodebeamerService(ServiceExtension):
             "auth": params["auth"],
             "params": {
                 "queryString": params["query"],
-                "pageSize": 250,
+                "pageSize": 100,
                 "page": current_page,
                 "descriptionFormat": "HTML",
                 "descFormat": "HTML",
@@ -97,7 +97,7 @@ class CodebeamerService(ServiceExtension):
         response_json = result.json()
 
         combined_objects = response_json["items"]
-        print(len(combined_objects))
+        print(combined_objects)
 
         retries = 0
         if result.status_code != 200:
