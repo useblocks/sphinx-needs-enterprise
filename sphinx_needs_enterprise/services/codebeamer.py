@@ -172,7 +172,7 @@ class CodebeamerService(ServiceExtension):
         for datum in data:
             delay = cb_request_delay_ms / 1000
             if delay:
-                time.sleep(delay)
+                time.sleep(delay*1.5)
 
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
