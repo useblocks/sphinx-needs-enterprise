@@ -101,9 +101,10 @@ class CodebeamerService(ServiceExtension):
         retries = 0
         if result.status_code != 200:
             while retries < RETRY_LIMIT:
+                print("retrying connection")
                 result = self._send_request(request_params, params["cert_abspath"])
                 retries += 1
-                time.sleep(0.5)
+                time.sleep(3)
 
         # check return code
 
@@ -150,9 +151,10 @@ class CodebeamerService(ServiceExtension):
                     if status != 200:
 
                         while retries < RETRY_LIMIT:
+                            print("retrying connection")
                             result = self._send_request(request_params, params["cert_abspath"])
                             retries += 1
-                            time.sleep(0.5)
+                            time.sleep(3)
 
                         
                     response_json = result.json()
@@ -169,6 +171,9 @@ class CodebeamerService(ServiceExtension):
         print(len(combined_objects))
         
         data = combined_objects
+        
+        """
+        
         for datum in data:
             delay = cb_request_delay_ms / 1000
             if delay:
@@ -197,6 +202,11 @@ class CodebeamerService(ServiceExtension):
 
                 wiki2html_answer = self._send_request(wiki2html_params, params["cert_abspath"])
                 datum["description"] = wiki2html_answer.text
+        
+        
+        
+        """
+        
 
         need_data = self._extract_data(data, options)
 
