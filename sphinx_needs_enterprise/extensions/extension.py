@@ -166,16 +166,25 @@ class ServiceExtension(BaseService):
             from time import sleep
 
             delay = 15
+            RETRY_LIMIT = 3
+            retries = 0
+
             print(f"HTTP status code {result.status_code}")
-            print(f"retrying once in {delay} seconds")
+            print(f"retrying {RETRY_LIMIT} times with {delay} s delay")
 
-            sleep(delay)
+            while result.status_code != 200 and retries < RETRY_LIMIT:
+                retries += 1
+                print(f"retry #{retries} in {delay} seconds")
+                sleep(delay)
+                print(f"HTTP status code {result.status_code}")
+                
             
-            if cert_abspath:
-                result = requests.request(**request, verify=cert_abspath)
+                if cert_abspath:
+                    result = requests.request(**request, verify=cert_abspath)
 
-            else:
-                result = requests.request(**request)
+                else:
+                    result = requests.request(**request)
+            
 
             
             if result.status_code >= 300:
