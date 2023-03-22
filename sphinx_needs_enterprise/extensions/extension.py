@@ -165,7 +165,7 @@ class ServiceExtension(BaseService):
         if result.status_code >= 300:
             from time import sleep
 
-            delay = 90
+            delay = 15
             print(f"HTTP status code {result.status_code}")
             print(f"retrying once in {delay} seconds")
 
