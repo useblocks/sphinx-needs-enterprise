@@ -163,7 +163,24 @@ class ServiceExtension(BaseService):
             result = requests.request(**request)
 
         if result.status_code >= 300:
-            raise CommunicationException(f"Problems accessing {result.url}.\nReason: {result.text}")
+            from time import sleep
+
+            delay = 90
+            print(f"HTTP status code {result.status_code}")
+            print(f"retrying once in {delay} seconds")
+
+            sleep(delay)
+            
+            if cert_abspath:
+                result = requests.request(**request, verify=cert_abspath)
+
+            else:
+                result = requests.request(**request)
+
+            
+            if result.status_code >= 300:
+
+                raise CommunicationException(f"Problems accessing {result.url}.\nReason: {result.text}")
 
         return result
 
