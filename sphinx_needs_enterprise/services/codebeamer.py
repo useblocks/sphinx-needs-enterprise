@@ -84,7 +84,7 @@ class CodebeamerService(ServiceExtension):
             "auth": params["auth"],
             "params": {
                 "queryString": params["query"],
-                "pageSize": 100,
+                "pageSize": 250,
                 "page": current_page,
                 "descriptionFormat": "HTML",
                 "descFormat": "HTML",
