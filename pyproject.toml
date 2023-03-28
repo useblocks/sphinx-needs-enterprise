@@ -8,6 +8,7 @@ license = "BSL 1.1"
 readme = "README.rst"
 repository = "http://github.com/useblocks/sphinx-needs-enterprise"
 documentation = "https://useblocks.com/sphinx-needs-enterprise"
+sphinx = {version = ">= 4.0"}
 
 [tool.poetry.dependencies]
 python = ">3.7,<4.0"
@@ -50,7 +51,6 @@ line-length = 120
 profile = "black"
 
 [tool.poetry.extras]
-sphinx = {version = ">= 4.0"}
 docs = ["sphinx"]
 
 [build-system]
