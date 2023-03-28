@@ -15,9 +15,10 @@ import datetime
 import os
 import sys
 
+from sphinx_needs_enterprise.version import VERSION
+
 # from docutils.parsers.rst import directives
 
-from sphinx_needs_enterprise.version import VERSION
 
 sys.path.insert(0, os.path.abspath("../sphinx_needs_enterprise"))
 

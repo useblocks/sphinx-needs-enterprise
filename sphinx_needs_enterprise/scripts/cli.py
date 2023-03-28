@@ -1,6 +1,5 @@
 import json
 import os
-import requests
 import subprocess
 import webbrowser
 from datetime import datetime, timedelta
@@ -8,6 +7,7 @@ from datetime import datetime, timedelta
 import click
 import elasticsearch
 import jinja2
+import requests
 from tqdm import tqdm
 
 # API has changed with Sphinx-Needs version 1.0.1
@@ -22,6 +22,7 @@ from sphinx_needs_enterprise.scripts.loader import service_loader
 class BearerAuth(requests.auth.AuthBase):
     def __init__(self, token):
         self.token = token
+
     def __call__(self, r):
         r.headers["authorization"] = "Bearer " + self.token
         return r
@@ -50,7 +51,7 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     if query:
         options["query"] = query
     params = service_obj._prepare_request(options)
-    
+
     # Getting data
     click.echo()
     click.echo(f'URL: {params["url"]}')
@@ -104,7 +105,6 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
                 f"Warning: new created needs from imported data do not have such needs options: \
                 {not_included_options}"
             )
-    i = 1
     for datum in data:
         needlist.add_need(version, datum)
 

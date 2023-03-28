@@ -1,5 +1,3 @@
-import requests
-
 from jira2markdown import convert as jira_convert
 from m2r2 import convert as md_convert
 
@@ -45,7 +43,6 @@ class JiraService(ServiceExtension):
 
         # according to Jira docs password auth is deprecated
         # https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/
-
 
         request_params = {
             "method": "GET",

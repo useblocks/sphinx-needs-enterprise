@@ -76,7 +76,7 @@ class CodebeamerService(ServiceExtension):
 
         delay = 1
         current_page = 1
-        RETRY_LIMIT = 3
+        retry_limit = 3
 
         # query 250 objects at once
         request_params = {
@@ -92,17 +92,16 @@ class CodebeamerService(ServiceExtension):
             },
         }
         result = self._send_request(request_params, params["cert_abspath"])
-        
-        
+
         response_json = result.json()
 
         combined_objects = response_json["items"]
         print(len(combined_objects))
 
-        # if first request fails, try RETRY_LIMIT times again 
+        # if first request fails, try RETRY_LIMIT times again
         retries = 0
         if result.status_code != 200:
-            while retries < RETRY_LIMIT:
+            while retries < retry_limit:
                 print("retrying connection")
                 result = self._send_request(request_params, params["cert_abspath"])
                 retries += 1
@@ -111,10 +110,8 @@ class CodebeamerService(ServiceExtension):
         # check return code
 
         if result.status_code == 200:
-            
+
             print("start pagination")
-
-
 
             total = response_json["total"]
             page_size = response_json["pageSize"]
@@ -136,7 +133,7 @@ class CodebeamerService(ServiceExtension):
 
                 # request pages 2 - last page
                 for i in range(total_page_count):
-                    
+
                     time.sleep(delay)
 
                     current_page += 1
@@ -149,16 +146,15 @@ class CodebeamerService(ServiceExtension):
                     status = result.status_code
 
                     retries = 0
-                    
+
                     if status != 200:
 
-                        while retries < RETRY_LIMIT:
+                        while retries < retry_limit:
                             print("retrying connection")
                             result = self._send_request(request_params, params["cert_abspath"])
                             retries += 1
                             time.sleep(3)
 
-                        
                     response_json = result.json()
 
                     [combined_objects.append(item) for item in response_json["items"]]
@@ -167,19 +163,15 @@ class CodebeamerService(ServiceExtension):
 
                     retries += 1
 
-                    
-        
         # print("starting wiki2html requests")
         # print(len(combined_objects))
-        
-        data = combined_objects
-        
 
-        
+        data = combined_objects
+
         for datum in data:
             delay = cb_request_delay_ms / 1000
             if delay:
-                time.sleep(delay*1.5)
+                time.sleep(delay * 1.5)
 
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
@@ -204,10 +196,6 @@ class CodebeamerService(ServiceExtension):
 
                 wiki2html_answer = self._send_request(wiki2html_params, params["cert_abspath"])
                 datum["description"] = wiki2html_answer.text
-        
-        
-        
-        
 
         need_data = self._extract_data(data, options)
 

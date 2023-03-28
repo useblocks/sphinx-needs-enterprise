@@ -17,6 +17,7 @@ from sphinx_needs_enterprise.util import dict_get, jinja_parse
 class BearerAuth(requests.auth.AuthBase):
     def __init__(self, token):
         self.token = token
+
     def __call__(self, r):
         r.headers["authorization"] = "Bearer " + self.token
         return r
@@ -166,27 +167,24 @@ class ServiceExtension(BaseService):
             from time import sleep
 
             delay = 15
-            RETRY_LIMIT = 3
+            retry_limit = 3
             retries = 0
 
             print(f"HTTP status code {result.status_code}")
-            print(f"retrying {RETRY_LIMIT} times with {delay} s delay")
+            print(f"retrying {retry_limit} times with {delay} s delay")
 
-            while result.status_code != 200 and retries < RETRY_LIMIT:
+            while result.status_code != 200 and retries < retry_limit:
                 retries += 1
                 print(f"retry #{retries} in {delay} seconds")
                 sleep(delay)
                 print(f"HTTP status code {result.status_code}")
-                
-            
+
                 if cert_abspath:
                     result = requests.request(**request, verify=cert_abspath)
 
                 else:
                     result = requests.request(**request)
-            
 
-            
             if result.status_code >= 300:
 
                 raise CommunicationException(f"Problems accessing {result.url}.\nReason: {result.text}")
