@@ -49,9 +49,8 @@ line-length = 120
 [tool.isort]
 profile = "black"
 
-sphinx = {version = ">= 4.0"}
-
 [tool.poetry.extras]
+sphinx = {version = ">= 4.0"}
 docs = ["sphinx"]
 
 [build-system]
