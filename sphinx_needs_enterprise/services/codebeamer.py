@@ -78,6 +78,7 @@ class CodebeamerService(ServiceExtension):
         current_page = 1
         RETRY_LIMIT = 3
 
+        # query 250 objects at once
         request_params = {
             "method": "GET",
             "url": params["url"],
@@ -98,6 +99,7 @@ class CodebeamerService(ServiceExtension):
         combined_objects = response_json["items"]
         print(len(combined_objects))
 
+        # if first request fails, try RETRY_LIMIT times again 
         retries = 0
         if result.status_code != 200:
             while retries < RETRY_LIMIT:
@@ -167,12 +169,12 @@ class CodebeamerService(ServiceExtension):
 
                     
         
-        print("starting wiki2html requests")
-        print(len(combined_objects))
+        # print("starting wiki2html requests")
+        # print(len(combined_objects))
         
         data = combined_objects
         
-        """
+
         
         for datum in data:
             delay = cb_request_delay_ms / 1000
@@ -205,7 +207,6 @@ class CodebeamerService(ServiceExtension):
         
         
         
-        """
         
 
         need_data = self._extract_data(data, options)
