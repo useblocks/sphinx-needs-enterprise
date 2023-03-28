@@ -2,4 +2,4 @@ sphinx
 sphinx-needs==1.0.1
 sphinxcontrib-plantuml
 sphinx-revealjs
-pygls
+pygls<=1.0
