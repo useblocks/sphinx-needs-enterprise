@@ -5,6 +5,10 @@ Changelog
 -----
 **Released**: under developement
 
+* Improvement: Added pagination and retry attemps for codebeamer API requests
+* Improvement: Added bearer auth
+
+
 1.0.1
 -----
 **Released**: 01.02.2023

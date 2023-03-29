@@ -169,9 +169,6 @@ class CodebeamerService(ServiceExtension):
         data = combined_objects
 
         for datum in data:
-            delay = cb_request_delay_ms / 1000
-            if delay:
-                time.sleep(delay * 1.5)
 
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
@@ -179,6 +176,11 @@ class CodebeamerService(ServiceExtension):
             elif datum["descriptionFormat"] == "Wiki" and wiki2html == "True":
                 # Transform the Codebeamer wiki syntax to HTML.
                 # Must be done by an API request for each item.
+
+                delay = cb_request_delay_ms / 1000
+                if delay:
+                    time.sleep(delay)
+
                 url = options.get("url", self.url)
                 wiki2html_id = options.get("wiki2html_id", 2)
 
