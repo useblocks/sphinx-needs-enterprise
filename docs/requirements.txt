@@ -1,6 +1,6 @@
 sphinx>=3.4
 sphinxcontrib-plantuml
-sphinx-needs==1.0.1
+sphinx-needs==1.2.2
 sphinx-copybutton
 pygls
 
