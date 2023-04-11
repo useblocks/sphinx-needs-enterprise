@@ -1,6 +1,7 @@
+import time
+
 from jira2markdown import convert as jira_convert
 from m2r2 import convert as md_convert
-import time
 
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
 from sphinx_needs_enterprise.util import dict_undefined_set
@@ -57,12 +58,12 @@ class JiraService(ServiceExtension):
         }
 
         answer = self._send_request(request_params)
-        
+
         response_json = answer.json()
 
         combined_objects = response_json["issues"]
         print(len(combined_objects))
-        
+
         if result.status_code == 200:
 
             print("start pagination")
@@ -88,7 +89,7 @@ class JiraService(ServiceExtension):
                 # request pages 2 - last page
                 for i in range(total_page_count):
 
-                    time.sleep(.2)
+                    time.sleep(0.2)
 
                     current_page += 1
                     request_params["params"]["page"] = current_page
@@ -116,7 +117,7 @@ class JiraService(ServiceExtension):
                     print(len(combined_objects))
 
                     retries += 1
-              
+
         data = combined_objects
 
         if self.config["convert_content"]:
