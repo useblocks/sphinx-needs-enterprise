@@ -53,8 +53,11 @@ class JiraService(ServiceExtension):
             "method": "GET",
             "url": params["url"],
             "auth": params["auth"],
-            "params": {"jql": params["query"]},
-            "maxResults": 500,
+            "params": {
+                "jql": params["query"],
+                "maxResults": 500,
+                },
+        
         }
 
         answer = self._send_request(request_params)
