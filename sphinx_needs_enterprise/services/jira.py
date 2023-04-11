@@ -42,6 +42,7 @@ class JiraService(ServiceExtension):
 
     def request(self, options=None):
 
+        current_page = 1
         retry_limit = 3
 
         params = self._prepare_request(options)
