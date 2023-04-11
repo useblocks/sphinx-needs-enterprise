@@ -56,13 +56,13 @@ class JiraService(ServiceExtension):
             "params": {
                 "jql": params["query"],
                 "maxResults": 500,
-                "fields":"id,key,description",
+                "fields": "id,key,description",
             },
         }
 
-        answer = self._send_request(request_params)
+        result = self._send_request(request_params)
 
-        response_json = answer.json()
+        response_json = result.json()
 
         combined_objects = response_json["issues"]
         print(len(combined_objects))
