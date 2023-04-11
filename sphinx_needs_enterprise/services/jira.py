@@ -1,5 +1,6 @@
 from jira2markdown import convert as jira_convert
 from m2r2 import convert as md_convert
+import time
 
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
 from sphinx_needs_enterprise.util import dict_undefined_set
@@ -39,6 +40,9 @@ class JiraService(ServiceExtension):
         super().__init__(config, **kwargs)
 
     def request(self, options=None):
+
+        retry_limit = 3
+
         params = self._prepare_request(options)
 
         # according to Jira docs password auth is deprecated
@@ -49,10 +53,71 @@ class JiraService(ServiceExtension):
             "url": params["url"],
             "auth": params["auth"],
             "params": {"jql": params["query"]},
+            "maxResults": 500,
         }
 
         answer = self._send_request(request_params)
-        data = answer.json()["issues"]
+        
+        response_json = answer.json()
+
+        combined_objects = response_json["issues"]
+        print(len(combined_objects))
+        
+        if result.status_code == 200:
+
+            print("start pagination")
+
+            total = response_json["total"]
+            page_size = response_json["maxResults"]
+
+            # there are more items than shown, request more pages
+            if total > page_size:
+
+                # minimum amount of pages needed for example if pageSize = 100 and 1000 objects
+                min_pages = total // page_size
+
+                # if page_size multiple of amount of objects, no additional query needed
+                if total % page_size == 0:
+
+                    total_page_count = min_pages
+
+                else:
+                    # one more pagination request needed to get remainder of data
+                    total_page_count = min_pages + 1
+
+                # request pages 2 - last page
+                for i in range(total_page_count):
+
+                    time.sleep(.2)
+
+                    current_page += 1
+                    request_params["params"]["page"] = current_page
+
+                    print(f"querying page {current_page}")
+
+                    result = self._send_request(request_params)
+
+                    status = result.status_code
+
+                    retries = 0
+
+                    if status != 200:
+
+                        while retries < retry_limit:
+                            print("retrying connection")
+                            result = self._send_request(request_params)
+                            retries += 1
+                            time.sleep(3)
+
+                    response_json = result.json()
+
+                    [combined_objects.append(item) for item in response_json["issues"]]
+
+                    print(len(combined_objects))
+
+                    retries += 1
+              
+        data = combined_objects
 
         if self.config["convert_content"]:
             # We need to transform the description text format to rst, before we proceed to extract
