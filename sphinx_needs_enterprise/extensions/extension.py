@@ -122,6 +122,7 @@ class ServiceExtension(BaseService):
         bearer_auth = options.get("enable_bearer_auth", self.bearer_auth)
 
         if bearer_auth:
+            print("using bearer auth")
 
             auth = BearerAuth(options.get("password", self.password))
 
