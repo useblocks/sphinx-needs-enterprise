@@ -56,7 +56,7 @@ class JiraService(ServiceExtension):
             "auth": params["auth"],
             "params": {
                 "jql": params["query"],
-                "maxResults": 500,
+                "maxResults": 400,
                 "fields": "id,key,description",
             },
         }
@@ -75,6 +75,9 @@ class JiraService(ServiceExtension):
             total = response_json["total"]
             page_size = response_json["maxResults"]
 
+            print(f"There are {total} elements")
+            print(f"pagesize is {page_size}")
+
             # there are more items than shown, request more pages
             if total > page_size:
 
@@ -90,10 +93,12 @@ class JiraService(ServiceExtension):
                     # one more pagination request needed to get remainder of data
                     total_page_count = min_pages + 1
 
+                print(f"requesting {total_page_count} pages")
+
                 # request pages 2 - last page
                 for i in range(total_page_count):
 
-                    time.sleep(0.2)
+                    time.sleep(0.33)
 
                     current_page += 1
                     request_params["params"]["page"] = current_page
