@@ -204,6 +204,8 @@ class ServiceExtension(BaseService):
         need_data = []
         if options is None:
             options = {}
+        print("data in extraction")
+        print(len(data))
         for item in data:
             extra_data = {}
             for name, selector in self.extra_data.items():
