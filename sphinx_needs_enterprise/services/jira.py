@@ -57,7 +57,8 @@ class JiraService(ServiceExtension):
             "params": {
                 "jql": params["query"],
                 "maxResults": 400,
-                "fields": "id,key,description,status,summary,issuetype,assignee",
+                "startAt": 0,
+                "fields": "id,key,description,status,summary",
             },
         }
 
@@ -101,7 +102,7 @@ class JiraService(ServiceExtension):
                     time.sleep(0.33)
 
                     current_page += 1
-                    request_params["params"]["page"] = current_page
+                    request_params["params"]["startAt"] = current_page * page_size
 
                     print(f"querying page {current_page}")
 
