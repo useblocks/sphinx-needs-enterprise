@@ -57,7 +57,7 @@ class JiraService(ServiceExtension):
             "params": {
                 "jql": params["query"],
                 "maxResults": 400,
-                "fields": "id,key,description,status,summary",
+                "fields": "id,key,description,status,summary,issuetype,assignee",
             },
         }
 
