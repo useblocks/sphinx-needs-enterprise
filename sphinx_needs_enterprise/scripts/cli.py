@@ -65,6 +65,8 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     click.echo("Done")
     click.echo(f"Retrieved {len(data)} elements")
 
+    data = service_obj.replace_content(options, data)
+
     # Storing data
     os.makedirs(outdir, exist_ok=True)
     needlist = NeedsList(sphinx_config, outdir, ".")

@@ -204,8 +204,6 @@ class ServiceExtension(BaseService):
         need_data = []
         if options is None:
             options = {}
-        print("data in extraction")
-        print(len(data))
         for item in data:
             extra_data = {}
             for name, selector in self.extra_data.items():
@@ -260,8 +258,28 @@ class ServiceExtension(BaseService):
                 if name == "id":
                     need_values[name] = prefix + need_values.get(name, "")
 
+            if "title" not in need_values.keys():
+                need_values["title"] = "no title provided"
+
             finale_data = {"content": content}
             finale_data.update(need_values)
 
             need_data.append(finale_data)
         return need_data
+
+    def replace_content(self, options, data):
+        replace_dict = options.get("replace_content", self.config["replace_content"])
+        options["replace_content"] = replace_dict
+
+        if not replace_dict:
+            return data
+
+        for field, replacements in replace_dict.items():
+
+            for string, replacement in replacements.items():
+                for datum in data:
+
+                    datum[field].replace(string, replacement)
+                    print(f"replacing {string} with {replacement} in {datum['id']}")
+
+        return data
