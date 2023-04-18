@@ -275,11 +275,13 @@ class ServiceExtension(BaseService):
             return data
 
         for field, replacements in replace_dict.items():
-
             for string, replacement in replacements.items():
                 for datum in data:
+                    try:
 
-                    datum[field].replace(string, replacement)
-                    print(f"replacing {string} with {replacement} in {datum['id']}")
-
+                        datum[field].replace(string, replacement)
+                        print(f"replacing {string} with {replacement} in {datum['id']}")
+                    except KeyError:
+                        print(f"cound not find")
+                        continue
         return data
