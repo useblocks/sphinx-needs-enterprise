@@ -65,7 +65,7 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     click.echo("Done")
     click.echo(f"Retrieved {len(data)} elements")
     
-    if "replace_content" in service_obj.config.has:
+    if "replace_content" in service_obj.config:
         data = service_obj.replace_content(options, data)
 
     # Storing data
