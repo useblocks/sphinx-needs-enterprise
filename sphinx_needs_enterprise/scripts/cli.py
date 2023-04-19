@@ -64,8 +64,9 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     data = service_obj.request(options)
     click.echo("Done")
     click.echo(f"Retrieved {len(data)} elements")
-
-    data = service_obj.replace_content(options, data)
+    
+    if "replace_content" in service_obj.config.has:
+        data = service_obj.replace_content(options, data)
 
     # Storing data
     os.makedirs(outdir, exist_ok=True)
