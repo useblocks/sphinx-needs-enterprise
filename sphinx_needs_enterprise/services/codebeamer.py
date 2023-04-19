@@ -177,6 +177,11 @@ class CodebeamerService(ServiceExtension):
                 # Transform the Codebeamer wiki syntax to HTML.
                 # Must be done by an API request for each item.
 
+                print("format is WIKI")
+                print("pre translation")
+                print("--------------------")
+                print(datum["description"])
+
                 delay = cb_request_delay_ms / 1000
                 if delay:
                     time.sleep(delay)
@@ -198,6 +203,10 @@ class CodebeamerService(ServiceExtension):
 
                 wiki2html_answer = self._send_request(wiki2html_params, params["cert_abspath"])
                 datum["description"] = wiki2html_answer.text
+                
+                print("--------------------")
+                print("post translation")
+                print(datum["description"])
 
         need_data = self._extract_data(data, options)
 
