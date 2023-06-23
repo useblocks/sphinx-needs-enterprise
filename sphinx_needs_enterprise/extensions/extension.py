@@ -279,9 +279,6 @@ class ServiceExtension(BaseService):
         for field, replacements in replace_dict.items(): # entries in service_config["replace_content"], low amount
             for string, replacement in replacements.items(): # string to replace
                 for datum in data: # entries
-
-                    print(field, datum.keys())
-                    print(f"replacing {string} with {replacement} in {datum['id']}")
                     
                     if field in datum.keys():
 
