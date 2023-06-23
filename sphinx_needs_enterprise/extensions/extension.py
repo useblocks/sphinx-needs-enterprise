@@ -273,10 +273,14 @@ class ServiceExtension(BaseService):
 
         if not replace_dict:
             return data
+        
+        # TODO invert logic, first parse datum in data, then replace if present, saves compute time
 
         for field, replacements in replace_dict.items(): # entries in service_config["replace_content"], low amount
             for string, replacement in replacements.items(): # string to replace
+                print(f"replacing {string} for {replacement}")
                 for datum in data: # entries
+                    
                     if field in datum.keys():
 
                         datum[field].replace(string, replacement)
