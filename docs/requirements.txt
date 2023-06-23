@@ -1,7 +1,8 @@
 sphinx>=3.4
 sphinxcontrib-plantuml
-sphinx-needs==1.0.1
+sphinx-needs==1.2.2
 sphinx-copybutton
+pygls
 
 # Sphinx-Material Theme + Fix to support Sphinx-Needs
 sphinx-design

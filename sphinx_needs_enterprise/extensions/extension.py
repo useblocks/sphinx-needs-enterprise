@@ -14,6 +14,15 @@ from sphinx_needs_enterprise.license import License
 from sphinx_needs_enterprise.util import dict_get, jinja_parse
 
 
+class BearerAuth(requests.auth.AuthBase):
+    def __init__(self, token):
+        self.token = token
+
+    def __call__(self, r):
+        r.headers["authorization"] = "Bearer " + self.token
+        return r
+
+
 class ServiceExtension(BaseService):
     def __init__(
         self,
@@ -31,6 +40,7 @@ class ServiceExtension(BaseService):
         mappings_replaces=None,
         extra_data=None,
         ssl_location=None,
+        bearer_auth=None,
         **kwargs,
     ):
 
@@ -55,6 +65,7 @@ class ServiceExtension(BaseService):
         self.extra_data = extra_data or config.get("extra_data", {})
 
         self.ssl_location = ssl_location or config.get("ssl_cert_abspath", "")
+        self.bearer_auth = ssl_location or config.get("enable_bearer_auth", "")
 
         self.license_key = None
         self.product_id = None
@@ -108,7 +119,16 @@ class ServiceExtension(BaseService):
         url = options.get("url", self.url)
         url = url + self.url_postfix
 
-        auth = (options.get("user", self.user), options.get("password", self.password))
+        bearer_auth = options.get("enable_bearer_auth", self.bearer_auth)
+
+        if bearer_auth:
+            print("using bearer auth")
+
+            auth = BearerAuth(options.get("password", self.password))
+
+        else:
+
+            auth = (options.get("user", self.user), options.get("password", self.password))
         query = options.get("query", self.query)
         query = query + self.query_postfix
 
@@ -145,7 +165,30 @@ class ServiceExtension(BaseService):
             result = requests.request(**request)
 
         if result.status_code >= 300:
-            raise CommunicationException(f"Problems accessing {result.url}.\nReason: {result.text}")
+            from time import sleep
+
+            delay = 15
+            retry_limit = 3
+            retries = 0
+
+            print(f"HTTP status code {result.status_code}")
+            print(f"retrying {retry_limit} times with {delay} s delay")
+
+            while result.status_code != 200 and retries < retry_limit:
+                retries += 1
+                print(f"retry #{retries} in {delay} seconds")
+                sleep(delay)
+                print(f"HTTP status code {result.status_code}")
+
+                if cert_abspath:
+                    result = requests.request(**request, verify=cert_abspath)
+
+                else:
+                    result = requests.request(**request)
+
+            if result.status_code >= 300:
+
+                raise CommunicationException(f"Problems accessing {result.url}.\nReason: {result.text}")
 
         return result
 
@@ -215,8 +258,30 @@ class ServiceExtension(BaseService):
                 if name == "id":
                     need_values[name] = prefix + need_values.get(name, "")
 
+            if "title" not in need_values.keys():
+                need_values["title"] = "no title provided"
+
             finale_data = {"content": content}
             finale_data.update(need_values)
 
             need_data.append(finale_data)
         return need_data
+
+    def replace_content(self, options, data):
+        replace_dict = options.get("replace_content", self.config["replace_content"])
+        options["replace_content"] = replace_dict
+
+        if not replace_dict:
+            return data
+        
+        # TODO invert logic, first parse datum in data, then replace if present, saves compute time
+
+        for field, replacements in replace_dict.items(): # entries in service_config["replace_content"], low amount
+            for string, replacement in replacements.items(): # string to replace
+                for datum in data: # entries
+                    
+                    if field in datum.keys():
+
+                        datum[field] = datum[field].replace(string, replacement)
+
+        return data

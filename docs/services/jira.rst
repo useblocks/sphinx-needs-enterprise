@@ -52,6 +52,15 @@ notation.
 
 See also :ref:`conf_query` for more details.
 
+.. _jira_enable_bearer_auth:
+
+enable_bearer_auth
+~~~~~~~~~~~~~~~~~~
+
+**Default** False
+
+If specified, enables bearer auth for jira API service. See `Jira API docs https://confluence.atlassian.com/enterprise/using-personal-access-tokens-1026032365.html` for more details.
+
 
 id_prefix
 ~~~~~~~~~

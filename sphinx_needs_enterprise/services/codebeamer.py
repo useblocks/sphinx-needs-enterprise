@@ -74,22 +74,101 @@ class CodebeamerService(ServiceExtension):
 
         params = self._prepare_request(options)
 
+        delay = 1
+        current_page = 1
+        retry_limit = 3
+
+        # query 250 objects at once
         request_params = {
             "method": "GET",
             "url": params["url"],
             "auth": params["auth"],
             "params": {
                 "queryString": params["query"],
+                "pageSize": 250,
+                "page": current_page,
                 "descriptionFormat": "HTML",
                 "descFormat": "HTML",
             },
         }
-        answer = self._send_request(request_params, params["cert_abspath"])
-        data = answer.json()["items"]
+        result = self._send_request(request_params, params["cert_abspath"])
+
+        response_json = result.json()
+
+        combined_objects = response_json["items"]
+        print(len(combined_objects))
+
+        # if first request fails, try RETRY_LIMIT times again
+        retries = 0
+        if result.status_code != 200:
+            while retries < retry_limit:
+                print("retrying connection")
+                result = self._send_request(request_params, params["cert_abspath"])
+                retries += 1
+                time.sleep(3)
+
+        # check return code
+
+        if result.status_code == 200:
+
+            print("start pagination")
+
+            total = response_json["total"]
+            page_size = response_json["pageSize"]
+
+            # there are more items than shown, request more pages
+            if total > page_size:
+
+                # minimum amount of pages needed for example if pageSize = 100 and 1000 objects
+                min_pages = total // page_size
+
+                # if page_size multiple of amount of objects, no additional query needed
+                if total % page_size == 0:
+
+                    total_page_count = min_pages
+
+                else:
+                    # one more pagination request needed to get remainder of data
+                    total_page_count = min_pages + 1
+
+                # request pages 2 - last page
+                for i in range(total_page_count):
+
+                    time.sleep(delay)
+
+                    current_page += 1
+                    request_params["params"]["page"] = current_page
+
+                    print(f"querying page {current_page}")
+
+                    result = self._send_request(request_params, params["cert_abspath"])
+
+                    status = result.status_code
+
+                    retries = 0
+
+                    if status != 200:
+
+                        while retries < retry_limit:
+                            print("retrying connection")
+                            result = self._send_request(request_params, params["cert_abspath"])
+                            retries += 1
+                            time.sleep(3)
+
+                    response_json = result.json()
+
+                    [combined_objects.append(item) for item in response_json["items"]]
+
+                    print(len(combined_objects))
+
+                    retries += 1
+
+        # print("starting wiki2html requests")
+        # print(len(combined_objects))
+
+        data = combined_objects
+
         for datum in data:
-            delay = cb_request_delay_ms / 1000
-            if delay:
-                time.sleep(delay)
 
             # Be sure "description" is set and valid
             if "description" not in datum or datum["description"] is None:
@@ -97,6 +176,16 @@ class CodebeamerService(ServiceExtension):
             elif datum["descriptionFormat"] == "Wiki" and wiki2html == "True":
                 # Transform the Codebeamer wiki syntax to HTML.
                 # Must be done by an API request for each item.
+
+                print("format is WIKI")
+                print("pre translation")
+                print("--------------------")
+                print(datum["description"])
+
+                delay = cb_request_delay_ms / 1000
+                if delay:
+                    time.sleep(delay)
+
                 url = options.get("url", self.url)
                 wiki2html_id = options.get("wiki2html_id", 2)
 
@@ -114,8 +203,14 @@ class CodebeamerService(ServiceExtension):
 
                 wiki2html_answer = self._send_request(wiki2html_params, params["cert_abspath"])
                 datum["description"] = wiki2html_answer.text
+                
+                print("--------------------")
+                print("post translation")
+                print(datum["description"])
 
         need_data = self._extract_data(data, options)
+
+        print(len(need_data))
 
         return need_data
 

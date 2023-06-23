@@ -1,0 +1,31 @@
+{
+    "created": "2022-09-27T11:18:22.143486",
+    "current_version": "0.1.5",
+    "project": "test codebeamer",
+    "versions": {
+        "0.1.5": {
+            "created": "2022-09-27T11:18:22.143472",
+            "filters": {},
+            "filters_amount": 0,
+            "needs": {
+                "CB_1000": {
+                    "description": "\n\n\n.. raw:: html\n   \n   sysreq test descr\n\n\n\n| \n\n| **assignedBy**: None\n| **createdAt**: 2022-09-27T11:18:13.915\n| **updated**: 2022-09-27T11:18:13.915\n| **type**: Requirement\n| **cb_id**: 1000\n| **status**: None\n",
+                    "id": "CB_1000",
+                    "status": "",
+                    "tags": "cb_import, example",
+                    "title": "test_sysreq",
+                    "type": "spec"
+                },
+                "CB_1001": {
+                    "description": "\n\n\n.. raw:: html\n   \n   bug description test 1234\n\n\n\n| \n\n| **assignedBy**: None\n| **createdAt**: 2022-09-27T11:18:18.203\n| **updated**: 2022-09-27T11:18:18.203\n| **type**: Bug\n| **cb_id**: 1001\n| **status**: None\n",
+                    "id": "CB_1001",
+                    "status": "",
+                    "tags": "cb_import, example",
+                    "title": "test_bug",
+                    "type": "spec"
+                }
+            },
+            "needs_amount": 2
+        }
+    }
+}

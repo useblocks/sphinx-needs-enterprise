@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 import click
 import elasticsearch
 import jinja2
+import requests
 from tqdm import tqdm
 
 # API has changed with Sphinx-Needs version 1.0.1
@@ -16,6 +17,15 @@ except ImportError:
     from sphinx_needs.needsfile import NeedsList
 
 from sphinx_needs_enterprise.scripts.loader import service_loader
+
+
+class BearerAuth(requests.auth.AuthBase):
+    def __init__(self, token):
+        self.token = token
+
+    def __call__(self, r):
+        r.headers["authorization"] = "Bearer " + self.token
+        return r
 
 
 @click.group()
@@ -54,6 +64,9 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
     data = service_obj.request(options)
     click.echo("Done")
     click.echo(f"Retrieved {len(data)} elements")
+
+    if "replace_content" in service_obj.config:
+        data = service_obj.replace_content(options, data)
 
     # Storing data
     os.makedirs(outdir, exist_ok=True)
@@ -95,7 +108,6 @@ def import_cmd(service, conf, outdir, query, old_needfile, version, wipe):
                 f"Warning: new created needs from imported data do not have such needs options: \
                 {not_included_options}"
             )
-
     for datum in data:
         needlist.add_need(version, datum)
 

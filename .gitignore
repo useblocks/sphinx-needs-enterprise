@@ -141,3 +141,4 @@ needs.rst
 
 !/presentations/_static/dynamic_background/js/lib
 /needs_save.json
+!/tests/roots/test-sne-import/needs.json
