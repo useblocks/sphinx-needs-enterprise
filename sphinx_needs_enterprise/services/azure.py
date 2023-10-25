@@ -1,5 +1,5 @@
 from azure.devops.connection import Connection
-from azure.devops.v5_1.work_item_tracking.models import Wiql
+from azure.devops.v7_1.work_item_tracking.models import Wiql
 from msrest.authentication import BasicAuthentication
 
 from sphinx_needs_enterprise.extensions.extension import ServiceExtension
