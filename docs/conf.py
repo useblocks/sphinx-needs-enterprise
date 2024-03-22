@@ -20,7 +20,7 @@ import sys
 from sphinx_needs_enterprise.version import VERSION
 
 sys.path.insert(0, os.path.abspath("../sphinx_needs_enterprise"))
-
+ 
 # -- Project information -----------------------------------------------------
 
 project = "Sphinx-Needs Enterprise"
@@ -118,10 +118,11 @@ needs_services = {
     },
     "jira_config": {
         "url": "http://127.0.0.1:8081",
-        "user": "test",
-        "password": "test",
+        "user": "daniel.woste",
+        "password": "testtest",
         "id_prefix": "JIRA_",
         "query": "project = PX",
+        "convert_content": False,
         "mappings": {
             "id": ["key"],
             "type": "spec",

@@ -117,3 +117,7 @@ Inside any ``rst`` file of your Sphinx project:
    :width: 80%
 
 {% endif %}
+
+.. needservice:: jira_config
+   :query: project = PX
+   :prefix: JIRA_IMPORT
