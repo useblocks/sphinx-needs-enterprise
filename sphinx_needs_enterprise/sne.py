@@ -57,7 +57,13 @@ def prepare_env(app, env, _docname):
         for name, provider in get_providers().items():
             if re.search(provider["regex"], service):
                 service_provider_class = provider["service"]
-                app.needs_services.register(service, service_provider_class)
+                # quickfix for Sphinx-Needs 4 compatibility
+                if hasattr(app, 'needs_services'):
+                    # sn < 4
+                    app.needs_services.register(service, service_provider_class)
+                else:
+                    # sn >= 4
+                    app._needs_services.register(service, service_provider_class)
                 break  # check next configured service
 
 
